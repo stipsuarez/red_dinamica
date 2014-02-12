@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditEventosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditEventosLabel_eventoId}" for="eventoId" />
+                    <h:inputText id="eventoId" value="#{eventosController.selected.eventoId}" title="#{bundle.EditEventosTitle_eventoId}" required="true" requiredMessage="#{bundle.EditEventosRequiredMessage_eventoId}"/>
+                    <h:outputLabel value="#{bundle.EditEventosLabel_eventoTitulo}" for="eventoTitulo" />
+                    <h:inputText id="eventoTitulo" value="#{eventosController.selected.eventoTitulo}" title="#{bundle.EditEventosTitle_eventoTitulo}" />
+                    <h:outputLabel value="#{bundle.EditEventosLabel_eventoDescripcion}" for="eventoDescripcion" />
+                    <h:inputText id="eventoDescripcion" value="#{eventosController.selected.eventoDescripcion}" title="#{bundle.EditEventosTitle_eventoDescripcion}" />
+                    <h:outputLabel value="#{bundle.EditEventosLabel_usuariosusrcc}" for="usuariosusrcc" />
+                    <h:selectOneMenu id="usuariosusrcc" value="#{eventosController.selected.usuariosusrcc}" title="#{bundle.EditEventosTitle_usuariosusrcc}" required="true" requiredMessage="#{bundle.EditEventosRequiredMessage_usuariosusrcc}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{eventosController.update}" value="#{bundle.EditEventosSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditEventosViewLink}"/>
+                <br />
+                <h:commandLink action="#{eventosController.prepareList}" value="#{bundle.EditEventosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditEventosIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

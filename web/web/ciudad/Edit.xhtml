@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCiudadTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCiudadLabel_ciudadId}" for="ciudadId" />
+                    <h:inputText id="ciudadId" value="#{ciudadController.selected.ciudadId}" title="#{bundle.EditCiudadTitle_ciudadId}" required="true" requiredMessage="#{bundle.EditCiudadRequiredMessage_ciudadId}"/>
+                    <h:outputLabel value="#{bundle.EditCiudadLabel_ciudadNombre}" for="ciudadNombre" />
+                    <h:inputText id="ciudadNombre" value="#{ciudadController.selected.ciudadNombre}" title="#{bundle.EditCiudadTitle_ciudadNombre}" required="true" requiredMessage="#{bundle.EditCiudadRequiredMessage_ciudadNombre}"/>
+                    <h:outputLabel value="#{bundle.EditCiudadLabel_ciudadCodigoPostal}" for="ciudadCodigoPostal" />
+                    <h:inputText id="ciudadCodigoPostal" value="#{ciudadController.selected.ciudadCodigoPostal}" title="#{bundle.EditCiudadTitle_ciudadCodigoPostal}" />
+                    <h:outputLabel value="#{bundle.EditCiudadLabel_departamentosdepartamentoid}" for="departamentosdepartamentoid" />
+                    <h:selectOneMenu id="departamentosdepartamentoid" value="#{ciudadController.selected.departamentosdepartamentoid}" title="#{bundle.EditCiudadTitle_departamentosdepartamentoid}" required="true" requiredMessage="#{bundle.EditCiudadRequiredMessage_departamentosdepartamentoid}">
+                        <f:selectItems value="#{departamentosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{ciudadController.update}" value="#{bundle.EditCiudadSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditCiudadViewLink}"/>
+                <br />
+                <h:commandLink action="#{ciudadController.prepareList}" value="#{bundle.EditCiudadShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditCiudadIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

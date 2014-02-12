@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditProyectosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditProyectosLabel_proyectosId}" for="proyectosId" />
+                    <h:inputText id="proyectosId" value="#{proyectosController.selected.proyectosId}" title="#{bundle.EditProyectosTitle_proyectosId}" required="true" requiredMessage="#{bundle.EditProyectosRequiredMessage_proyectosId}"/>
+                    <h:outputLabel value="#{bundle.EditProyectosLabel_proyectoTitulo}" for="proyectoTitulo" />
+                    <h:inputText id="proyectoTitulo" value="#{proyectosController.selected.proyectoTitulo}" title="#{bundle.EditProyectosTitle_proyectoTitulo}" />
+                    <h:outputLabel value="#{bundle.EditProyectosLabel_proyectoAutor}" for="proyectoAutor" />
+                    <h:inputText id="proyectoAutor" value="#{proyectosController.selected.proyectoAutor}" title="#{bundle.EditProyectosTitle_proyectoAutor}" />
+                    <h:outputLabel value="#{bundle.EditProyectosLabel_proyectoFecha}" for="proyectoFecha" />
+                    <h:inputText id="proyectoFecha" value="#{proyectosController.selected.proyectoFecha}" title="#{bundle.EditProyectosTitle_proyectoFecha}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                </h:panelGrid>
+                <h:commandLink action="#{proyectosController.update}" value="#{bundle.EditProyectosSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditProyectosViewLink}"/>
+                <br />
+                <h:commandLink action="#{proyectosController.prepareList}" value="#{bundle.EditProyectosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditProyectosIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

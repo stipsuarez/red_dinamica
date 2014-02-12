@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditGruposTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditGruposLabel_grupoId}" for="grupoId" />
+                    <h:inputText id="grupoId" value="#{gruposController.selected.grupoId}" title="#{bundle.EditGruposTitle_grupoId}" required="true" requiredMessage="#{bundle.EditGruposRequiredMessage_grupoId}"/>
+                    <h:outputLabel value="#{bundle.EditGruposLabel_grupoNombre}" for="grupoNombre" />
+                    <h:inputText id="grupoNombre" value="#{gruposController.selected.grupoNombre}" title="#{bundle.EditGruposTitle_grupoNombre}" required="true" requiredMessage="#{bundle.EditGruposRequiredMessage_grupoNombre}"/>
+                    <h:outputLabel value="#{bundle.EditGruposLabel_grupoTipo}" for="grupoTipo" />
+                    <h:inputText id="grupoTipo" value="#{gruposController.selected.grupoTipo}" title="#{bundle.EditGruposTitle_grupoTipo}" required="true" requiredMessage="#{bundle.EditGruposRequiredMessage_grupoTipo}"/>
+                    <h:outputLabel value="#{bundle.EditGruposLabel_gruposcol}" for="gruposcol" />
+                    <h:inputText id="gruposcol" value="#{gruposController.selected.gruposcol}" title="#{bundle.EditGruposTitle_gruposcol}" />
+                </h:panelGrid>
+                <h:commandLink action="#{gruposController.update}" value="#{bundle.EditGruposSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditGruposViewLink}"/>
+                <br />
+                <h:commandLink action="#{gruposController.prepareList}" value="#{bundle.EditGruposShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditGruposIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

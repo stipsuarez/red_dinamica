@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewSolicitudesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewSolicitudesLabel_solicitudId}"/>
+                    <h:outputText value="#{solicitudesController.selected.solicitudId}" title="#{bundle.ViewSolicitudesTitle_solicitudId}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudesLabel_solicitudCc}"/>
+                    <h:outputText value="#{solicitudesController.selected.solicitudCc}" title="#{bundle.ViewSolicitudesTitle_solicitudCc}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudesLabel_solicitudFecha}"/>
+                    <h:outputText value="#{solicitudesController.selected.solicitudFecha}" title="#{bundle.ViewSolicitudesTitle_solicitudFecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewSolicitudesLabel_solicitudEstado}"/>
+                    <h:outputText value="#{solicitudesController.selected.solicitudEstado}" title="#{bundle.ViewSolicitudesTitle_solicitudEstado}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudesLabel_usuariosusrcc}"/>
+                    <h:outputText value="#{solicitudesController.selected.usuariosusrcc}" title="#{bundle.ViewSolicitudesTitle_usuariosusrcc}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{solicitudesController.destroyAndView}" value="#{bundle.ViewSolicitudesDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewSolicitudesEditLink}"/>
+                <br />
+                <h:commandLink action="#{solicitudesController.prepareCreate}" value="#{bundle.ViewSolicitudesCreateLink}" />
+                <br />
+                <h:commandLink action="#{solicitudesController.prepareList}" value="#{bundle.ViewSolicitudesShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewSolicitudesIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

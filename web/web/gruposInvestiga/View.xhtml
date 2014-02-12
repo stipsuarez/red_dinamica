@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewGruposInvestigaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewGruposInvestigaLabel_gruposInvestigaPK_gruposInvestigaId}"/>
+                    <h:outputText value="#{gruposInvestigaController.selected.gruposInvestigaPK.gruposInvestigaId}" title="#{bundle.ViewGruposInvestigaTitle_gruposInvestigaPK_gruposInvestigaId}"/>
+                    <h:outputText value="#{bundle.ViewGruposInvestigaLabel_gruposInvestigaNombre}"/>
+                    <h:outputText value="#{gruposInvestigaController.selected.gruposInvestigaNombre}" title="#{bundle.ViewGruposInvestigaTitle_gruposInvestigaNombre}"/>
+                    <h:outputText value="#{bundle.ViewGruposInvestigaLabel_universidades}"/>
+                    <h:outputText value="#{gruposInvestigaController.selected.universidades}" title="#{bundle.ViewGruposInvestigaTitle_universidades}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{gruposInvestigaController.destroyAndView}" value="#{bundle.ViewGruposInvestigaDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewGruposInvestigaEditLink}"/>
+                <br />
+                <h:commandLink action="#{gruposInvestigaController.prepareCreate}" value="#{bundle.ViewGruposInvestigaCreateLink}" />
+                <br />
+                <h:commandLink action="#{gruposInvestigaController.prepareList}" value="#{bundle.ViewGruposInvestigaShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewGruposInvestigaIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

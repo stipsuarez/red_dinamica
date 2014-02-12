@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewGruposTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewGruposLabel_grupoId}"/>
+                    <h:outputText value="#{gruposController.selected.grupoId}" title="#{bundle.ViewGruposTitle_grupoId}"/>
+                    <h:outputText value="#{bundle.ViewGruposLabel_grupoNombre}"/>
+                    <h:outputText value="#{gruposController.selected.grupoNombre}" title="#{bundle.ViewGruposTitle_grupoNombre}"/>
+                    <h:outputText value="#{bundle.ViewGruposLabel_grupoTipo}"/>
+                    <h:outputText value="#{gruposController.selected.grupoTipo}" title="#{bundle.ViewGruposTitle_grupoTipo}"/>
+                    <h:outputText value="#{bundle.ViewGruposLabel_gruposcol}"/>
+                    <h:outputText value="#{gruposController.selected.gruposcol}" title="#{bundle.ViewGruposTitle_gruposcol}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{gruposController.destroyAndView}" value="#{bundle.ViewGruposDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewGruposEditLink}"/>
+                <br />
+                <h:commandLink action="#{gruposController.prepareCreate}" value="#{bundle.ViewGruposCreateLink}" />
+                <br />
+                <h:commandLink action="#{gruposController.prepareList}" value="#{bundle.ViewGruposShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewGruposIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

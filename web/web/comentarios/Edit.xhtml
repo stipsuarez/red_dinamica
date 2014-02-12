@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditComentariosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditComentariosLabel_comentId}" for="comentId" />
+                    <h:inputText id="comentId" value="#{comentariosController.selected.comentId}" title="#{bundle.EditComentariosTitle_comentId}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_comentId}"/>
+                    <h:outputLabel value="#{bundle.EditComentariosLabel_comentDescripcion}" for="comentDescripcion" />
+                    <h:inputText id="comentDescripcion" value="#{comentariosController.selected.comentDescripcion}" title="#{bundle.EditComentariosTitle_comentDescripcion}" />
+                    <h:outputLabel value="#{bundle.EditComentariosLabel_comentFechaHora}" for="comentFechaHora" />
+                    <h:inputText id="comentFechaHora" value="#{comentariosController.selected.comentFechaHora}" title="#{bundle.EditComentariosTitle_comentFechaHora}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditComentariosLabel_usuariosusrcc}" for="usuariosusrcc" />
+                    <h:selectOneMenu id="usuariosusrcc" value="#{comentariosController.selected.usuariosusrcc}" title="#{bundle.EditComentariosTitle_usuariosusrcc}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_usuariosusrcc}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditComentariosLabel_forosforoid}" for="forosforoid" />
+                    <h:selectOneMenu id="forosforoid" value="#{comentariosController.selected.forosforoid}" title="#{bundle.EditComentariosTitle_forosforoid}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_forosforoid}">
+                        <f:selectItems value="#{forosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{comentariosController.update}" value="#{bundle.EditComentariosSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditComentariosViewLink}"/>
+                <br />
+                <h:commandLink action="#{comentariosController.prepareList}" value="#{bundle.EditComentariosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditComentariosIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

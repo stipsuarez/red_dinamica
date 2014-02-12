@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewHistorialGeneralTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewHistorialGeneralLabel_histGenId}"/>
+                    <h:outputText value="#{historialGeneralController.selected.histGenId}" title="#{bundle.ViewHistorialGeneralTitle_histGenId}"/>
+                    <h:outputText value="#{bundle.ViewHistorialGeneralLabel_histGenFechaHora}"/>
+                    <h:outputText value="#{historialGeneralController.selected.histGenFechaHora}" title="#{bundle.ViewHistorialGeneralTitle_histGenFechaHora}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewHistorialGeneralLabel_histGenVisitas}"/>
+                    <h:outputText value="#{historialGeneralController.selected.histGenVisitas}" title="#{bundle.ViewHistorialGeneralTitle_histGenVisitas}"/>
+                    <h:outputText value="#{bundle.ViewHistorialGeneralLabel_proyectosproyectosid}"/>
+                    <h:outputText value="#{historialGeneralController.selected.proyectosproyectosid}" title="#{bundle.ViewHistorialGeneralTitle_proyectosproyectosid}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{historialGeneralController.destroyAndView}" value="#{bundle.ViewHistorialGeneralDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewHistorialGeneralEditLink}"/>
+                <br />
+                <h:commandLink action="#{historialGeneralController.prepareCreate}" value="#{bundle.ViewHistorialGeneralCreateLink}" />
+                <br />
+                <h:commandLink action="#{historialGeneralController.prepareList}" value="#{bundle.ViewHistorialGeneralShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewHistorialGeneralIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

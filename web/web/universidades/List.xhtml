@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListUniversidadesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListUniversidadesEmpty}" rendered="#{universidadesController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{universidadesController.items.rowCount > 0}">
+                    <h:outputText value="#{universidadesController.pagination.pageFirstItem + 1}..#{universidadesController.pagination.pageLastItem + 1}/#{universidadesController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{universidadesController.previous}" value="#{bundle.Previous} #{universidadesController.pagination.pageSize}" rendered="#{universidadesController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{universidadesController.next}" value="#{bundle.Next} #{universidadesController.pagination.pageSize}" rendered="#{universidadesController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{universidadesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUniversidadesTitle_universidadId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.universidadId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUniversidadesTitle_universidadNombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.universidadNombre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUniversidadesTitle_ciudadciudadid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ciudadciudadid}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{universidadesController.prepareView}" value="#{bundle.ListUniversidadesViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{universidadesController.prepareEdit}" value="#{bundle.ListUniversidadesEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{universidadesController.destroy}" value="#{bundle.ListUniversidadesDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{universidadesController.prepareCreate}" value="#{bundle.ListUniversidadesCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListUniversidadesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewComentariosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewComentariosLabel_comentId}"/>
+                    <h:outputText value="#{comentariosController.selected.comentId}" title="#{bundle.ViewComentariosTitle_comentId}"/>
+                    <h:outputText value="#{bundle.ViewComentariosLabel_comentDescripcion}"/>
+                    <h:outputText value="#{comentariosController.selected.comentDescripcion}" title="#{bundle.ViewComentariosTitle_comentDescripcion}"/>
+                    <h:outputText value="#{bundle.ViewComentariosLabel_comentFechaHora}"/>
+                    <h:outputText value="#{comentariosController.selected.comentFechaHora}" title="#{bundle.ViewComentariosTitle_comentFechaHora}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewComentariosLabel_usuariosusrcc}"/>
+                    <h:outputText value="#{comentariosController.selected.usuariosusrcc}" title="#{bundle.ViewComentariosTitle_usuariosusrcc}"/>
+                    <h:outputText value="#{bundle.ViewComentariosLabel_forosforoid}"/>
+                    <h:outputText value="#{comentariosController.selected.forosforoid}" title="#{bundle.ViewComentariosTitle_forosforoid}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{comentariosController.destroyAndView}" value="#{bundle.ViewComentariosDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewComentariosEditLink}"/>
+                <br />
+                <h:commandLink action="#{comentariosController.prepareCreate}" value="#{bundle.ViewComentariosCreateLink}" />
+                <br />
+                <h:commandLink action="#{comentariosController.prepareList}" value="#{bundle.ViewComentariosShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewComentariosIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

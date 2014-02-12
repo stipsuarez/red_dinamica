@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditUniversidadesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditUniversidadesLabel_universidadId}" for="universidadId" />
+                    <h:inputText id="universidadId" value="#{universidadesController.selected.universidadId}" title="#{bundle.EditUniversidadesTitle_universidadId}" required="true" requiredMessage="#{bundle.EditUniversidadesRequiredMessage_universidadId}"/>
+                    <h:outputLabel value="#{bundle.EditUniversidadesLabel_universidadNombre}" for="universidadNombre" />
+                    <h:inputText id="universidadNombre" value="#{universidadesController.selected.universidadNombre}" title="#{bundle.EditUniversidadesTitle_universidadNombre}" />
+                    <h:outputLabel value="#{bundle.EditUniversidadesLabel_ciudadciudadid}" for="ciudadciudadid" />
+                    <h:selectOneMenu id="ciudadciudadid" value="#{universidadesController.selected.ciudadciudadid}" title="#{bundle.EditUniversidadesTitle_ciudadciudadid}" required="true" requiredMessage="#{bundle.EditUniversidadesRequiredMessage_ciudadciudadid}">
+                        <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{universidadesController.update}" value="#{bundle.EditUniversidadesSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditUniversidadesViewLink}"/>
+                <br />
+                <h:commandLink action="#{universidadesController.prepareList}" value="#{bundle.EditUniversidadesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditUniversidadesIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
