@@ -42,8 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuarios.findByUsrPass", query = "SELECT u FROM Usuarios u WHERE u.usrPass = :usrPass"),
     @NamedQuery(name = "Usuarios.findByUsrTipo", query = "SELECT u FROM Usuarios u WHERE u.usrTipo = :usrTipo"),
     @NamedQuery(name = "Usuarios.findByUsrSexo", query = "SELECT u FROM Usuarios u WHERE u.usrSexo = :usrSexo"),
-    @NamedQuery(name = "Usuarios.findByUsrFechaNacimiento", query = "SELECT u FROM Usuarios u WHERE u.usrFechaNacimiento = :usrFechaNacimiento"),
-    @NamedQuery(name = "Usuarios.findByUsrEstado", query = "SELECT u FROM Usuarios u WHERE u.usrEstado = :usrEstado")})
+    @NamedQuery(name = "Usuarios.findByUsrFechaNacimiento", query = "SELECT u FROM Usuarios u WHERE u.usrFechaNacimiento = :usrFechaNacimiento")})
+    
+
 public class Usuarios implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -79,8 +80,6 @@ public class Usuarios implements Serializable {
     @Column(name = "usr_fecha_nacimiento")
     @Temporal(TemporalType.DATE)
     private Date usrFechaNacimiento;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "usr_estado")
     private String usrEstado;
@@ -115,13 +114,13 @@ public class Usuarios implements Serializable {
         this.usrCc = usrCc;
     }
 
-    public Usuarios(Integer usrCc, String usrNombres, String usrApellidos, String usrEmail, String usrPass, String usrEstado) {
+    public Usuarios(Integer usrCc, String usrNombres, String usrApellidos, String usrEmail, String usrPass) {
         this.usrCc = usrCc;
         this.usrNombres = usrNombres;
         this.usrApellidos = usrApellidos;
         this.usrEmail = usrEmail;
         this.usrPass = usrPass;
-        this.usrEstado = usrEstado;
+        
     }
 
     public Integer getUsrCc() {

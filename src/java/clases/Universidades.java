@@ -122,7 +122,7 @@ public class Universidades implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.Universidades[ universidadId=" + universidadId + " ]";
+        return  universidadNombre;
     }
     
 }
