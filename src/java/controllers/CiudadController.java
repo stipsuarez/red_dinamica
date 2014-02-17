@@ -6,10 +6,13 @@ import util.PaginationHelper;
 import facade.CiudadFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -17,24 +20,63 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.faces.validator.ValidatorException;
 
+@ManagedBean
 @Named("ciudadController")
 @SessionScoped
 public class CiudadController implements Serializable {
 
-    private Ciudad current;
+    private static Ciudad current;
     private DataModel items = null;
     @EJB
-    private facade.CiudadFacade ejbFacade;
+    private CiudadFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private Object departamento;
+    private SelectItem[] ciudades;
 
     public CiudadController() {
     }
+    public void  correcto(){
+        FacesContext context = FacesContext.getCurrentInstance();  
+        context.addMessage("datosFrom", new FacesMessage("Exito", "Departamento " + departamento.toString()));
+        
+    }
 
-    public Ciudad getSelected() {
+    public void  asignarCiudades(){
+        try {
+            
+        List <Ciudad> ciu = ejbFacade.ciudadesSelecionadas(departamento.toString());
+        
+        //    List <Ciudad> ciu = ejbFacade.findAll();
+        
+        ciudades = new SelectItem[ciu.size()];
+        int i=0;
+        SelectItem nuevo;
+        for (Ciudad c : ciu) {
+            nuevo= new SelectItem(c.getCiudadNombre());
+            ciudades[i]= nuevo;
+            i++;
+        }
+        
+        
+        
+        } catch (Exception e) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Departamento:" + departamento +"Error: ",""+e+"   "+e.getLocalizedMessage());  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+        }
+    }
+
+    public SelectItem[] getCiudades() {
+        return ciudades;
+    }
+
+    public void setCiudades(SelectItem[] ciudades) {
+        this.ciudades = ciudades;
+    }
+    
+            
+            public Ciudad getSelected() {
         if (current == null) {
             current = new Ciudad();
             selectedItemIndex = -1;
@@ -42,15 +84,27 @@ public class CiudadController implements Serializable {
         return current;
     }
 
-    public void asignarDepartamento(FacesContext arg0, UIComponent arg1, Object arg2)
-            throws ValidatorException {
-
-        this.departamento = arg2;
-        asignarCiudades();
+    public static Ciudad getCurrent() {
+        return current;
     }
 
-    public void asignarCiudades() {
+    public static void setCurrent(Ciudad current) {
+        CiudadController.current = current;
+    }
+    public void asignarDepartamento(FacesContext arg0, UIComponent arg1, Object arg2)
+    {
+        try {
+            
+
+        this.departamento = arg2;
+            
+//         FacesMessage msg = new FacesMessage("Departamento", "Departamento:" + departamento + " Asignado");  
+//        FacesContext.getCurrentInstance().addMessage("datosFrom", msg);  
         
+        } catch (Exception e) {
+            
+        }
+
     }
 
     private CiudadFacade getFacade() {
@@ -193,15 +247,11 @@ public class CiudadController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
+        
+        
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
-    public SelectItem[] getItemsAvailableSelectOne() {
-        //Hacemos las consultas de las ciudades acorde al departamento
-        SelectItem[] sel= JsfUtil.getSelectItems(ejbFacade.findAll(),true);
-        JsfUtil.getSelectItems(ejbFacade.findAll(),true);
-        return JsfUtil.getSelectItems(ejbFacade.findAll(),true);
-    }
 
     public Ciudad getCiudad(java.lang.Integer id) {
         return ejbFacade.find(id);
@@ -241,7 +291,7 @@ public class CiudadController implements Serializable {
                 Ciudad o = (Ciudad) object;
                 return getStringKey(o.getCiudadId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Ciudad.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected 'type: " + Ciudad.class.getName());
             }
         }
     }

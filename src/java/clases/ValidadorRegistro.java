@@ -17,7 +17,8 @@ import javax.faces.validator.ValidatorException;
 public class ValidadorRegistro {
 
     private String email = "";
-    private String contraseña = "";
+    private String contrasena = "";
+    private String contrasena2 = "";
     private Usuarios user;
     private int cedula = 0;
     private String valorCedula = "";
@@ -30,6 +31,16 @@ public class ValidadorRegistro {
     public void setValorCedula(String valorCedula) {
         this.valorCedula = valorCedula;
     }
+
+    public String getContrasena2() {
+        return contrasena2;
+    }
+
+    public void setContrasena2(String contrasena2) {
+        this.contrasena2 = contrasena2;
+    }
+    
+    
     @EJB
     facade.UsuariosFacade ejbFacadeUsuarios;
 
@@ -63,21 +74,36 @@ public class ValidadorRegistro {
         }
     }
 
-    public void asignarContraseña(FacesContext arg0, UIComponent arg1, Object arg2)
-            throws ValidatorException {
+    public void asignarContrasena(FacesContext arg0, UIComponent arg1, Object arg2)
+             {
 
-        this.contraseña = arg2.toString();
-
+        this.contrasena = arg2.toString();
+                FacesContext context = FacesContext.getCurrentInstance();  
+                context.addMessage("datosFrom",new FacesMessage(FacesMessage.SEVERITY_INFO, "akjhfds", "laksjhdfkjh alkjhfdla kjsdf "));
+            
     }
 
-    public void validarContraseñas(FacesContext arg0, UIComponent arg1, Object arg2)
-            throws ValidatorException {
+    public void validarContrasenas(FacesContext arg0, UIComponent arg1, Object arg2)
+            {
+                try {
+             contrasena2=(String) arg2;       
+                
 
-        if (!this.contraseña.matches("")) {
-            if (!arg2.toString().matches(this.contraseña)) {
-                throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden", "Las contraseñas no coinciden"));
+        if (!this.contrasena.matches("")) {
+            if (!contrasena2.toString().matches(contrasena)) {
+                FacesContext context = FacesContext.getCurrentInstance();  
+                context.addMessage("datosFrom",new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden", "Las contraseñas no coinciden"));
+                
             }
+            FacesContext context = FacesContext.getCurrentInstance();  
+        context.addMessage("datosFrom",new FacesMessage(FacesMessage.SEVERITY_ERROR, "Son iguales", "Las contraseñas coinciden"));
         }
+             
+        } catch (Exception e) {
+            FacesContext context = FacesContext.getCurrentInstance();  
+                context.addMessage("datosFrom",new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Las contraseñas no coinciden"));
+                
+                }
     }
 
     public void ExisteCedula(FacesContext arg0, UIComponent arg1, Object arg2)
@@ -108,12 +134,12 @@ public class ValidadorRegistro {
         this.email = email;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public void imprimir() {

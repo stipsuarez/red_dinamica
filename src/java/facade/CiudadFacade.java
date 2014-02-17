@@ -5,9 +5,17 @@
 package facade;
 
 import clases.Ciudad;
+import clases.Departamentos;
+import java.util.List;
+
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -15,6 +23,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class CiudadFacade extends AbstractFacade<Ciudad> {
+
     @PersistenceContext(unitName = "red_dinamicaPU")
     private EntityManager em;
 
@@ -23,8 +32,27 @@ public class CiudadFacade extends AbstractFacade<Ciudad> {
         return em;
     }
 
+    public List<Ciudad> ciudadesSelecionadas(String departamento_nombre) {
+        try {
+            //buscamos el id del departamento seleccionado
+            String cadena = "SELECT departamento_id FROM Departamentos d WHERE d.departamento_nombre LIKE '" + departamento_nombre + "'";
+            TypedQuery<Departamentos> query = (TypedQuery<Departamentos>) em.createNativeQuery(cadena, Departamentos.class);
+            Departamentos dep = query.getSingleResult();
+            int departamento_id = dep.getDepartamentoId();
+            cadena = "SELECT * FROM Ciudad c WHERE c.Departamentos_departamento_id =" + departamento_id;
+            TypedQuery<Ciudad> query2 = (TypedQuery<Ciudad>) em.createNativeQuery(cadena, Ciudad.class);
+            return query2.getResultList();
+        } catch (Exception e) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al consultar la BD: " + e + "\nLocalize: " + e.getLocalizedMessage(), "Error bd");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            return null;
+        }
+
+
+
+    }
+
     public CiudadFacade() {
         super(Ciudad.class);
     }
-    
 }

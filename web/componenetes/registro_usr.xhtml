@@ -15,8 +15,11 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <p:messages id="msgs" />    
-            <h:form>
+            
+            <h:form id="datosFrom">
+                 
                 <p:growl id="growl" showDetail="true" /> 
+                <p:messages id="msgs_error" />    
                 <p:panel header="Datos Básicos">
                     <h:panelGrid columns="3">
 
@@ -49,16 +52,16 @@
                         <p:message for="usrEmail" id="msgEmail" display="tooltip" />
 
                         <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrPass}" for="usrPass" />
-                        <p:password id="usrPass" value="#{usuariosController.selected.usrPass}" validator="#{validadorRegistro.asignarContraseña}" title="#{bundle.CreateUsuariosTitle_usrPass}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usrPass}">
+                        <p:password id="usrPass" value="#{usuariosController.selected.usrPass}"  title="#{bundle.CreateUsuariosTitle_usrPass}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usrPass}" validator="#{validadorRegistro.asignarContrasena}">
                             <f:validateLength minimum="3" maximum="30" />  
-                            <p:ajax update="msgPass" event="keyup" />
+                            <p:ajax update="msgPass" event="keyup"/>
                         </p:password>
                         <p:message for="usrPass" id="msgPass" display="tooltip" />
 
                         <h:outputLabel value="Confirmar Contraseña:*" for="usrPassword2" />
-                        <p:password value="#{validadorRegistro.contraseña}" validator="#{validadorRegistro.validarContraseñas}" title="#{bundle.CreateUsuariosTitle_usrPass}" id="usrPassword2" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usrPass}">
+                        <p:password id="usrPassword2" value="#{validadorRegistro.contrasena2}"  title="#{bundle.CreateUsuariosTitle_usrPass}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usrPass}">
                             <f:validateLength minimum="3" maximum="30" />  
-                            <p:ajax update="msgContrasena2" event="keyup" />
+                            <p:ajax event="keyup" update="msgContrasena2"  listener="#{validadorRegistro.validarContrasenas}"/>  
                         </p:password>
                         <p:message for="usrPassword2" id="msgContrasena2" display="tooltip" />
 
@@ -81,21 +84,25 @@
                         <p:calendar id="usrFechaNacimiento" value="#{usuariosController.selected.usrFechaNacimiento}" title="#{bundle.CreateUsuariosTitle_usrFechaNacimiento}" >
                             <f:convertDateTime pattern="dd/MM/yy" />
                         </p:calendar>
+
+
+                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_departamentosdepartamentoid}" for="departamentosdepartamentoid" />
+                    <h:selectOneMenu id="departamentosdepartamentoid" value="#{usuariosController.selected.departamentosdepartamentoid}" title="#{bundle.CreateUsuariosTitle_departamentosdepartamentoid}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_departamentosdepartamentoid}" validator="#{ciudadController.asignarDepartamento}"  >                        
+                        <f:selectItems  value="#{departamentosController.itemsAvailableSelectOne}"/>                        
+                        <p:ajax  listener="#{ciudadController.asignarCiudades}"   update="ciudades,growl" />  
+                    </h:selectOneMenu>
+
+                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_ciudadciudadid}" for="ciudadciudadid" />
+                    <h:selectOneMenu id="ciudades" value="#{usuariosController.selected.ciudadciudadid}" title="#{bundle.CreateUsuariosTitle_ciudadciudadid}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_ciudadciudadid}">
+                        <f:selectItem itemLabel="Select ciudad" itemValue="" />  
+                        <f:selectItems value="#{ciudadController.ciudades}"/>
                         
-                         <h:outputLabel value="#{bundle.CreateUsuariosLabel_departamentosdepartamentoid}" for="departamentosdepartamentoid" />
-                         <h:selectOneMenu id="departamentosdepartamentoid" value="#{usuariosController.selected.departamentosdepartamentoid}" title="#{bundle.CreateUsuariosTitle_departamentosdepartamentoid}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_departamentosdepartamentoid}" validator="#{ciudadController.asignarDepartamento}" >
-                            <f:selectItems value="#{departamentosController.itemsAvailableSelectOne}" />
-                        </h:selectOneMenu>
-                        
-                        <h:outputLabel value="#{bundle.CreateUsuariosLabel_ciudadciudadid}" for="ciudadciudadid" />
-                        <h:selectOneMenu id="ciudadciudadid" value="#{usuariosController.selected.ciudadciudadid}" title="#{bundle.CreateUsuariosTitle_ciudadciudadid}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_ciudadciudadid}">
-                            <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"/>
-                        </h:selectOneMenu>
-                        <h:outputLabel value="#{bundle.CreateUsuariosLabel_universidadesuniversidadid}" for="universidadesuniversidadid" />
-                        <h:selectOneMenu id="universidadesuniversidadid" value="#{usuariosController.selected.universidadesuniversidadid}" title="#{bundle.CreateUsuariosTitle_universidadesuniversidadid}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_universidadesuniversidadid}">
-                            <f:selectItems value="#{universidadesController.itemsAvailableSelectOne}"/>
-                        </h:selectOneMenu>
-                       
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_universidadesuniversidadid}" for="universidadesuniversidadid" />
+                    <h:selectOneMenu id="universidadesuniversidadid" value="#{usuariosController.selected.universidadesuniversidadid}" title="#{bundle.CreateUsuariosTitle_universidadesuniversidadid}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_universidadesuniversidadid}">
+                        <f:selectItems value="#{universidadesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+
                     </h:panelGrid>
                 </p:panel>
 
