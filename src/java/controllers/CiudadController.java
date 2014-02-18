@@ -1,6 +1,7 @@
 package controllers;
 
 import clases.Ciudad;
+import clases.Departamentos;
 import util.JsfUtil;
 import util.PaginationHelper;
 import facade.CiudadFacade;
@@ -32,51 +33,12 @@ public class CiudadController implements Serializable {
     private CiudadFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    private Object departamento;
-    private SelectItem[] ciudades;
+    
 
     public CiudadController() {
-    }
-    public void  correcto(){
-        FacesContext context = FacesContext.getCurrentInstance();  
-        context.addMessage("datosFrom", new FacesMessage("Exito", "Departamento " + departamento.toString()));
-        
-    }
-
-    public void  asignarCiudades(){
-        try {
-            
-        List <Ciudad> ciu = ejbFacade.ciudadesSelecionadas(departamento.toString());
-        
-        //    List <Ciudad> ciu = ejbFacade.findAll();
-        
-        ciudades = new SelectItem[ciu.size()];
-        int i=0;
-        SelectItem nuevo;
-        for (Ciudad c : ciu) {
-            nuevo= new SelectItem(c.getCiudadNombre());
-            ciudades[i]= nuevo;
-            i++;
-        }
-        
-        
-        
-        } catch (Exception e) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Departamento:" + departamento +"Error: ",""+e+"   "+e.getLocalizedMessage());  
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-        }
-    }
-
-    public SelectItem[] getCiudades() {
-        return ciudades;
-    }
-
-    public void setCiudades(SelectItem[] ciudades) {
-        this.ciudades = ciudades;
-    }
-    
-            
-            public Ciudad getSelected() {
+    }   
+  
+    public Ciudad getSelected() {
         if (current == null) {
             current = new Ciudad();
             selectedItemIndex = -1;
@@ -91,21 +53,7 @@ public class CiudadController implements Serializable {
     public static void setCurrent(Ciudad current) {
         CiudadController.current = current;
     }
-    public void asignarDepartamento(FacesContext arg0, UIComponent arg1, Object arg2)
-    {
-        try {
-            
-
-        this.departamento = arg2;
-            
-//         FacesMessage msg = new FacesMessage("Departamento", "Departamento:" + departamento + " Asignado");  
-//        FacesContext.getCurrentInstance().addMessage("datosFrom", msg);  
-        
-        } catch (Exception e) {
-            
-        }
-
-    }
+  
 
     private CiudadFacade getFacade() {
         return ejbFacade;
@@ -295,4 +243,42 @@ public class CiudadController implements Serializable {
             }
         }
     }
+    
+    //NUESTRO CÓDIGO INICIA AQUÍ    
+    private Departamentos departamento;
+    private List<Ciudad> ciudades;
+
+    public List<Ciudad> getCiudades() {
+        return ciudades;
+    }
+
+    public void setCiudades(List<Ciudad> ciudades) {
+        this.ciudades = ciudades;
+    }
+    
+    public void asignarCiudades() {
+        try {
+
+            ciudades = ejbFacade.ciudadesSelecionadas(departamento.getDepartamentoId());
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage("datosFrom", new FacesMessage("Exito", "Departamentoooo " + departamento.toString()));
+        } catch (Exception e) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Departamento:" + departamento + "Error: ", "" + e + "   " + e.getLocalizedMessage());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+
+    public void correcto() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage("datosFrom", new FacesMessage("Exito", "Departamento " + departamento.toString()));
+    }
+
+    public void asignarDepartamento(FacesContext arg0, UIComponent arg1, Object arg2) {
+        try {
+
+            this.departamento = (Departamentos) arg2;
+
+        } catch (Exception e) {
+        }
+    }      
 }

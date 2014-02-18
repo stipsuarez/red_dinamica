@@ -31,15 +31,13 @@ public class CiudadFacade extends AbstractFacade<Ciudad> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
-    public List<Ciudad> ciudadesSelecionadas(String departamento_nombre) {
-        try {
-            //buscamos el id del departamento seleccionado
-            String cadena = "SELECT departamento_id FROM Departamentos d WHERE d.departamento_nombre LIKE '" + departamento_nombre + "'";
-            TypedQuery<Departamentos> query = (TypedQuery<Departamentos>) em.createNativeQuery(cadena, Departamentos.class);
-            Departamentos dep = query.getSingleResult();
-            int departamento_id = dep.getDepartamentoId();
-            cadena = "SELECT * FROM Ciudad c WHERE c.Departamentos_departamento_id =" + departamento_id;
+    public CiudadFacade() {
+        super(Ciudad.class);
+    }
+    
+     public List<Ciudad> ciudadesSelecionadas(Integer departamento_id) {
+        try {            
+            String cadena = "SELECT * FROM Ciudad c WHERE c.Departamentos_departamento_id =" + departamento_id;
             TypedQuery<Ciudad> query2 = (TypedQuery<Ciudad>) em.createNativeQuery(cadena, Ciudad.class);
             return query2.getResultList();
         } catch (Exception e) {
@@ -47,12 +45,5 @@ public class CiudadFacade extends AbstractFacade<Ciudad> {
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
         }
-
-
-
-    }
-
-    public CiudadFacade() {
-        super(Ciudad.class);
     }
 }

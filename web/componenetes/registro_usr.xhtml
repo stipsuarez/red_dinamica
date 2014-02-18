@@ -93,14 +93,16 @@
                     </h:selectOneMenu>
 
                     <h:outputLabel value="#{bundle.CreateUsuariosLabel_ciudadciudadid}" for="ciudadciudadid" />
-                    <h:selectOneMenu id="ciudades" value="#{usuariosController.selected.ciudadciudadid}" title="#{bundle.CreateUsuariosTitle_ciudadciudadid}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_ciudadciudadid}">
-                        <f:selectItem itemLabel="Select ciudad" itemValue="" />  
+                    <h:selectOneMenu id="ciudades" value="#{usuariosController.selected.ciudadciudadid}" title="#{bundle.CreateUsuariosTitle_ciudadciudadid}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_ciudadciudadid}" validator="#{universidadesController.asignarCiudad}">                         
+                        <f:selectItem itemLabel="---" itemValue="" />
                         <f:selectItems value="#{ciudadController.ciudades}"/>
-                        
+                        <p:ajax  listener="#{universidadesController.asignarUniversidades}"   update="universidadesuniversidadid, growl" /> 
                     </h:selectOneMenu>
+                    
                     <h:outputLabel value="#{bundle.CreateUsuariosLabel_universidadesuniversidadid}" for="universidadesuniversidadid" />
                     <h:selectOneMenu id="universidadesuniversidadid" value="#{usuariosController.selected.universidadesuniversidadid}" title="#{bundle.CreateUsuariosTitle_universidadesuniversidadid}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_universidadesuniversidadid}">
-                        <f:selectItems value="#{universidadesController.itemsAvailableSelectOne}"/>
+                        <f:selectItem itemLabel="---" itemValue="" />
+                        <f:selectItems value="#{universidadesController.universidad}"/>
                     </h:selectOneMenu>
 
                     </h:panelGrid>
