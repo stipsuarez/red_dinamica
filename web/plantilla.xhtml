@@ -13,38 +13,41 @@
     <h:body>
 
         <p:layout fullPage="true">
-            <ui:insert name="header">
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+            <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+
+                <ui:insert name="header">
                     Header
-                </p:layoutUnit>
-            </ui:insert>
-            <ui:insert name="footer">
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
-            </ui:insert>
-
-
-            <ui:insert name="menu_lateral">
-                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
-
-                        </p:submenu>
-
-                    </p:menu>
-                </p:layoutUnit>
-            </ui:insert>
-            <p>
-                <ui:insert name="central">
-                    <p:layoutUnit position="center">
-                        Welcome to PrimeFaces
-                    </p:layoutUnit>
                 </ui:insert>
+
+            </p:layoutUnit>
+            <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                <ui:insert name="footer">
+                    Footer
+                </ui:insert>
+
+             </p:layoutUnit>
+            <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                <ui:insert name="menu_lateral">
+
+                        <p:menu>
+                            <p:submenu label="Resources">
+                                <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                                <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
+                                <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                                <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+
+                            </p:submenu>
+
+                        </p:menu>
+
+                </ui:insert>
+            </p:layoutUnit>
+            <p>
+                <p:layoutUnit position="center" size="2000">
+                    <ui:insert name="central">
+                            Welcome to PrimeFaces
+                    </ui:insert>
+            </p:layoutUnit> 
             </p>
         </p:layout>
 

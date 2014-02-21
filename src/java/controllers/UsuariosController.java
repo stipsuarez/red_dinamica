@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -17,6 +18,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.faces.validator.ValidatorException;
 
 @Named("usuariosController")
 @SessionScoped
@@ -28,6 +30,7 @@ public class UsuariosController implements Serializable {
     private facade.UsuariosFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String pass1 = "";
 
     public UsuariosController() {
     }
@@ -39,6 +42,7 @@ public class UsuariosController implements Serializable {
         }
         return current;
     }
+
     public static Usuarios getCurrent() {
         return current;
     }
@@ -234,6 +238,38 @@ public class UsuariosController implements Serializable {
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Usuarios.class.getName());
             }
+        }
+    }
+
+    public String getPass1() {
+        return pass1;
+    }
+
+    public void setPass1(String pass1) {
+        this.pass1 = pass1;
+    }
+
+    public void asignarCon(FacesContext arg0, UIComponent arg1, Object arg2)
+            throws ValidatorException {
+        this.pass1 = arg2.toString();
+
+    }
+
+    public void validarCon(FacesContext fc, UIComponent component, Object value) throws ValidatorException {
+        try {
+
+            String attribute = (String) component.getAttributes().get("password");
+            if (!value.equals(attribute)) {
+                FacesMessage message = new FacesMessage();
+                message.setSummary("La contraseña no coincide");
+                message.setSeverity(FacesMessage.SEVERITY_ERROR);
+                throw new ValidatorException(message);
+            }
+            
+        } catch (Exception e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage("datosFrom", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Las contraseñas no coinciden"));
+
         }
     }
 }

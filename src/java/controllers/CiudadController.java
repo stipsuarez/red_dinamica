@@ -260,8 +260,7 @@ public class CiudadController implements Serializable {
         try {
 
             ciudades = ejbFacade.ciudadesSelecionadas(departamento.getDepartamentoId());
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage("datosFrom", new FacesMessage("Exito", "Departamentoooo " + departamento.toString()));
+            
         } catch (Exception e) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Departamento:" + departamento + "Error: ", "" + e + "   " + e.getLocalizedMessage());
             FacesContext.getCurrentInstance().addMessage(null, msg);

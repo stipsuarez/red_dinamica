@@ -10,11 +10,11 @@
 
 
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="header">
             <h:outputText value="#{bundle.CreateUsuariosTitle}"></h:outputText>
         </ui:define>
-        <ui:define name="body">
+        <ui:define name="central">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
@@ -58,19 +58,17 @@
 
 
                         <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrPass}" for="usrPass" />
-                        <p:password id="usrPass" binding="#{pass}" value="#{usuariosController.selected.usrPass}" 
-                                    feedback="true" promptLabel="Seguridad" weakLabel="Debil"  goodLabel="Media" strongLabel="Fuerte" 
-                                    title="#{bundle.CreateUsuariosTitle_usrPass}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usrPass}" >
+                        <p:password id="usrPass" value="#{usuariosController.selected.usrPass}" validator="#{validadorRegistro.asignarCon}"
+                                    feedback="true" promptLabel="Seguridad" weakLabel="Baja"  goodLabel="Media" strongLabel="Fuerte" 
+                                      title="#{bundle.CreateUsuariosTitle_usrPass}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usrPass}" >
                             <f:validateLength minimum="3" maximum="30" /> 
-
-                            <p:ajax event="keyup" update="msgPass"  />
+                            <p:ajax event="keyup" update="msgPass,growl"  />
                         </p:password>
                         <p:message for="usrPass" id="msgPass" display="tooltip" />
 
                         <h:outputLabel value="Confirmar Contraseña:*" for="usrPassword2" />
-                        <p:password  id="usrPassword2"  feedback="false" validator="#{usuariosController.validarCon}"  title="#{bundle.CreateUsuariosTitle_usrPass}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usrPass}">
+                        <p:password  value="#{validadorRegistro.contrasena}" feedback="false" id="usrPassword2" validator="#{validadorRegistro.validarCon}"  title="#{bundle.CreateUsuariosTitle_usrPass}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usrPass}">
                             <f:validateLength minimum="3" maximum="30" />  
-                            <f:attribute name="password" value="#{pass.value}"/>
                             <p:ajax event="keyup" update="msgContrasena2,growl" />  
                         </p:password>
                         <p:message for="usrPassword2" id="msgContrasena2" display="tooltip" />
@@ -119,7 +117,7 @@
 
 
                 <p:row>
-                    <p:selectBooleanCheckbox required="true" validator="#{validador.aceptarTerminos}"/>
+                    <p:selectBooleanCheckbox required="true" />
                     Acepta los terminos y condiciones
                 </p:row>
                 <br>

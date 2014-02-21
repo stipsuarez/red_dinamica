@@ -255,8 +255,7 @@ public class UniversidadesController implements Serializable {
         try {
 
             universidad = ejbFacade.UniversidadSelecionadas(ciudad.getCiudadId());
-             FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage("datosFrom", new FacesMessage("Exito", "Ciudaddddd " + ciudad.getCiudadNombre()));
+             
 
         } catch (Exception e) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mi ciudad:" + ciudad + "Error: ", "" + e + "   " + e.getLocalizedMessage());
