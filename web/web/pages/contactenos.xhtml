@@ -1,0 +1,115 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html" >
+        <h:head >
+            <f:facet name="first" >
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <link rel="stylesheet" type="text/css" href="Recursos/Css/general.css" />
+                <link rel="stylesheet" type="text/css" href="Recursos/Banner/engine1/style.css" media="screen" />
+                <script type="text/javascript" src="Recursos/Banner/engine1/jquery.js"></script>
+                <title>Residencis UIS</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <div class="cubierta">
+
+                <p:layout style="height: 1300px; padding: 0; margin: 0;">
+
+                    <p:layoutUnit position="north" size="205" resizable="true" closable="true" rendered="#{loggin.activa}" collapsible="true" >
+                        <ui:include src="/componentes/menuregistro.xhtml" />
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="north" size="205" resizable="true" closable="true" rendered="#{!loggin.activa}" collapsible="true" >
+                        <ui:include src="/componentes/menugeneral.xhtml" />
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="south" size="140" closable="true" collapsible="true">
+                        <ui:include src="/componentes/piePagina.xhtml" />
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="east" size="270" header="Sesión Iniciada" rendered="#{loggin.activa}" collapsible="true" >
+                        <ui:include src="/componentes/perfil.xhtml" class="iniciarsesion"/>
+
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="center" header="Contáctenos">
+                        <br/>
+                        <br/>
+                        <h:form prependId="false">  
+
+                            <h:panelGrid columns="4" style="width:100%; padding: 2px;"  >
+                                <f:facet name="header">
+                                    Red Colombiana de Dinámica de Sistemas
+                                    
+                                </f:facet>    
+                                <h:outputText value="Dirección:" />
+                                <h:outputText value="Cra 27 Calle 9 Ciudad Universitaria" />
+                                <h:outputText value="Indicativos Telefónicos:" />
+                                <h:outputText value="037" />
+                                <h:outputText value="Bucaramanga-Santander-Colombia	Ciudad: " />
+                                <h:outputText value="7" />
+                                <h:outputText value="PBX" />
+                                <h:outputText value="6344000" />
+
+
+                            </h:panelGrid> 
+                        </h:form>  
+
+                        <p:messages id="msgs" />  
+                        <br/>
+                        <br/>
+                        
+                        <h:form id="tablaSolicitudes" class="tablaPostula" prependId="false">  
+
+                            <p:dataTable sortMode="multiple" var="usuarios" paginatorPosition="bottom" value="#{contactenos.admins}" widgetVar="contactos" emptyMessage="La página no tiene administradores actualmente" paginator="true" rows="10">  
+                                <f:facet name="header">
+                                    <h:outputText value="Administradores"  />
+                                </f:facet>
+                                <p:column style="width:25%" headerText="Imágen de Perfil">  
+                                    <p:graphicImage value="/Recursos/Imagenes/perfil/#{usuarios.usrCc}" width="170" height="200"/>  
+                                </p:column>  
+
+                                <p:column id="nombre" style="width:20px"  headerText="Nombres" filterValue="#{usuarios.usrNombres}"
+                                          filterMatchMode="contains" sortBy="#{usuarios.usrNombres}" filterBy="#{usuarios.usrNombres}" > 
+
+                                    <h:outputText value="#{usuarios.usrNombres}" />  
+
+
+                                </p:column> 
+
+
+                                <p:column id="apellido"  style="width:40px" filterBy="#{usuarios.usrApellidos}"   
+
+
+                                          headerText="Apellidos"   filterMatchMode="contains" sortBy="#{usuarios.usrApellidos}" >  
+                                    <h:outputText value="#{usuarios.usrApellidos}" />  
+                                </p:column> 
+
+                                <p:column id="email" style="width:20px" filterBy="#{usuarios.usrEmail}"   
+                                          headerText="E-Mail"   filterMatchMode="contains" sortBy="#{usuarios.usrEmail}">  
+
+                                    <h:outputText value="#{usuarios.usrEmail}" />  
+                                </p:column>  
+
+                                
+
+
+                            </p:dataTable>  
+
+
+                        </h:form>  
+                    </p:layoutUnit>
+                </p:layout>
+            </div>
+
+        </h:body>
+    </f:view>
+</html>
+

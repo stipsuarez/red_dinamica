@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package clases;
+package bean;
 
+import clases.InterfaceBean;
+import clases.Usuarios;
 import controllers.UsuariosController;
 import util.JsfUtil;
 import java.io.Serializable;

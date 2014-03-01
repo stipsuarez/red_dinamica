@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package clases;
+package bean;
 
+import clases.Usuarios;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;

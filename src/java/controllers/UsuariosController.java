@@ -31,6 +31,9 @@ public class UsuariosController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private String pass1 = "";
+    private String actualPass = "";
+    private String nuevaPass = "";
+    private String nuevaPassConfir = "";
 
     public UsuariosController() {
     }
@@ -265,11 +268,61 @@ public class UsuariosController implements Serializable {
                 message.setSeverity(FacesMessage.SEVERITY_ERROR);
                 throw new ValidatorException(message);
             }
-            
+
         } catch (Exception e) {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage("datosFrom", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Las contraseñas no coinciden"));
 
+        }
+    }
+
+    public String getActualPass() {
+        return actualPass;
+    }
+
+    public void setActualPass(String actualPass) {
+        this.actualPass = actualPass;
+    }
+
+    public String getNuevaPass() {
+        return nuevaPass;
+    }
+
+    public void setNuevaPass(String nuevaPass) {
+        this.nuevaPass = nuevaPass;
+    }
+
+    public String getNuevaPassConfir() {
+        return nuevaPassConfir;
+    }
+
+    public void setNuevaPassConfir(String nuevaPassConfir) {
+        this.nuevaPassConfir = nuevaPassConfir;
+    }
+
+    
+    public void validarPassActual(FacesContext arg0, UIComponent arg1, Object arg2)
+            throws ValidatorException {
+        String actual = current.getUsrPass();
+        actualPass = actual;
+        if (!arg2.equals(actual)) {
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña no es la actual " + actual + "  Vieja: arg2 =" + arg2, "La contraseña no es la actual: " + actual + "  Vieja: arg2 =" + arg2));
+
+        }
+    }
+
+    public void nuevaPass(FacesContext arg0, UIComponent arg1, Object arg2) {
+        nuevaPass = (String) arg2;
+        current.setUsrPass(nuevaPass);
+    }
+
+    public void validarNuevaConfirmar(FacesContext arg0, UIComponent arg1, Object arg2)
+            throws ValidatorException {
+        nuevaPassConfir = (String) arg2;
+        current.setUsrPass(nuevaPass);
+
+        if (!arg2.equals(nuevaPass)) {
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseñas no coinciden", "La contraseñas no coinciden "));
         }
     }
 }

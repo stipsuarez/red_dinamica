@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      lang="es"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <link rel="stylesheet" type="text/css" href="../Recursos/Css/general.css" />
+        <link rel="stylesheet" type="text/css" href="" />
+    </h:head>
+
+    <h:body>
+        <h:form id="perfil" title="Perfil">  
+            <p:panel menuTitle="Perfil">
+                <h:panelGrid columns="2">
+                    <p:graphicImage id="imagendePerfil" value="/faces/Recursos/Imagenes/perfil/#{usuariosController.selected.usrCc}" cache="false" rendered="#{photoCamBean.tieneFoto}" style="height: 80px;"/>
+                    <p:graphicImage id="imagendePerfil2" value="/faces/Recursos/Imagenes/perfil/default.png" cache="false" rendered="#{!photoCamBean.tieneFoto}" style="height: 80px;"/>
+                    
+                    <h:outputLabel for="nombre" class="destacado" value="#{loggin.usuarioActual().usrNombres} #{loggin.usuarioActual().usrApellidos}" />
+                    <p:commandLink  actionListener="#{loggin.irA('index')}">
+                        <p:graphicImage value="Inicio" url="/faces/Recursos/Imagenes/inicio_p.png" style="height: 45px;"/>  
+                    </p:commandLink>
+                    <p:commandLink value="Mi perfil" actionListener="#{loggin.irA('perfil')}"></p:commandLink>
+                    <p:commandLink value="Cerrar sesión" actionListener="#{loggin.cerrarSesion()}"></p:commandLink>
+                    </h:panelGrid>
+            </p:panel>
+        </h:form>  
+
+    </h:body>
+
+</html>

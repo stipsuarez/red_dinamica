@@ -1,4 +1,4 @@
-package clases;
+package bean;
 
 public class Session {
     boolean activa=false;

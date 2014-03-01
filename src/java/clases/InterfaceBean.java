@@ -1,6 +1,6 @@
 package clases;
 
-import clases.Session;
+import bean.Session;
 
 public interface InterfaceBean{
     Session session = new Session();
