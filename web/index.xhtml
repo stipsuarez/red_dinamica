@@ -13,12 +13,13 @@
                 <link rel="stylesheet" type="text/css" href="Recursos/Banner/engine1/style.css" media="screen" />
                 <script type="text/javascript" src="Recursos/Banner/engine1/jquery.js"></script>
                 <title>Red Colombiana de Dinámica de sistemas</title>
+                <h:outputStylesheet name="css/jsfcrud.css"/>
             </f:facet>
         </h:head>
 
         <h:body>
             <div class="cubierta">
-                
+
                 <p:layout style="height: 1800px; padding: 0; margin: 0;">
 
                     <p:layoutUnit position="north" size="190" resizable="true" closable="true" collapsible="true" rendered="#{!loggin.activa}">
@@ -51,7 +52,7 @@
                     </p:layoutUnit>
 
                     <p:layoutUnit position="south" size="140" closable="true" collapsible="false" >
-                          <ui:include src="/componentes/piePagina.xhtml" />
+                        <ui:include src="/componentes/piePagina.xhtml" />
                     </p:layoutUnit>
 
                     <footer>
@@ -66,7 +67,10 @@
 
             </div>
 
+            <br />
+            <h:link outcome="/web/foros/List" value="Show All Foros Items"/>
         </h:body>
+
 
     </f:view>
 </html>

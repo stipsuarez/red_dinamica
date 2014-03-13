@@ -1,8 +1,8 @@
 package controllers;
 
 import clases.Foros;
-import util.JsfUtil;
-import util.PaginationHelper;
+import controllers.util.JsfUtil;
+import controllers.util.PaginationHelper;
 import facade.ForosFacade;
 
 import java.io.Serializable;
