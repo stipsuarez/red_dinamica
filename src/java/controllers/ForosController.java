@@ -1,15 +1,18 @@
 package controllers;
 
 import clases.Foros;
-import util.JsfUtil;
-import util.PaginationHelper;
+import clases.Usuarios;
+import controllers.util.JsfUtil;
+import controllers.util.PaginationHelper;
 import facade.ForosFacade;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -61,8 +64,9 @@ public class ForosController implements Serializable {
         return pagination;
     }
 
-    public String prepareList() {
+    public String prepareList() throws IOException {
         recreateModel();
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/foros/List.xhtml");
         return "List";
     }
 
@@ -73,15 +77,15 @@ public class ForosController implements Serializable {
     }
 
     public String prepareCreate() {
-        current = new Foros();
-        selectedItemIndex = -1;
+        current = new Foros();         
+        selectedItemIndex = -1;        
         return "Create";
     }
-
+    
     public String create() {
-        try {
+        try {            
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ForosCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ForosCreated"));  
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -228,5 +232,26 @@ public class ForosController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Foros.class.getName());
             }
         }
+    }
+    
+                                       //MIS CAMBIOS
+    
+    private Usuarios usuario;
+   
+    public String asignarUsuario(){
+        try {            
+             this.usuario = UsuariosController.getCurrent();
+             current.setUsuariosusrcc(usuario);
+             FacesContext context = FacesContext.getCurrentInstance();
+             context.addMessage("messagePanel", new FacesMessage("Exito: ", "Usuario"+usuario.getUsrNombres()));
+             return current.getUsuariosusrcc().getUsrNombres();
+        } catch (Exception e) {
+        }
+        return "nada";           
+    }
+     public void imprimir() {
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage("messagePanel", new FacesMessage("Exito: ", "Usuario"+usuario.getUsrNombres()));
     }
 }
