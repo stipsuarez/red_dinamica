@@ -6,6 +6,8 @@ import util.PaginationHelper;
 import facade.UsuariosFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -34,6 +36,7 @@ public class UsuariosController implements Serializable {
     private String actualPass = "";
     private String nuevaPass = "";
     private String nuevaPassConfir = "";
+    List<Usuarios> listaUsuarios = new ArrayList<>();
 
     public UsuariosController() {
     }
@@ -325,4 +328,5 @@ public class UsuariosController implements Serializable {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseñas no coinciden", "La contraseñas no coinciden "));
         }
     }
+  
 }

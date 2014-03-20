@@ -19,37 +19,38 @@
 
         <p:tabView effect="#{tabBean.effect}" effectDuration="normal" style="height: auto;" >  
 
-            <p:tab title="Hoja de vida">  
-                <h:form id="HojaVida" enctype="multipart/form-data">
-                    <p:growl id="growlfoto" showDetail="true" /> 
-                    <p:messages id="msgs1" autoUpdate="true"/>               
-                    <h:panelGrid columns="2" style="margin-top:10px">
-                         
-                        <p:commandLink id="fotoLink" onclick="fotoDialog.show()">
-                            <p:graphicImage value="#{pageContext.contextPath}/Recursos/Imagenes/perfil/default.png"
-                                            rendered="#{! photoCamBean.tieneFoto}" cache="false" style="height: 203px;"/>
-                            <p:graphicImage rendered="#{photoCamBean.tieneFoto}"
-                                            value="#{pageContext.contextPath}/Recursos/Imagenes/perfil/#{usuariosController.selected.usrCc}"
-                                            cache="false" style="height: 203px;"/>
-                        </p:commandLink>
-                        <p:dialog header="Toma una foto" widgetVar="fotoDialog" >
-                            <p:photoCam widgetVar="pc" listener="#{photoCamBean.oncapture}" update="growlfoto" />
-                            <p:commandButton type="button" value="Tomar foto" onclick="pc.capture()" update="growlfoto">
-                                <p:ajax oncomplete="fotoDialog.hide();"  update="growlfoto"/>
-                            </p:commandButton>
-                        </p:dialog> 
 
-                    </h:panelGrid> 
-                    <h:panelGrid columns="4" > 
-                        
-                        <p:commandButton id="cambiarFoto" onclick="fotoDialog.show()" value="Cambiar Foto" icon="ui-icon-disk"/>
-                    </h:panelGrid> 
-                </h:form>
-            </p:tab>  
 
             <p:tab title="Mis datos"> 
-                <p:accordionPanel multiple="true">  
-                    <p:tab title="Modificar contraseña" closable="true"> 
+                <p:accordionPanel multiple="true" binding="#{usrActual}" value="#{usuariosController.selected}" >  
+                    <p:tab title="Cambiar foto">  
+                        <h:form id="HojaVida" enctype="multipart/form-data">
+                            <p:growl id="growlfoto" showDetail="true" /> 
+                            <p:messages id="msgs1" autoUpdate="true"/>               
+                            <h:panelGrid columns="2" style="margin-top:10px">
+
+                                <p:commandLink id="fotoLink" onclick="fotoDialog.show()">
+                                    <p:graphicImage value="#{pageContext.contextPath}/Recursos/Imagenes/perfil/default.png"
+                                                    rendered="#{! photoCamBean.tieneFoto}" cache="false" style="height: 203px;"/>
+                                    <p:graphicImage rendered="#{photoCamBean.tieneFoto}"
+                                                    value="#{pageContext.contextPath}/Recursos/Imagenes/perfil/#{usuariosController.selected.usrCc}"
+                                                    cache="false" style="height: 203px;"/>
+                                </p:commandLink>
+                                <p:dialog header="Toma una foto" widgetVar="fotoDialog" >
+                                    <p:photoCam widgetVar="pc" listener="#{photoCamBean.oncapture}" update="growlfoto" />
+                                    <p:commandButton type="button" value="Tomar foto" onclick="pc.capture()" update="growlfoto">
+                                        <p:ajax oncomplete="fotoDialog.hide();"  update="growlfoto"/>
+                                    </p:commandButton>
+                                </p:dialog> 
+
+                            </h:panelGrid> 
+                            <h:panelGrid columns="4" > 
+
+                                <p:commandButton id="cambiarFoto" onclick="fotoDialog.show()" value="Cambiar Foto" icon="ui-icon-disk"/>
+                            </h:panelGrid> 
+                        </h:form>
+                    </p:tab>
+                    <p:tab title="Modificar contraseña" closable="false"> 
                         <h:form>
                             <p:messages id="msgs2" />
                             <h:panelGrid columns="3" cellpadding="10">  
@@ -113,8 +114,6 @@
                                 </h:panelGrid>
                             </p:panel>
 
-
-
                             <p:panel header="Datos adicionales">
                                 <p:panelGrid columns="2">
 
@@ -124,7 +123,7 @@
                                     </p:calendar>
                                     <h:outputLabel value="#{bundle.CreateUsuariosLabel_ciudadciudadid}" for="usrCiudad" />
                                     <p:inputText id="usrCiudad" value="#{usuariosController.selected.ciudadciudadid}" title="#{bundle.CreateUsuariosTitle_ciudadciudadid}" />
-                                    
+
                                 </p:panelGrid>
                             </p:panel>
                             <br />
@@ -145,22 +144,100 @@
                 </p:layout>
             </p:tab> 
 
+            <p:tab title="Busca persona" id="busca" >  
+                <h:form id="buscar" class="tablaPostula" prependId="false">
+                    <p:messages id="msgs_errores" ></p:messages>  
+                    <p:growl id="growlB" showDetail="true" />
+                    <h:outputLabel value="Ingrese el nombre a buscar: " for="nombre_buscar" />
+                    <h:inputText id="nombre_buscar" value="#{solicitudesController.nombre_buscar}" title="Usuario a buscar" validator="#{solicitudesController.asignarNombreBuscar}" required="true" requiredMessage="El campo es obligatorios">
+                        <p:ajax  event="keyup" listener="#{solicitudesController.asignarUsuariosEncontrados}"   update="growlB,tablaEnc,msgs_errores" />  
+                    </h:inputText>
+                    <p:commandButton  icon="ui-icon-search" action="#{solicitudesController.asignarUsuariosEncontrados}" update="tablaEnc,growlB"  value="Buscar" />
+
+                    <p:growl id="growl" showDetail="true" /> 
+                    <p:dataTable id="tablaEnc" sortMode="multiple" var="usuariosE" value="#{solicitudesController.listaUsuariosE}" widgetVar="tablaPost" emptyMessage="No hay solicitudes disponibles" paginator="true" rows="10"
+                                 rowKey="#{usuariosE.usrCc}" selection="#{solicitudesController.usrSelect}"  >  
+                        
+                        
+                        <f:facet name="header">  
+                            <p:outputPanel>  
+                                <h:outputText value="Buscar en todos los campos:" />  
+                                <p:inputText id="globalFilter" onkeyup="tablaPost.filter()" style="width:150px" />  
+                                <p:messages id="msgs_error" >Error: </p:messages> 
+                            </p:outputPanel>  
+                        </f:facet>  
+
+
+
+                        <p:column style="width:10%" headerText="Mas Info.">                                                           
+                            <p:rowToggler />  
+                        </p:column>  
+                        <p:column style="width:25%" headerText="Imágen de Perfil">  
+                            <p:graphicImage value="/Recursos/Imagenes/perfil/#{usuariosE.usrCc}" width="170" height="200"/>  
+                        </p:column>  
+
+                        <p:column id="nombre" style="width:20px"  headerText="Nombres" filterValue="#{usuariosE.usrNombres}"
+                                  filterMatchMode="contains" sortBy="#{usuariosE.usrNombres}" filterBy="#{usuariosE.usrNombres}" > 
+                            <h:outputText value="#{usuariosE.usrNombres}" />  
+                        </p:column> 
+
+                        <p:column id="apellido"  style="width:40px" filterBy="#{usuariosE.usrApellidos}"   
+                                  headerText="Apellidos"   filterMatchMode="contains" sortBy="#{usuariosE.usrApellidos}" >  
+                            <h:outputText value="#{usuariosE.usrApellidos}" />  
+                        </p:column> 
+
+                        <p:column id="carrera" style="width:20px" filterBy="#{usuariosE.usrEmail}"   
+                                  headerText="E-Mail"   filterMatchMode="contains" sortBy="#{usuariosE.usrEmail}">  
+
+                            <h:outputText value="#{usuariosE.usrEmail}" />  
+                        </p:column>  
+
+
+                       
+                        <p:column  style="width:6%" headerText="Aceptar Solicitud" id="agregar"  >
+                            <p:commandButton  id="agregar_amigo"   update="tablaEnc,msgs_error" action="#{solicitudesController.enviarSolicitud}" value="Agregar" >
+                                <f:attribute name="usrAct" value="#{usrActual.value}"  />
+                                <f:setPropertyActionListener value="#{usuariosE}" target="#{solicitudesController.usrSelect}" />  
+                            </p:commandButton> 
+                        </p:column>
+
+                        <p:rowExpansion>  
+                            <h:panelGrid id="display" columns="2" cellpadding="5" style="width:100%"  
+                                         styleClass="ui-widget-content grid">  
+                                <h:outputText value="Cedula de Ciudadania:" />
+                                <h:outputText id="detalle_descripcion" value="#{usuariosE.usrCc}"   />      
+
+                                <h:outputText value="Fecha de Nacimiento:" />  
+                                <h:outputText id="detalle_fecNacim" value="#{usuariosE.usrFechaNacimiento}" />  
+
+                                <h:outputText value="Ciudad:" />  
+                                <h:outputText id="detalle_ciudad" value="#{usuariosE.ciudadciudadid}"/>  
+                            </h:panelGrid>  
+
+
+                        </p:rowExpansion>  
+
+                    </p:dataTable>  
+
+                    <p:commandButton value="Enviar" action="#{solicitudesController.aceptarSolicitudes}" update="growl"/>
+                </h:form> 
+            </p:tab>  
 
             <p:tab title="Solicitudes" rendered="#{loggin.admin}" >  
                 <h:form id="tablaSolicitudes" class="tablaPostula" prependId="false">  
-                    <p:growl id="growl" showDetail="true" /> 
-                    <p:dataTable sortMode="multiple" var="usuarios" value="#{solicitudBean.listaNoAceptados}" widgetVar="tablaPost" emptyMessage="No hay solicitudes disponibles" paginator="true" rows="10"
-                                 rowKey="#{usuarios.usrCc}" selection="#{solicitudBean.listaAceptados}" >  
-                        
-                         <f:facet name="header">  
+                    <p:growl id="growl2" showDetail="true" /> 
+                    <p:dataTable sortMode="multiple" var="usuarios" value="#{solicitudesController.listaNoAceptados}" widgetVar="tablaPost" emptyMessage="No hay solicitudes disponibles" paginator="true" rows="10"
+                                 rowKey="#{usuarios.usrCc}" selection="#{solicitudesController.listaAceptados}" >  
+
+                        <f:facet name="header">  
                             <p:outputPanel>  
-                                <h:outputText value="Search all fields:" />  
+                                <h:outputText value="Buscar en todos los campos:" />  
                                 <p:inputText id="globalFilter" onkeyup="tablaPost.filter()" style="width:150px" />  
                             </p:outputPanel>  
                         </f:facet>  
 
-                        
-                            
+
+
                         <p:column style="width:10%" headerText="Mas Info.">                                                           
                             <p:rowToggler />  
                         </p:column>  
@@ -192,7 +269,7 @@
 
                         <p:rowExpansion>  
                             <h:panelGrid id="display" columns="2" cellpadding="5" style="width:100%"  
-                                         styleClass=" ui-widget-content grid">  
+                                         styleClass="ui-widget-content grid">  
 
                                 <h:outputText value="Cedula de Ciudadania:" />
                                 <h:outputText id="detalle_descripcion" value="#{usuarios.usrCc}"   />      
@@ -203,15 +280,15 @@
                                 <h:outputText value="Ciudad:" />  
                                 <h:outputText id="detalle_ciudad" value="#{usuarios.ciudadciudadid}"/>  
 
-                                
+
                             </h:panelGrid>  
 
 
                         </p:rowExpansion>  
 
                     </p:dataTable>  
-                   
-                    <p:commandButton value="Enviar" action="#{solicitudBean.aceptarSolicitudes}" update="growl"/>
+
+                    <p:commandButton value="Enviar" action="#{solicitudesController.aceptarSolicitudes}" update="growl2"/>
 
 
                 </h:form>  

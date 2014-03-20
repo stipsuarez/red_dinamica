@@ -4,8 +4,12 @@
  */
 package facade;
 
+import clases.Ciudad;
 import clases.Usuarios;
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -40,6 +44,21 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
         return q.getResultList().size()==1;
         
         
+    }
+    public List<Usuarios> buscarUsuarios_por_nombre(String nombre) {
+        try {
+            
+        
+        String sentencia ="SELECT * FROM Usuarios u WHERE u.usr_nombres LIKE '%"+nombre+ "%' OR u.usr_apellidos LIKE '%"+nombre+"%'"
+                + " OR u.usr_email LIKE '%"+nombre+"%' ";
+        Query q = em.createNativeQuery(sentencia, Usuarios.class);
+        return q.getResultList();
+        
+        } catch (Exception e) {
+             FacesContext context = FacesContext.getCurrentInstance();
+             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al realizar la consulta en la BD: "+e+"\nLocalize:"+e.getLocalizedMessage(), "  nombre no asignado: "+e+"\nLocalize: "+e.getLocalizedMessage()));
+        }
+        return null;
     }
     
 }

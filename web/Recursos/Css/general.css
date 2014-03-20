@@ -4,6 +4,9 @@
     Author     : Naturaleza
     Description:
         Purpose of the stylesheet follows.
+		Para el título: 
+		background:linear-gradient(#deddd8,#ebebe4) ;
+		color: green;
 */
 
 root { 
@@ -11,14 +14,10 @@ root {
 }
 
 .Titulo{
-    color: green;
     height: 110px;
     margin: 0px;
     padding: 0px;
-    background:linear-gradient(#deddd8,#ebebe4) ;
     height: auto;
-
-
 }
 body{
     background-color: gray;

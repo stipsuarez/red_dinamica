@@ -111,7 +111,8 @@ public class Loggin implements InterfaceBean {
                 HttpSession sessionv = (HttpSession) context2.getExternalContext().getSession(true);
                 sessionv.setAttribute("user", usrActual);
                 session.setActiva(true);
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/");
+                //FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/");
+                irA("perfil");
             } else {
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Verifique cédula y/o contraseña!", ""));
