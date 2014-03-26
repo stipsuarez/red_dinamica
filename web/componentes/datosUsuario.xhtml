@@ -194,11 +194,11 @@
 
 
                        
-                        <p:column  style="width:6%" headerText="Aceptar Solicitud" id="agregar"  >
-                            <p:commandButton  id="agregar_amigo"   update="tablaEnc,msgs_error" action="#{solicitudesController.enviarSolicitud}" value="Agregar" >
-                                <f:attribute name="usrAct" value="#{usrActual.value}"  />
+                        <p:column  style="width:6%" headerText="Enviar Solicitud" id="agregar"  >
+                            <p:commandButton  id="agregar_amigo"    update="tablaEnc,msgs_error" action="#{solicitudesController.enviarSolicitud}" value="Enviar solicitud" >
                                 <f:setPropertyActionListener value="#{usuariosE}" target="#{solicitudesController.usrSelect}" />  
                             </p:commandButton> 
+
                         </p:column>
 
                         <p:rowExpansion>  
