@@ -25,7 +25,7 @@ import javax.faces.model.SelectItem;
 @SessionScoped
 public class ForosController implements Serializable {
 
-    private Foros current;
+    private static Foros current;
     private DataModel items = null;
     @EJB
     private facade.ForosFacade ejbFacade;
@@ -40,6 +40,10 @@ public class ForosController implements Serializable {
             current = new Foros();
             selectedItemIndex = -1;
         }
+        return current;
+    }
+    
+      public static Foros getCurrent() {
         return current;
     }
 
@@ -70,26 +74,29 @@ public class ForosController implements Serializable {
         return "List";
     }
 
-    public String prepareView() {
+    public void prepareView() throws IOException {
         current = (Foros) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/comentarios/comentariosTemplateClient.xhtml");        
     }
 
-    public String prepareCreate() {
+    public String prepareCreate() throws IOException {
         current = new Foros();         
-        selectedItemIndex = -1;        
+        selectedItemIndex = -1;    
         return "Create";
     }
     
-    public String create() {
+    public void create() {
         try {            
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ForosCreated"));  
-            return prepareCreate();
+            prepareCreate();
+            recreatePagination();
+            recreateModel();     
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/foros/forosTemplateClient.xhtml");
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+            
         }
     }
 
@@ -110,13 +117,12 @@ public class ForosController implements Serializable {
         }
     }
 
-    public String destroy() {
+    public void destroy() {
         current = (Foros) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
-        recreateModel();
-        return "List";
+        recreateModel();       
     }
 
     public String destroyAndView() {
@@ -169,18 +175,18 @@ public class ForosController implements Serializable {
 
     private void recreatePagination() {
         pagination = null;
+        
     }
 
-    public String next() {
+    public void next() {
         getPagination().nextPage();
         recreateModel();
-        return "List";
+       
     }
 
-    public String previous() {
+    public void previous() {
         getPagination().previousPage();
-        recreateModel();
-        return "List";
+        recreateModel();        
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
@@ -237,7 +243,7 @@ public class ForosController implements Serializable {
                                        //MIS CAMBIOS
     
     private Usuarios usuario;
-   
+    Boolean mostrarLista = true;
     public String asignarUsuario(){
         try {            
              this.usuario = UsuariosController.getCurrent();
@@ -254,4 +260,14 @@ public class ForosController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage("messagePanel", new FacesMessage("Exito: ", "Usuario"+usuario.getUsrNombres()));
     }
+     
+        public void irA(String dire) throws IOException{
+        switch(dire){
+            case "crear": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/foros/Create.xhtml"); break;
+            case "perfil": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/pages/perfiles.xhtml"); break; 
+            case "contacto": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/pages/contactenos.xhtml"); break;    
+            case "foros": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/pages/foros.xhtml"); break;    
+            case "regVacante": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/registrarVacante.xhtml"); break;    
+        }
+    }        
 }

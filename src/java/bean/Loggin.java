@@ -1,5 +1,6 @@
 package bean;
 
+import clases.Foros;
 import clases.InterfaceBean;
 import clases.Usuarios;
 import static clases.InterfaceBean.session;
@@ -137,12 +138,13 @@ public class Loggin implements InterfaceBean {
         session.setActiva(false);
         FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/");
     }
-
+    
     public void irA(String dire) throws IOException{
         switch(dire){
             case "index": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/"); break;
             case "perfil": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/pages/perfiles.xhtml"); break; 
             case "contacto": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/pages/contactenos.xhtml"); break;    
+            case "foros": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/foros/forosTemplateClient.xhtml"); break;    
             case "regVacante": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/registrarVacante.xhtml"); break;    
         }
     }

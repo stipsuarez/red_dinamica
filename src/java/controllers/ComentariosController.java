@@ -1,6 +1,8 @@
 package controllers;
 
 import clases.Comentarios;
+import clases.Foros;
+import clases.Usuarios;
 import util.JsfUtil;
 import util.PaginationHelper;
 import facade.ComentariosFacade;
@@ -10,6 +12,8 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -78,14 +82,17 @@ public class ComentariosController implements Serializable {
         return "Create";
     }
 
-    public String create() {
+    public void create() {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ComentariosCreated"));
-            return prepareCreate();
+            prepareCreate();
+            recreatePagination();
+            recreateModel();     
+           
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+            
         }
     }
 
@@ -229,4 +236,12 @@ public class ComentariosController implements Serializable {
             }
         }
     }
+    
+    /////MI CODIGO
+    
+
+        public void asignarAll(){                   
+             current.setUsuariosusrcc(UsuariosController.getCurrent());  
+             current.setForosforoid(ForosController.getCurrent());            
+        }
 }

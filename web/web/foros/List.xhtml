@@ -1,60 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html xmlns="http://www.w3.org/1999/xhtml"            
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListForosTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+ 
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
+                </h:panelGroup>                  
                 <h:outputText escape="false" value="#{bundle.ListForosEmpty}" rendered="#{forosController.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{forosController.items.rowCount > 0}">
-                    <h:outputText value="#{forosController.pagination.pageFirstItem + 1}..#{forosController.pagination.pageLastItem + 1}/#{forosController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{forosController.previous}" value="#{bundle.Previous} #{forosController.pagination.pageSize}" rendered="#{forosController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{forosController.next}" value="#{bundle.Next} #{forosController.pagination.pageSize}" rendered="#{forosController.pagination.hasNextPage}"/>&nbsp;
+                    
                     <h:dataTable value="#{forosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListForosTitle_foroId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.foroId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListForosTitle_foroNombre}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.foroNombre}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListForosTitle_foroTema}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.foroTema}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListForosTitle_foroFecha}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.foroFecha}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListForosTitle_foroDescripcion}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.foroDescripcion}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListForosTitle_usuariosusrcc}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usuariosusrcc}"/>
+                            <p:accordionPanel dynamic="true" cache="true">  
+                                <p:tab title="#{item.foroNombre} - #{item.foroFecha}">  
+                                    <h:panelGrid columns="1" cellpadding="10">                               
+                                        <h:outputText  value="#{item.foroDescripcion}" />  
+                                    </h:panelGrid>  
+                                </p:tab>  
+                            </p:accordionPanel> 
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -67,14 +34,31 @@
                             <h:commandLink action="#{forosController.destroy}" value="#{bundle.ListForosDestroyLink}"/>
                         </h:column>
                     </h:dataTable>
+                    
+                    <h:outputText value="#{forosController.pagination.pageFirstItem + 1}..#{forosController.pagination.pageLastItem + 1}/#{forosController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{forosController.previous}" value="#{bundle.Previous} #{forosController.pagination.pageSize}" rendered="#{forosController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{forosController.next}" value="#{bundle.Next} #{forosController.pagination.pageSize}" rendered="#{forosController.pagination.hasNextPage}"/>&nbsp;
+
+
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{forosController.prepareCreate}" value="#{bundle.ListForosCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListForosIndexLink}"/>
-            </h:form>
-        </ui:define>
-    </ui:composition>
+                
+            </h:form>   
+    
+    
+    <h:form id="form">
+        <p:commandButton icon="ui-icon-search" update="carDetail" oncomplete="car.show()" title="View Detail" ajax="true"/>                      
+                    <!--   <p:dialog appendToBody="false" id="dialog" header="Car Detail" widgetVar="carDialog" modal="true" showEffect="fade" resizable="false" position="center center" height="123" width="456">  -->
+            <p:dialog header="Car Detail" widgetVar="car"  showEffect="fade" position="center center" >  
+                <p:outputPanel id="carDetail" style="text-align:center;" layout="block">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText value="Todo está bienefa" />
+                     <h:outputText value="Todo está bien" />
+                </h:panelGrid> 
+              
+              </p:outputPanel> 
+          </p:dialog>
+    </h:form>
+ 
 
 </html>
