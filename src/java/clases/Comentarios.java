@@ -8,26 +8,27 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Entity
 @Table(name = "comentarios")
@@ -40,8 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Comentarios implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "coment_id")
     private Integer comentId;
     @Size(max = 700)
@@ -50,19 +51,17 @@ public class Comentarios implements Serializable {
     @Column(name = "coment_fecha_hora")
     @Temporal(TemporalType.TIMESTAMP)
     private Date comentFechaHora;
-    @JoinTable(name = "comentarios_has_comentarios", joinColumns = {
-        @JoinColumn(name = "Comentarios_coment_id", referencedColumnName = "coment_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "Comentarios_coment_id1", referencedColumnName = "coment_id")})
-    @ManyToMany
-    private Collection<Comentarios> comentariosCollection;
-    @ManyToMany(mappedBy = "comentariosCollection")
-    private Collection<Comentarios> comentariosCollection1;
     @JoinColumn(name = "Usuarios_usr_cc", referencedColumnName = "usr_cc")
     @ManyToOne(optional = false)
     private Usuarios usuariosusrcc;
     @JoinColumn(name = "Foros_foro_id", referencedColumnName = "foro_id")
     @ManyToOne(optional = false)
     private Foros forosforoid;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comentarioscomentid")
+    private Collection<Comentarios> comentariosCollection;
+    @JoinColumn(name = "Comentarios_coment_id", referencedColumnName = "coment_id")
+    @ManyToOne(optional = false)
+    private Comentarios comentarioscomentid;
 
     public Comentarios() {
     }
@@ -95,24 +94,6 @@ public class Comentarios implements Serializable {
         this.comentFechaHora = comentFechaHora;
     }
 
-    @XmlTransient
-    public Collection<Comentarios> getComentariosCollection() {
-        return comentariosCollection;
-    }
-
-    public void setComentariosCollection(Collection<Comentarios> comentariosCollection) {
-        this.comentariosCollection = comentariosCollection;
-    }
-
-    @XmlTransient
-    public Collection<Comentarios> getComentariosCollection1() {
-        return comentariosCollection1;
-    }
-
-    public void setComentariosCollection1(Collection<Comentarios> comentariosCollection1) {
-        this.comentariosCollection1 = comentariosCollection1;
-    }
-
     public Usuarios getUsuariosusrcc() {
         return usuariosusrcc;
     }
@@ -127,6 +108,23 @@ public class Comentarios implements Serializable {
 
     public void setForosforoid(Foros forosforoid) {
         this.forosforoid = forosforoid;
+    }
+
+    @XmlTransient
+    public Collection<Comentarios> getComentariosCollection() {
+        return comentariosCollection;
+    }
+
+    public void setComentariosCollection(Collection<Comentarios> comentariosCollection) {
+        this.comentariosCollection = comentariosCollection;
+    }
+
+    public Comentarios getComentarioscomentid() {
+        return comentarioscomentid;
+    }
+
+    public void setComentarioscomentid(Comentarios comentarioscomentid) {
+        this.comentarioscomentid = comentarioscomentid;
     }
 
     @Override
