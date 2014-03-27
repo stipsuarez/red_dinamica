@@ -88,7 +88,7 @@ public class PhotoCamBean implements InterfaceBean, Serializable{
            
         
     }
-    
+    //Arreglarlo
     public boolean isTieneFoto(){
      Usuarios u = UsuariosController.getCurrent();
         String foto = ""+u.getUsrCc();
