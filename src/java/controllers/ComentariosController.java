@@ -8,6 +8,7 @@ import util.PaginationHelper;
 import facade.ComentariosFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -161,7 +162,7 @@ public class ComentariosController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
-            items = getPagination().createPageDataModel();
+            items = getPagination().createPageDataModel();            
         }
         return items;
     }
@@ -242,6 +243,13 @@ public class ComentariosController implements Serializable {
 
         public void asignarAll(){                   
              current.setUsuariosusrcc(UsuariosController.getCurrent());  
-             current.setForosforoid(ForosController.getCurrent());            
+             current.setForosforoid(ForosController.getCurrent()); 
+             
         }
+        
+        public DataModel getItems2() { 
+            List lista = ejbFacade.ComentariosForo(ForosController.getCurrent().getForoId());
+            DataModel comentario = new ListDataModel(lista);             
+            return comentario;
+    }
 }

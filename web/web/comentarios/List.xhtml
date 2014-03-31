@@ -19,7 +19,7 @@
                     <h:outputText value="#{comentariosController.pagination.pageFirstItem + 1}..#{comentariosController.pagination.pageLastItem + 1}/#{comentariosController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{comentariosController.previous}" value="#{bundle.Previous} #{comentariosController.pagination.pageSize}" rendered="#{comentariosController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{comentariosController.next}" value="#{bundle.Next} #{comentariosController.pagination.pageSize}" rendered="#{comentariosController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{comentariosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:dataTable value="#{comentariosController.items2}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListComentariosTitle_comentId}"/>
@@ -62,13 +62,8 @@
                             <h:outputText value=" "/>
                             <h:commandLink action="#{comentariosController.destroy}" value="#{bundle.ListComentariosDestroyLink}"/>
                         </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{comentariosController.prepareCreate}" value="#{bundle.ListComentariosCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListComentariosIndexLink}"/>
+                    </h:dataTable>                 
+                </h:panelGroup>                
             </h:form>
         </ui:define>
     </ui:composition>

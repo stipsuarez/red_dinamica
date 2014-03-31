@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     
             <h:form>
                 <h:panelGrid columns="2">
@@ -12,21 +13,16 @@
                     <h:outputLabel value="#{bundle.CreateComentariosLabel_comentFechaHora}" for="comentFechaHora" />
                     <h:inputText id="comentFechaHora" value="#{comentariosController.selected.comentFechaHora}" title="#{bundle.CreateComentariosTitle_comentFechaHora}" >
                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateComentariosLabel_usuariosusrcc}" for="usuariosusrcc" />
-                    <h:selectOneMenu id="usuariosusrcc" value="#{comentariosController.selected.usuariosusrcc}" title="#{bundle.CreateComentariosTitle_usuariosusrcc}" required="true" requiredMessage="#{bundle.CreateComentariosRequiredMessage_usuariosusrcc}">
-                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateComentariosLabel_forosforoid}" for="forosforoid" />
-                    <h:selectOneMenu id="forosforoid" value="#{comentariosController.selected.forosforoid}" title="#{bundle.CreateComentariosTitle_forosforoid}" required="true" requiredMessage="#{bundle.CreateComentariosRequiredMessage_forosforoid}">
-                        <f:selectItems value="#{forosController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                    </h:inputText>                     
+                    
+                 
                     <h:outputLabel value="#{bundle.CreateComentariosLabel_comentarioscomentid}" for="comentarioscomentid" />
                     <h:selectOneMenu id="comentarioscomentid" value="#{comentariosController.selected.comentarioscomentid}" title="#{bundle.CreateComentariosTitle_comentarioscomentid}" required="true" requiredMessage="#{bundle.CreateComentariosRequiredMessage_comentarioscomentid}">
                         <f:selectItems value="#{comentariosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
+                <p:commandButton action="#{comentariosController.create}" value="#{bundle.CreateForosSaveLink}" ajax="false" actionListener="#{comentariosController.asignarAll()}"/>                
                 <h:commandLink action="#{comentariosController.create}" value="#{bundle.CreateComentariosSaveLink}" />
                 <br />
                 <br />
