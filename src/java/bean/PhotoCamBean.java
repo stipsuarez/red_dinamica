@@ -4,8 +4,7 @@
  */
 package bean;
 
-import clases.InterfaceBean;
-import static clases.InterfaceBean.session;
+
 import clases.Usuarios;
 import controllers.UsuariosController;
 import java.io.File;
@@ -91,13 +90,8 @@ public class PhotoCamBean implements InterfaceBean, Serializable{
     //Arreglarlo
     public boolean isTieneFoto(){
      Usuarios u = UsuariosController.getCurrent();
-        String foto = ""+u.getUsrCc();
-        String idUsuario = ""+u.getUsrCc()+".png";   
-        int valor = 0;
-        if(foto.equals(idUsuario)){
-            valor = 1;
-            return true;
-        }
-        else return false;
+        if(u.getUsrFoto()!=null)
+            return u.getUsrFoto();
+        return false;
     }
 }

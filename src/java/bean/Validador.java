@@ -4,7 +4,6 @@
  */
 package bean;
 
-import clases.InterfaceBean;
 import clases.Usuarios;
 import controllers.UsuariosController;
 import util.JsfUtil;

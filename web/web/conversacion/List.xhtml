@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListConversacionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListConversacionEmpty}" rendered="#{conversacionController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{conversacionController.items.rowCount > 0}">
+                    <h:outputText value="#{conversacionController.pagination.pageFirstItem + 1}..#{conversacionController.pagination.pageLastItem + 1}/#{conversacionController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{conversacionController.previous}" value="#{bundle.Previous} #{conversacionController.pagination.pageSize}" rendered="#{conversacionController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{conversacionController.next}" value="#{bundle.Next} #{conversacionController.pagination.pageSize}" rendered="#{conversacionController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{conversacionController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConversacionTitle_convId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.convId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConversacionTitle_convAsunto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.convAsunto}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConversacionTitle_ultimo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ultimo}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConversacionTitle_convNumero}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.convNumero}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConversacionTitle_convUsr2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.convUsr2}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConversacionTitle_convUsr1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.convUsr1}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{conversacionController.prepareView}" value="#{bundle.ListConversacionViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{conversacionController.prepareEdit}" value="#{bundle.ListConversacionEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{conversacionController.destroy}" value="#{bundle.ListConversacionDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{conversacionController.prepareCreate}" value="#{bundle.ListConversacionCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListConversacionIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -4,7 +4,7 @@
  */
 package facade;
 
-import clases.Ciudad;
+
 import clases.Universidades;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -35,7 +35,7 @@ public class UniversidadesFacade extends AbstractFacade<Universidades> {
     //NUESTRO CÓDIGO INICIA AQUÍ
      public void correcto() {
         
-    }
+}
      public List<Universidades> UniversidadSelecionadas(Integer ciudad_id) {
         try {            
             String cadena = "SELECT * FROM Universidades u WHERE u.Ciudad_ciudad_id =" + ciudad_id;

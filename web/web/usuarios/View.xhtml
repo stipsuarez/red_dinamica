@@ -25,22 +25,20 @@
                     <h:outputText value="#{usuariosController.selected.usrEmail}" title="#{bundle.ViewUsuariosTitle_usrEmail}"/>
                     <h:outputText value="#{bundle.ViewUsuariosLabel_usrPass}"/>
                     <h:outputText value="#{usuariosController.selected.usrPass}" title="#{bundle.ViewUsuariosTitle_usrPass}"/>
-                    <h:outputText value="#{bundle.ViewUsuariosLabel_usrTipo}"/>
-                    <h:outputText value="#{usuariosController.selected.usrTipo}" title="#{bundle.ViewUsuariosTitle_usrTipo}"/>
                     <h:outputText value="#{bundle.ViewUsuariosLabel_usrSexo}"/>
                     <h:outputText value="#{usuariosController.selected.usrSexo}" title="#{bundle.ViewUsuariosTitle_usrSexo}"/>
-                    <h:outputText value="#{bundle.ViewUsuariosLabel_usrFechaNacimiento}"/>
-                    <h:outputText value="#{usuariosController.selected.usrFechaNacimiento}" title="#{bundle.ViewUsuariosTitle_usrFechaNacimiento}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewUsuariosLabel_usrTipo}"/>
+                    <h:outputText value="#{usuariosController.selected.usrTipo}" title="#{bundle.ViewUsuariosTitle_usrTipo}"/>
                     <h:outputText value="#{bundle.ViewUsuariosLabel_usrEstado}"/>
                     <h:outputText value="#{usuariosController.selected.usrEstado}" title="#{bundle.ViewUsuariosTitle_usrEstado}"/>
-                    <h:outputText value="#{bundle.ViewUsuariosLabel_ciudadciudadid}"/>
-                    <h:outputText value="#{usuariosController.selected.ciudadciudadid}" title="#{bundle.ViewUsuariosTitle_ciudadciudadid}"/>
-                    <h:outputText value="#{bundle.ViewUsuariosLabel_universidadesuniversidadid}"/>
-                    <h:outputText value="#{usuariosController.selected.universidadesuniversidadid}" title="#{bundle.ViewUsuariosTitle_universidadesuniversidadid}"/>
-                    <h:outputText value="#{bundle.ViewUsuariosLabel_departamentosdepartamentoid}"/>
-                    <h:outputText value="#{usuariosController.selected.departamentosdepartamentoid}" title="#{bundle.ViewUsuariosTitle_departamentosdepartamentoid}"/>
+                    <h:outputText value="#{bundle.ViewUsuariosLabel_usrCiudad}"/>
+                    <h:outputText value="#{usuariosController.selected.usrCiudad}" title="#{bundle.ViewUsuariosTitle_usrCiudad}"/>
+                    <h:outputText value="#{bundle.ViewUsuariosLabel_usrUniversidad}"/>
+                    <h:outputText value="#{usuariosController.selected.usrUniversidad}" title="#{bundle.ViewUsuariosTitle_usrUniversidad}"/>
+                    <h:outputText value="#{bundle.ViewUsuariosLabel_usrDepartamento}"/>
+                    <h:outputText value="#{usuariosController.selected.usrDepartamento}" title="#{bundle.ViewUsuariosTitle_usrDepartamento}"/>
+                    <h:outputText value="#{bundle.ViewUsuariosLabel_usrFoto}"/>
+                    <h:outputText value="#{usuariosController.selected.usrFoto}" title="#{bundle.ViewUsuariosTitle_usrFoto}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{usuariosController.destroyAndView}" value="#{bundle.ViewUsuariosDestroyLink}"/>

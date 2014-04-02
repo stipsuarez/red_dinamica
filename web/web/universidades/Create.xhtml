@@ -19,8 +19,8 @@
                     <h:inputText id="universidadId" value="#{universidadesController.selected.universidadId}" title="#{bundle.CreateUniversidadesTitle_universidadId}" required="true" requiredMessage="#{bundle.CreateUniversidadesRequiredMessage_universidadId}"/>
                     <h:outputLabel value="#{bundle.CreateUniversidadesLabel_universidadNombre}" for="universidadNombre" />
                     <h:inputText id="universidadNombre" value="#{universidadesController.selected.universidadNombre}" title="#{bundle.CreateUniversidadesTitle_universidadNombre}" />
-                    <h:outputLabel value="#{bundle.CreateUniversidadesLabel_ciudadciudadid}" for="ciudadciudadid" />
-                    <h:selectOneMenu id="ciudadciudadid" value="#{universidadesController.selected.ciudadciudadid}" title="#{bundle.CreateUniversidadesTitle_ciudadciudadid}" required="true" requiredMessage="#{bundle.CreateUniversidadesRequiredMessage_ciudadciudadid}">
+                    <h:outputLabel value="#{bundle.CreateUniversidadesLabel_universidadCiudad}" for="universidadCiudad" />
+                    <h:selectOneMenu id="universidadCiudad" value="#{universidadesController.selected.universidadCiudad}" title="#{bundle.CreateUniversidadesTitle_universidadCiudad}" required="true" requiredMessage="#{bundle.CreateUniversidadesRequiredMessage_universidadCiudad}">
                         <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>

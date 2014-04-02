@@ -52,23 +52,15 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrTipo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrTipo}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuariosTitle_usrSexo}"/>
                             </f:facet>
                             <h:outputText value="#{item.usrSexo}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrFechaNacimiento}"/>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usrTipo}"/>
                             </f:facet>
-                            <h:outputText value="#{item.usrFechaNacimiento}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
+                            <h:outputText value="#{item.usrTipo}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -78,21 +70,27 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_ciudadciudadid}"/>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usrCiudad}"/>
                             </f:facet>
-                            <h:outputText value="#{item.ciudadciudadid}"/>
+                            <h:outputText value="#{item.usrCiudad}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_universidadesuniversidadid}"/>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usrUniversidad}"/>
                             </f:facet>
-                            <h:outputText value="#{item.universidadesuniversidadid}"/>
+                            <h:outputText value="#{item.usrUniversidad}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_departamentosdepartamentoid}"/>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usrDepartamento}"/>
                             </f:facet>
-                            <h:outputText value="#{item.departamentosdepartamentoid}"/>
+                            <h:outputText value="#{item.usrDepartamento}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usrFoto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usrFoto}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

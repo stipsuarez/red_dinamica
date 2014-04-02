@@ -15,6 +15,8 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateSolicitudesLabel_solicitudId}" for="solicitudId" />
+                    <h:inputText id="solicitudId" value="#{solicitudesController.selected.solicitudId}" title="#{bundle.CreateSolicitudesTitle_solicitudId}" required="true" requiredMessage="#{bundle.CreateSolicitudesRequiredMessage_solicitudId}"/>
                     <h:outputLabel value="#{bundle.CreateSolicitudesLabel_solicitudCc}" for="solicitudCc" />
                     <h:inputText id="solicitudCc" value="#{solicitudesController.selected.solicitudCc}" title="#{bundle.CreateSolicitudesTitle_solicitudCc}" />
                     <h:outputLabel value="#{bundle.CreateSolicitudesLabel_solicitudFecha}" for="solicitudFecha" />
@@ -23,8 +25,8 @@
                     </h:inputText>
                     <h:outputLabel value="#{bundle.CreateSolicitudesLabel_solicitudEstado}" for="solicitudEstado" />
                     <h:inputText id="solicitudEstado" value="#{solicitudesController.selected.solicitudEstado}" title="#{bundle.CreateSolicitudesTitle_solicitudEstado}" />
-                    <h:outputLabel value="#{bundle.CreateSolicitudesLabel_usuariosusrcc}" for="usuariosusrcc" />
-                    <h:selectOneMenu id="usuariosusrcc" value="#{solicitudesController.selected.usuariosusrcc}" title="#{bundle.CreateSolicitudesTitle_usuariosusrcc}" required="true" requiredMessage="#{bundle.CreateSolicitudesRequiredMessage_usuariosusrcc}">
+                    <h:outputLabel value="#{bundle.CreateSolicitudesLabel_solicitudEnviadaA}" for="solicitudEnviadaA" />
+                    <h:selectOneMenu id="solicitudEnviadaA" value="#{solicitudesController.selected.solicitudEnviadaA}" title="#{bundle.CreateSolicitudesTitle_solicitudEnviadaA}" required="true" requiredMessage="#{bundle.CreateSolicitudesRequiredMessage_solicitudEnviadaA}">
                         <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>

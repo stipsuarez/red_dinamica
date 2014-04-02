@@ -4,7 +4,7 @@
  */
 package facade;
 
-import clases.Ciudad;
+
 import clases.Usuarios;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -44,7 +44,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
         return q.getResultList().size()==1;
         
         
-    }
+}
     public List<Usuarios> buscarUsuarios_por_nombre(String nombre) {
         try {
             

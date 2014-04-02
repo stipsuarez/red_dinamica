@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,8 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Universidades implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "universidad_id")
     private Integer universidadId;
     @Size(max = 70)
@@ -45,10 +47,10 @@ public class Universidades implements Serializable {
     private String universidadNombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "universidades")
     private Collection<GruposInvestiga> gruposInvestigaCollection;
-    @JoinColumn(name = "Ciudad_ciudad_id", referencedColumnName = "ciudad_id")
+    @JoinColumn(name = "universidad_ciudad", referencedColumnName = "ciudad_id")
     @ManyToOne(optional = false)
-    private Ciudad ciudadciudadid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "universidadesuniversidadid")
+    private Ciudad universidadCiudad;
+    @OneToMany(mappedBy = "usrUniversidad")
     private Collection<Usuarios> usuariosCollection;
 
     public Universidades() {
@@ -83,12 +85,12 @@ public class Universidades implements Serializable {
         this.gruposInvestigaCollection = gruposInvestigaCollection;
     }
 
-    public Ciudad getCiudadciudadid() {
-        return ciudadciudadid;
+    public Ciudad getUniversidadCiudad() {
+        return universidadCiudad;
     }
 
-    public void setCiudadciudadid(Ciudad ciudadciudadid) {
-        this.ciudadciudadid = ciudadciudadid;
+    public void setUniversidadCiudad(Ciudad universidadCiudad) {
+        this.universidadCiudad = universidadCiudad;
     }
 
     @XmlTransient
@@ -122,7 +124,7 @@ public class Universidades implements Serializable {
 
     @Override
     public String toString() {
-        return  universidadNombre;
+        return "clases.Universidades[ universidadId=" + universidadId + " ]";
     }
     
 }

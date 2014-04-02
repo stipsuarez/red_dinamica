@@ -80,17 +80,14 @@ public class ComentariosController implements Serializable {
         return "Create";
     }
 
-    public void create() {
+    public String create() {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ComentariosCreated"));
-            prepareCreate();
-            recreatePagination();
-            recreateModel();     
-           
+            return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            
+            return null;
         }
     }
 

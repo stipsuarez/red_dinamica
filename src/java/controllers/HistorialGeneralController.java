@@ -1,8 +1,8 @@
 package controllers;
 
 import clases.HistorialGeneral;
-import util.JsfUtil;
-import util.PaginationHelper;
+import controllers.util.JsfUtil;
+import controllers.util.PaginationHelper;
 import facade.HistorialGeneralFacade;
 
 import java.io.Serializable;

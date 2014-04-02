@@ -17,20 +17,19 @@ import javax.validation.constraints.NotNull;
 @Embeddable
 public class GruposInvestigaPK implements Serializable {
     @Basic(optional = false)
-    @NotNull
     @Column(name = "grupos_investiga_id")
     private int gruposInvestigaId;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Universidades_universidad_id")
-    private int universidadesuniversidadid;
+    @Column(name = "grupos_investiga_universidad")
+    private int gruposInvestigaUniversidad;
 
     public GruposInvestigaPK() {
     }
 
-    public GruposInvestigaPK(int gruposInvestigaId, int universidadesuniversidadid) {
+    public GruposInvestigaPK(int gruposInvestigaId, int gruposInvestigaUniversidad) {
         this.gruposInvestigaId = gruposInvestigaId;
-        this.universidadesuniversidadid = universidadesuniversidadid;
+        this.gruposInvestigaUniversidad = gruposInvestigaUniversidad;
     }
 
     public int getGruposInvestigaId() {
@@ -41,19 +40,19 @@ public class GruposInvestigaPK implements Serializable {
         this.gruposInvestigaId = gruposInvestigaId;
     }
 
-    public int getUniversidadesuniversidadid() {
-        return universidadesuniversidadid;
+    public int getGruposInvestigaUniversidad() {
+        return gruposInvestigaUniversidad;
     }
 
-    public void setUniversidadesuniversidadid(int universidadesuniversidadid) {
-        this.universidadesuniversidadid = universidadesuniversidadid;
+    public void setGruposInvestigaUniversidad(int gruposInvestigaUniversidad) {
+        this.gruposInvestigaUniversidad = gruposInvestigaUniversidad;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (int) gruposInvestigaId;
-        hash += (int) universidadesuniversidadid;
+        hash += (int) gruposInvestigaUniversidad;
         return hash;
     }
 
@@ -67,7 +66,7 @@ public class GruposInvestigaPK implements Serializable {
         if (this.gruposInvestigaId != other.gruposInvestigaId) {
             return false;
         }
-        if (this.universidadesuniversidadid != other.universidadesuniversidadid) {
+        if (this.gruposInvestigaUniversidad != other.gruposInvestigaUniversidad) {
             return false;
         }
         return true;
@@ -75,7 +74,7 @@ public class GruposInvestigaPK implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.GruposInvestigaPK[ gruposInvestigaId=" + gruposInvestigaId + ", universidadesuniversidadid=" + universidadesuniversidadid + " ]";
+        return "clases.GruposInvestigaPK[ gruposInvestigaId=" + gruposInvestigaId + ", gruposInvestigaUniversidad=" + gruposInvestigaUniversidad + " ]";
     }
     
 }

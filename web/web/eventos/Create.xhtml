@@ -25,6 +25,10 @@
                     <h:selectOneMenu id="usuariosusrcc" value="#{eventosController.selected.usuariosusrcc}" title="#{bundle.CreateEventosTitle_usuariosusrcc}" required="true" requiredMessage="#{bundle.CreateEventosRequiredMessage_usuariosusrcc}">
                         <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateEventosLabel_eventoCreadoPor}" for="eventoCreadoPor" />
+                    <h:selectOneMenu id="eventoCreadoPor" value="#{eventosController.selected.eventoCreadoPor}" title="#{bundle.CreateEventosTitle_eventoCreadoPor}" required="true" requiredMessage="#{bundle.CreateEventosRequiredMessage_eventoCreadoPor}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{eventosController.create}" value="#{bundle.CreateEventosSaveLink}" />

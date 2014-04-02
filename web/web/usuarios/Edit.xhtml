@@ -25,28 +25,26 @@
                     <h:inputText id="usrEmail" value="#{usuariosController.selected.usrEmail}" title="#{bundle.EditUsuariosTitle_usrEmail}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_usrEmail}"/>
                     <h:outputLabel value="#{bundle.EditUsuariosLabel_usrPass}" for="usrPass" />
                     <h:inputText id="usrPass" value="#{usuariosController.selected.usrPass}" title="#{bundle.EditUsuariosTitle_usrPass}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_usrPass}"/>
-                    <h:outputLabel value="#{bundle.EditUsuariosLabel_usrTipo}" for="usrTipo" />
-                    <h:inputText id="usrTipo" value="#{usuariosController.selected.usrTipo}" title="#{bundle.EditUsuariosTitle_usrTipo}" />
                     <h:outputLabel value="#{bundle.EditUsuariosLabel_usrSexo}" for="usrSexo" />
                     <h:inputText id="usrSexo" value="#{usuariosController.selected.usrSexo}" title="#{bundle.EditUsuariosTitle_usrSexo}" />
-                    <h:outputLabel value="#{bundle.EditUsuariosLabel_usrFechaNacimiento}" for="usrFechaNacimiento" />
-                    <h:inputText id="usrFechaNacimiento" value="#{usuariosController.selected.usrFechaNacimiento}" title="#{bundle.EditUsuariosTitle_usrFechaNacimiento}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditUsuariosLabel_usrTipo}" for="usrTipo" />
+                    <h:inputText id="usrTipo" value="#{usuariosController.selected.usrTipo}" title="#{bundle.EditUsuariosTitle_usrTipo}" />
                     <h:outputLabel value="#{bundle.EditUsuariosLabel_usrEstado}" for="usrEstado" />
-                    <h:inputText id="usrEstado" value="#{usuariosController.selected.usrEstado}" title="#{bundle.EditUsuariosTitle_usrEstado}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_usrEstado}"/>
-                    <h:outputLabel value="#{bundle.EditUsuariosLabel_ciudadciudadid}" for="ciudadciudadid" />
-                    <h:selectOneMenu id="ciudadciudadid" value="#{usuariosController.selected.ciudadciudadid}" title="#{bundle.EditUsuariosTitle_ciudadciudadid}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_ciudadciudadid}">
+                    <h:inputText id="usrEstado" value="#{usuariosController.selected.usrEstado}" title="#{bundle.EditUsuariosTitle_usrEstado}" />
+                    <h:outputLabel value="#{bundle.EditUsuariosLabel_usrCiudad}" for="usrCiudad" />
+                    <h:selectOneMenu id="usrCiudad" value="#{usuariosController.selected.usrCiudad}" title="#{bundle.EditUsuariosTitle_usrCiudad}" >
                         <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditUsuariosLabel_universidadesuniversidadid}" for="universidadesuniversidadid" />
-                    <h:selectOneMenu id="universidadesuniversidadid" value="#{usuariosController.selected.universidadesuniversidadid}" title="#{bundle.EditUsuariosTitle_universidadesuniversidadid}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_universidadesuniversidadid}">
+                    <h:outputLabel value="#{bundle.EditUsuariosLabel_usrUniversidad}" for="usrUniversidad" />
+                    <h:selectOneMenu id="usrUniversidad" value="#{usuariosController.selected.usrUniversidad}" title="#{bundle.EditUsuariosTitle_usrUniversidad}" >
                         <f:selectItems value="#{universidadesController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditUsuariosLabel_departamentosdepartamentoid}" for="departamentosdepartamentoid" />
-                    <h:selectOneMenu id="departamentosdepartamentoid" value="#{usuariosController.selected.departamentosdepartamentoid}" title="#{bundle.EditUsuariosTitle_departamentosdepartamentoid}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_departamentosdepartamentoid}">
+                    <h:outputLabel value="#{bundle.EditUsuariosLabel_usrDepartamento}" for="usrDepartamento" />
+                    <h:selectOneMenu id="usrDepartamento" value="#{usuariosController.selected.usrDepartamento}" title="#{bundle.EditUsuariosTitle_usrDepartamento}" >
                         <f:selectItems value="#{departamentosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditUsuariosLabel_usrFoto}" for="usrFoto" />
+                    <h:inputText id="usrFoto" value="#{usuariosController.selected.usrFoto}" title="#{bundle.EditUsuariosTitle_usrFoto}" />
                 </h:panelGrid>
                 <h:commandLink action="#{usuariosController.update}" value="#{bundle.EditUsuariosSaveLink}"/>
                 <br />

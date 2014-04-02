@@ -4,7 +4,7 @@ package bean;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-import clases.InterfaceBean;
+
 import clases.Usuarios;
 import controllers.UsuariosController;
 import util.JsfUtil;

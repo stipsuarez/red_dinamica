@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditConversacionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditConversacionLabel_convId}" for="convId" />
+                    <h:inputText id="convId" value="#{conversacionController.selected.convId}" title="#{bundle.EditConversacionTitle_convId}" required="true" requiredMessage="#{bundle.EditConversacionRequiredMessage_convId}"/>
+                    <h:outputLabel value="#{bundle.EditConversacionLabel_convAsunto}" for="convAsunto" />
+                    <h:inputText id="convAsunto" value="#{conversacionController.selected.convAsunto}" title="#{bundle.EditConversacionTitle_convAsunto}" required="true" requiredMessage="#{bundle.EditConversacionRequiredMessage_convAsunto}"/>
+                    <h:outputLabel value="#{bundle.EditConversacionLabel_ultimo}" for="ultimo" />
+                    <h:inputText id="ultimo" value="#{conversacionController.selected.ultimo}" title="#{bundle.EditConversacionTitle_ultimo}" required="true" requiredMessage="#{bundle.EditConversacionRequiredMessage_ultimo}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditConversacionLabel_convNumero}" for="convNumero" />
+                    <h:inputText id="convNumero" value="#{conversacionController.selected.convNumero}" title="#{bundle.EditConversacionTitle_convNumero}" required="true" requiredMessage="#{bundle.EditConversacionRequiredMessage_convNumero}"/>
+                    <h:outputLabel value="#{bundle.EditConversacionLabel_convUsr2}" for="convUsr2" />
+                    <h:selectOneMenu id="convUsr2" value="#{conversacionController.selected.convUsr2}" title="#{bundle.EditConversacionTitle_convUsr2}" required="true" requiredMessage="#{bundle.EditConversacionRequiredMessage_convUsr2}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditConversacionLabel_convUsr1}" for="convUsr1" />
+                    <h:selectOneMenu id="convUsr1" value="#{conversacionController.selected.convUsr1}" title="#{bundle.EditConversacionTitle_convUsr1}" required="true" requiredMessage="#{bundle.EditConversacionRequiredMessage_convUsr1}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{conversacionController.update}" value="#{bundle.EditConversacionSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditConversacionViewLink}"/>
+                <br />
+                <h:commandLink action="#{conversacionController.prepareList}" value="#{bundle.EditConversacionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditConversacionIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

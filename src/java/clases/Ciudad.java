@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,12 +36,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ciudad.findByCiudadId", query = "SELECT c FROM Ciudad c WHERE c.ciudadId = :ciudadId"),
     @NamedQuery(name = "Ciudad.findByCiudadNombre", query = "SELECT c FROM Ciudad c WHERE c.ciudadNombre = :ciudadNombre"),
     @NamedQuery(name = "Ciudad.findByCiudadCodigoPostal", query = "SELECT c FROM Ciudad c WHERE c.ciudadCodigoPostal = :ciudadCodigoPostal")})
-    
 public class Ciudad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ciudad_id")
     private Integer ciudadId;
     @Basic(optional = false)
@@ -50,12 +51,12 @@ public class Ciudad implements Serializable {
     @Size(max = 45)
     @Column(name = "ciudad_codigo_postal")
     private String ciudadCodigoPostal;
-    @JoinColumn(name = "Departamentos_departamento_id", referencedColumnName = "departamento_id")
+    @JoinColumn(name = "ciudad_departamento", referencedColumnName = "departamento_id")
     @ManyToOne(optional = false)
-    private Departamentos departamentosdepartamentoid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudadciudadid")
+    private Departamentos ciudadDepartamento;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "universidadCiudad")
     private Collection<Universidades> universidadesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudadciudadid")
+    @OneToMany(mappedBy = "usrCiudad")
     private Collection<Usuarios> usuariosCollection;
 
     public Ciudad() {
@@ -94,12 +95,12 @@ public class Ciudad implements Serializable {
         this.ciudadCodigoPostal = ciudadCodigoPostal;
     }
 
-    public Departamentos getDepartamentosdepartamentoid() {
-        return departamentosdepartamentoid;
+    public Departamentos getCiudadDepartamento() {
+        return ciudadDepartamento;
     }
 
-    public void setDepartamentosdepartamentoid(Departamentos departamentosdepartamentoid) {
-        this.departamentosdepartamentoid = departamentosdepartamentoid;
+    public void setCiudadDepartamento(Departamentos ciudadDepartamento) {
+        this.ciudadDepartamento = ciudadDepartamento;
     }
 
     @XmlTransient
@@ -142,7 +143,7 @@ public class Ciudad implements Serializable {
 
     @Override
     public String toString() {
-        return ciudadNombre;
+        return "clases.Ciudad[ ciudadId=" + ciudadId + " ]";
     }
     
 }

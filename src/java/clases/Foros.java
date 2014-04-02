@@ -41,6 +41,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Foros.findByForoFecha", query = "SELECT f FROM Foros f WHERE f.foroFecha = :foroFecha"),
     @NamedQuery(name = "Foros.findByForoDescripcion", query = "SELECT f FROM Foros f WHERE f.foroDescripcion = :foroDescripcion")})
 public class Foros implements Serializable {
+    @Column(name = "foro_fecha")
+    @Temporal(TemporalType.DATE)
+    private Date foroFecha;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,17 +56,15 @@ public class Foros implements Serializable {
     @Size(max = 45)
     @Column(name = "foro_tema")
     private String foroTema;
-    @Column(name = "foro_fecha")
-    @Temporal(TemporalType.DATE)
-    private Date foroFecha;
     @Size(max = 700)
     @Column(name = "foro_descripcion")
     private String foroDescripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "forosforoid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comentForo")
     private Collection<Comentarios> comentariosCollection;
-    @JoinColumn(name = "Usuarios_usr_cc", referencedColumnName = "usr_cc")
+    @JoinColumn(name = "foro_creado_por", referencedColumnName = "usr_cc")
     @ManyToOne(optional = false)
-    private Usuarios usuariosusrcc;   
+    private Usuarios foroCreadoPor;
+
     public Foros() {
     }
 
@@ -94,14 +95,14 @@ public class Foros implements Serializable {
     public void setForoTema(String foroTema) {
         this.foroTema = foroTema;
     }
-
-     public Date getForoFecha() {
+    
+    public Date getForoFecha() {
         return foroFecha;
     }
-   
+
     public void setForoFecha(Date foroFecha) {
         this.foroFecha = foroFecha;
-    } 
+    }
     
     public String getForoDescripcion() {
         return foroDescripcion;
@@ -120,12 +121,12 @@ public class Foros implements Serializable {
         this.comentariosCollection = comentariosCollection;
     }
 
-    public Usuarios getUsuariosusrcc() {
-        return usuariosusrcc;
+    public Usuarios getForoCreadoPor() {
+        return foroCreadoPor;
     }
 
-    public void setUsuariosusrcc(Usuarios usuariosusrcc) {
-        this.usuariosusrcc = usuariosusrcc;
+    public void setForoCreadoPor(Usuarios foroCreadoPor) {
+        this.foroCreadoPor = foroCreadoPor;
     }
 
     @Override
@@ -151,5 +152,6 @@ public class Foros implements Serializable {
     @Override
     public String toString() {
         return "clases.Foros[ foroId=" + foroId + " ]";
-    }  
+    }
+
 }

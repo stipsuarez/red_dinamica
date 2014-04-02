@@ -117,12 +117,8 @@
                             <p:panel header="Datos adicionales">
                                 <p:panelGrid columns="2">
 
-                                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrFechaNacimiento}" for="usrFechaNacimiento" />
-                                    <p:calendar id="usrFechaNacimiento" value="#{usuariosController.selected.usrFechaNacimiento}" title="#{bundle.CreateUsuariosTitle_usrFechaNacimiento}" >
-                                        <f:convertDateTime pattern="dd/MM/yy" />
-                                    </p:calendar>
-                                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_ciudadciudadid}" for="usrCiudad" />
-                                    <p:inputText id="usrCiudad" value="#{usuariosController.selected.ciudadciudadid}" title="#{bundle.CreateUsuariosTitle_ciudadciudadid}" />
+                                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrCiudad}" for="usrCiudad" />
+                                    <p:inputText id="usrCiudad" value="#{usuariosController.selected.usrCiudad}" title="#{bundle.CreateUsuariosTitle_ciudadciudadid}" />
 
                                 </p:panelGrid>
                             </p:panel>
@@ -207,9 +203,6 @@
                                 <h:outputText value="Cedula de Ciudadania:" />
                                 <h:outputText id="detalle_descripcion" value="#{usuariosE.usrCc}"   />      
 
-                                <h:outputText value="Fecha de Nacimiento:" />  
-                                <h:outputText id="detalle_fecNacim" value="#{usuariosE.usrFechaNacimiento}" />  
-
                                 <h:outputText value="Ciudad:" />  
                                 <h:outputText id="detalle_ciudad" value="#{usuariosE.ciudadciudadid}"/>  
                             </h:panelGrid>  
@@ -273,9 +266,6 @@
 
                                 <h:outputText value="Cedula de Ciudadania:" />
                                 <h:outputText id="detalle_descripcion" value="#{usuarios.usrCc}"   />      
-
-                                <h:outputText value="Fecha de Nacimiento:" />  
-                                <h:outputText id="detalle_fecNacim" value="#{usuarios.usrFechaNacimiento}" />  
 
                                 <h:outputText value="Ciudad:" />  
                                 <h:outputText id="detalle_ciudad" value="#{usuarios.ciudadciudadid}"/>  

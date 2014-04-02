@@ -1,9 +1,7 @@
 package bean;
 
 import clases.Foros;
-import clases.InterfaceBean;
 import clases.Usuarios;
-import static clases.InterfaceBean.session;
 import com.sun.xml.ws.developer.Serialization;
 import controllers.UsuariosController;
 import java.io.IOException;

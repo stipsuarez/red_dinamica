@@ -43,7 +43,7 @@ public class ForosController implements Serializable {
         }
         return current;
     }
-    
+
       public static Foros getCurrent() {
         return current;
     }
@@ -75,29 +75,26 @@ public class ForosController implements Serializable {
         return "List";
     }
 
-    public void prepareView() throws IOException {
+    public String prepareView() {
         current = (Foros) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/comentarios/comentariosTemplateClient.xhtml");        
+        return "View";
     }
 
-    public String prepareCreate() throws IOException {
-        current = new Foros();         
-        selectedItemIndex = -1;    
+    public String prepareCreate() {
+        current = new Foros();
+        selectedItemIndex = -1;
         return "Create";
     }
-    
-    public void create() {
-        try {            
+
+    public String create() {
+        try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ForosCreated"));  
-            prepareCreate();
-            recreatePagination();
-            recreateModel();     
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/foros/forosTemplateClient.xhtml");
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ForosCreated"));
+            return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            
+            return null;
         }
     }
 
@@ -118,12 +115,13 @@ public class ForosController implements Serializable {
         }
     }
 
-    public void destroy() {
+    public String destroy() {
         current = (Foros) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
-        recreateModel();       
+        recreateModel();
+        return "List";
     }
 
     public String destroyAndView() {
@@ -176,18 +174,18 @@ public class ForosController implements Serializable {
 
     private void recreatePagination() {
         pagination = null;
-        
     }
 
-    public void next() {
+    public String next() {
         getPagination().nextPage();
         recreateModel();
-       
+        return "List";
     }
 
-    public void previous() {
+    public String previous() {
         getPagination().previousPage();
-        recreateModel();        
+        recreateModel();
+        return "List";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
@@ -253,7 +251,7 @@ public class ForosController implements Serializable {
              current.setForoFecha(fecha);
              return current.getUsuariosusrcc().getUsrNombres();
         } catch (Exception e) {
-        }
+}
         return "nada";           
     }
     

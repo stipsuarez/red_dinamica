@@ -46,6 +46,12 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventosTitle_eventoCreadoPor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.eventoCreadoPor}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
                             <h:commandLink action="#{eventosController.prepareView}" value="#{bundle.ListEventosViewLink}"/>

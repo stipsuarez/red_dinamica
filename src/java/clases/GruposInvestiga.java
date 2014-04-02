@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "GruposInvestiga.findAll", query = "SELECT g FROM GruposInvestiga g"),
     @NamedQuery(name = "GruposInvestiga.findByGruposInvestigaId", query = "SELECT g FROM GruposInvestiga g WHERE g.gruposInvestigaPK.gruposInvestigaId = :gruposInvestigaId"),
     @NamedQuery(name = "GruposInvestiga.findByGruposInvestigaNombre", query = "SELECT g FROM GruposInvestiga g WHERE g.gruposInvestigaNombre = :gruposInvestigaNombre"),
-    @NamedQuery(name = "GruposInvestiga.findByUniversidadesuniversidadid", query = "SELECT g FROM GruposInvestiga g WHERE g.gruposInvestigaPK.universidadesuniversidadid = :universidadesuniversidadid")})
+    @NamedQuery(name = "GruposInvestiga.findByGruposInvestigaUniversidad", query = "SELECT g FROM GruposInvestiga g WHERE g.gruposInvestigaPK.gruposInvestigaUniversidad = :gruposInvestigaUniversidad")})
 public class GruposInvestiga implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -35,7 +35,7 @@ public class GruposInvestiga implements Serializable {
     @Size(max = 45)
     @Column(name = "grupos_investiga_nombre")
     private String gruposInvestigaNombre;
-    @JoinColumn(name = "Universidades_universidad_id", referencedColumnName = "universidad_id", insertable = false, updatable = false)
+    @JoinColumn(name = "grupos_investiga_universidad", referencedColumnName = "universidad_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Universidades universidades;
 
@@ -46,8 +46,8 @@ public class GruposInvestiga implements Serializable {
         this.gruposInvestigaPK = gruposInvestigaPK;
     }
 
-    public GruposInvestiga(int gruposInvestigaId, int universidadesuniversidadid) {
-        this.gruposInvestigaPK = new GruposInvestigaPK(gruposInvestigaId, universidadesuniversidadid);
+    public GruposInvestiga(int gruposInvestigaId, int gruposInvestigaUniversidad) {
+        this.gruposInvestigaPK = new GruposInvestigaPK(gruposInvestigaId, gruposInvestigaUniversidad);
     }
 
     public GruposInvestigaPK getGruposInvestigaPK() {

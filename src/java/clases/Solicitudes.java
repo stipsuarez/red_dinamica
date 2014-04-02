@@ -50,9 +50,9 @@ public class Solicitudes implements Serializable {
     @Size(max = 30)
     @Column(name = "solicitud_estado")
     private String solicitudEstado;
-    @JoinColumn(name = "Usuarios_usr_cc", referencedColumnName = "usr_cc")
+    @JoinColumn(name = "solicitud_enviada_a", referencedColumnName = "usr_cc")
     @ManyToOne(optional = false)
-    private Usuarios usuariosusrcc;
+    private Usuarios solicitudEnviadaA;
 
     public Solicitudes() {
     }
@@ -93,12 +93,12 @@ public class Solicitudes implements Serializable {
         this.solicitudEstado = solicitudEstado;
     }
 
-    public Usuarios getUsuariosusrcc() {
-        return usuariosusrcc;
+    public Usuarios getSolicitudEnviadaA() {
+        return solicitudEnviadaA;
     }
 
-    public void setUsuariosusrcc(Usuarios usuariosusrcc) {
-        this.usuariosusrcc = usuariosusrcc;
+    public void setSolicitudEnviadaA(Usuarios solicitudEnviadaA) {
+        this.solicitudEnviadaA = solicitudEnviadaA;
     }
 
     @Override
