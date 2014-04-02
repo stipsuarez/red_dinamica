@@ -11,8 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,13 +20,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Miguel
+ * @author Naturaleza
  */
 @Entity
 @Table(name = "comentarios")
@@ -41,8 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Comentarios implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "coment_id")
     private Integer comentId;
     @Size(max = 700)
@@ -51,17 +50,16 @@ public class Comentarios implements Serializable {
     @Column(name = "coment_fecha_hora")
     @Temporal(TemporalType.TIMESTAMP)
     private Date comentFechaHora;
-    @JoinColumn(name = "Usuarios_usr_cc", referencedColumnName = "usr_cc")
+    @JoinColumn(name = "coment_foro", referencedColumnName = "foro_id")
     @ManyToOne(optional = false)
-    private Usuarios usuariosusrcc;
-    @JoinColumn(name = "Foros_foro_id", referencedColumnName = "foro_id")
+    private Foros comentForo;
+    @JoinColumn(name = "coment_hecho_por", referencedColumnName = "usr_cc")
     @ManyToOne(optional = false)
-    private Foros forosforoid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comentarioscomentid")
-    private Collection<Comentarios> comentariosCollection;
-    @JoinColumn(name = "Comentarios_coment_id", referencedColumnName = "coment_id")
-    @ManyToOne(optional = false)
-    private Comentarios comentarioscomentid;
+    private Usuarios comentHechoPor;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comentarios")
+    private Collection<RespuestasComent> respuestasComentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comentarios1")
+    private Collection<RespuestasComent> respuestasComentCollection1;
 
     public Comentarios() {
     }
@@ -94,37 +92,38 @@ public class Comentarios implements Serializable {
         this.comentFechaHora = comentFechaHora;
     }
 
-    public Usuarios getUsuariosusrcc() {
-        return usuariosusrcc;
+    public Foros getComentForo() {
+        return comentForo;
     }
 
-    public void setUsuariosusrcc(Usuarios usuariosusrcc) {
-        this.usuariosusrcc = usuariosusrcc;
+    public void setComentForo(Foros comentForo) {
+        this.comentForo = comentForo;
     }
 
-    public Foros getForosforoid() {
-        return forosforoid;
+    public Usuarios getComentHechoPor() {
+        return comentHechoPor;
     }
 
-    public void setForosforoid(Foros forosforoid) {
-        this.forosforoid = forosforoid;
+    public void setComentHechoPor(Usuarios comentHechoPor) {
+        this.comentHechoPor = comentHechoPor;
     }
 
     @XmlTransient
-    public Collection<Comentarios> getComentariosCollection() {
-        return comentariosCollection;
+    public Collection<RespuestasComent> getRespuestasComentCollection() {
+        return respuestasComentCollection;
     }
 
-    public void setComentariosCollection(Collection<Comentarios> comentariosCollection) {
-        this.comentariosCollection = comentariosCollection;
+    public void setRespuestasComentCollection(Collection<RespuestasComent> respuestasComentCollection) {
+        this.respuestasComentCollection = respuestasComentCollection;
     }
 
-    public Comentarios getComentarioscomentid() {
-        return comentarioscomentid;
+    @XmlTransient
+    public Collection<RespuestasComent> getRespuestasComentCollection1() {
+        return respuestasComentCollection1;
     }
 
-    public void setComentarioscomentid(Comentarios comentarioscomentid) {
-        this.comentarioscomentid = comentarioscomentid;
+    public void setRespuestasComentCollection1(Collection<RespuestasComent> respuestasComentCollection1) {
+        this.respuestasComentCollection1 = respuestasComentCollection1;
     }
 
     @Override

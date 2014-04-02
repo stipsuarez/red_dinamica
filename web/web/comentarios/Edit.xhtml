@@ -31,6 +31,18 @@
                     <h:selectOneMenu id="forosforoid" value="#{comentariosController.selected.forosforoid}" title="#{bundle.EditComentariosTitle_forosforoid}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_forosforoid}">
                         <f:selectItems value="#{forosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditComentariosLabel_comentarioscomentid}" for="comentarioscomentid" />
+                    <h:selectOneMenu id="comentarioscomentid" value="#{comentariosController.selected.comentarioscomentid}" title="#{bundle.EditComentariosTitle_comentarioscomentid}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_comentarioscomentid}">
+                        <f:selectItems value="#{comentariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditComentariosLabel_comentForo}" for="comentForo" />
+                    <h:selectOneMenu id="comentForo" value="#{comentariosController.selected.comentForo}" title="#{bundle.EditComentariosTitle_comentForo}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_comentForo}">
+                        <f:selectItems value="#{forosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditComentariosLabel_comentHechoPor}" for="comentHechoPor" />
+                    <h:selectOneMenu id="comentHechoPor" value="#{comentariosController.selected.comentHechoPor}" title="#{bundle.EditComentariosTitle_comentHechoPor}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_comentHechoPor}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{comentariosController.update}" value="#{bundle.EditComentariosSaveLink}"/>
                 <br />

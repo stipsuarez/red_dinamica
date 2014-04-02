@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateRespuestasComentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRespuestasComentLabel_resUsuario}" for="resUsuario" />
+                    <h:selectOneMenu id="resUsuario" value="#{respuestasComentController.selected.resUsuario}" title="#{bundle.CreateRespuestasComentTitle_resUsuario}" required="true" requiredMessage="#{bundle.CreateRespuestasComentRequiredMessage_resUsuario}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateRespuestasComentLabel_comentarios}" for="comentarios" />
+                    <h:selectOneMenu id="comentarios" value="#{respuestasComentController.selected.comentarios}" title="#{bundle.CreateRespuestasComentTitle_comentarios}" required="true" requiredMessage="#{bundle.CreateRespuestasComentRequiredMessage_comentarios}">
+                        <f:selectItems value="#{comentariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateRespuestasComentLabel_comentarios1}" for="comentarios1" />
+                    <h:selectOneMenu id="comentarios1" value="#{respuestasComentController.selected.comentarios1}" title="#{bundle.CreateRespuestasComentTitle_comentarios1}" required="true" requiredMessage="#{bundle.CreateRespuestasComentRequiredMessage_comentarios1}">
+                        <f:selectItems value="#{comentariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{respuestasComentController.create}" value="#{bundle.CreateRespuestasComentSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{respuestasComentController.prepareList}" value="#{bundle.CreateRespuestasComentShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateRespuestasComentIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

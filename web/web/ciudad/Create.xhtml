@@ -21,8 +21,8 @@
                     <h:inputText id="ciudadNombre" value="#{ciudadController.selected.ciudadNombre}" title="#{bundle.CreateCiudadTitle_ciudadNombre}" required="true" requiredMessage="#{bundle.CreateCiudadRequiredMessage_ciudadNombre}"/>
                     <h:outputLabel value="#{bundle.CreateCiudadLabel_ciudadCodigoPostal}" for="ciudadCodigoPostal" />
                     <h:inputText id="ciudadCodigoPostal" value="#{ciudadController.selected.ciudadCodigoPostal}" title="#{bundle.CreateCiudadTitle_ciudadCodigoPostal}" />
-                    <h:outputLabel value="#{bundle.CreateCiudadLabel_departamentosdepartamentoid}" for="departamentosdepartamentoid" />
-                    <h:selectOneMenu id="departamentosdepartamentoid" value="#{ciudadController.selected.departamentosdepartamentoid}" title="#{bundle.CreateCiudadTitle_departamentosdepartamentoid}" required="true" requiredMessage="#{bundle.CreateCiudadRequiredMessage_departamentosdepartamentoid}">
+                    <h:outputLabel value="#{bundle.CreateCiudadLabel_ciudadDepartamento}" for="ciudadDepartamento" />
+                    <h:selectOneMenu id="ciudadDepartamento" value="#{ciudadController.selected.ciudadDepartamento}" title="#{bundle.CreateCiudadTitle_ciudadDepartamento}" required="true" requiredMessage="#{bundle.CreateCiudadRequiredMessage_ciudadDepartamento}">
                         <f:selectItems value="#{departamentosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>

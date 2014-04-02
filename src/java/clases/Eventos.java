@@ -43,9 +43,9 @@ public class Eventos implements Serializable {
     @Size(max = 1000)
     @Column(name = "evento_descripcion")
     private String eventoDescripcion;
-    @JoinColumn(name = "Usuarios_usr_cc", referencedColumnName = "usr_cc")
+    @JoinColumn(name = "evento_creado_por", referencedColumnName = "usr_cc")
     @ManyToOne(optional = false)
-    private Usuarios usuariosusrcc;
+    private Usuarios eventoCreadoPor;
 
     public Eventos() {
     }
@@ -78,12 +78,12 @@ public class Eventos implements Serializable {
         this.eventoDescripcion = eventoDescripcion;
     }
 
-    public Usuarios getUsuariosusrcc() {
-        return usuariosusrcc;
+    public Usuarios getEventoCreadoPor() {
+        return eventoCreadoPor;
     }
 
-    public void setUsuariosusrcc(Usuarios usuariosusrcc) {
-        this.usuariosusrcc = usuariosusrcc;
+    public void setEventoCreadoPor(Usuarios eventoCreadoPor) {
+        this.eventoCreadoPor = eventoCreadoPor;
     }
 
     @Override

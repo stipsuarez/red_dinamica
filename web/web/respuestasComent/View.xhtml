@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewRespuestasComentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewRespuestasComentLabel_resUsuario}"/>
+                    <h:outputText value="#{respuestasComentController.selected.resUsuario}" title="#{bundle.ViewRespuestasComentTitle_resUsuario}"/>
+                    <h:outputText value="#{bundle.ViewRespuestasComentLabel_comentarios}"/>
+                    <h:outputText value="#{respuestasComentController.selected.comentarios}" title="#{bundle.ViewRespuestasComentTitle_comentarios}"/>
+                    <h:outputText value="#{bundle.ViewRespuestasComentLabel_comentarios1}"/>
+                    <h:outputText value="#{respuestasComentController.selected.comentarios1}" title="#{bundle.ViewRespuestasComentTitle_comentarios1}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{respuestasComentController.destroyAndView}" value="#{bundle.ViewRespuestasComentDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewRespuestasComentEditLink}"/>
+                <br />
+                <h:commandLink action="#{respuestasComentController.prepareCreate}" value="#{bundle.ViewRespuestasComentCreateLink}" />
+                <br />
+                <h:commandLink action="#{respuestasComentController.prepareList}" value="#{bundle.ViewRespuestasComentShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewRespuestasComentIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

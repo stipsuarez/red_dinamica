@@ -1,8 +1,8 @@
 package controllers;
 
 import clases.Proyectos;
-import util.JsfUtil;
-import util.PaginationHelper;
+import controllers.util.JsfUtil;
+import controllers.util.PaginationHelper;
 import facade.ProyectosFacade;
 
 import java.io.Serializable;

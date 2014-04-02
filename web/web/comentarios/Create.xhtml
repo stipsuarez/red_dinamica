@@ -4,9 +4,19 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateComentariosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateComentariosLabel_comentId}" for="comentId" />
+                    <h:inputText id="comentId" value="#{comentariosController.selected.comentId}" title="#{bundle.CreateComentariosTitle_comentId}" required="true" requiredMessage="#{bundle.CreateComentariosRequiredMessage_comentId}"/>
                     <h:outputLabel value="#{bundle.CreateComentariosLabel_comentDescripcion}" for="comentDescripcion" />
                     <h:inputText id="comentDescripcion" value="#{comentariosController.selected.comentDescripcion}" title="#{bundle.CreateComentariosTitle_comentDescripcion}" />
                     <h:outputLabel value="#{bundle.CreateComentariosLabel_comentFechaHora}" for="comentFechaHora" />
@@ -25,6 +35,14 @@
                     <h:selectOneMenu id="comentarioscomentid" value="#{comentariosController.selected.comentarioscomentid}" title="#{bundle.CreateComentariosTitle_comentarioscomentid}" required="true" requiredMessage="#{bundle.CreateComentariosRequiredMessage_comentarioscomentid}">
                         <f:selectItems value="#{comentariosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateComentariosLabel_comentForo}" for="comentForo" />
+                    <h:selectOneMenu id="comentForo" value="#{comentariosController.selected.comentForo}" title="#{bundle.CreateComentariosTitle_comentForo}" required="true" requiredMessage="#{bundle.CreateComentariosRequiredMessage_comentForo}">
+                        <f:selectItems value="#{forosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateComentariosLabel_comentHechoPor}" for="comentHechoPor" />
+                    <h:selectOneMenu id="comentHechoPor" value="#{comentariosController.selected.comentHechoPor}" title="#{bundle.CreateComentariosTitle_comentHechoPor}" required="true" requiredMessage="#{bundle.CreateComentariosRequiredMessage_comentHechoPor}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{comentariosController.create}" value="#{bundle.CreateComentariosSaveLink}" />
@@ -34,6 +52,8 @@
                 <br />
                 <br />
                 <h:link outcome="/index" value="#{bundle.CreateComentariosIndexLink}"/>
-            </h:form>      
+            </h:form>
+        </ui:define>
+    </ui:composition>
 
 </html>

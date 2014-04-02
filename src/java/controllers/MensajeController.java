@@ -1,9 +1,9 @@
 package controllers;
 
-import clases.Amigos;
-import util.JsfUtil;
-import util.PaginationHelper;
-import facade.AmigosFacade;
+import clases.Mensaje;
+import controllers.util.JsfUtil;
+import controllers.util.PaginationHelper;
+import facade.MensajeFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,29 +18,29 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@Named("amigosController")
+@Named("mensajeController")
 @SessionScoped
-public class AmigosController implements Serializable {
+public class MensajeController implements Serializable {
 
-    private Amigos current;
+    private Mensaje current;
     private DataModel items = null;
     @EJB
-    private facade.AmigosFacade ejbFacade;
+    private facade.MensajeFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public AmigosController() {
+    public MensajeController() {
     }
 
-    public Amigos getSelected() {
+    public Mensaje getSelected() {
         if (current == null) {
-            current = new Amigos();
+            current = new Mensaje();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private AmigosFacade getFacade() {
+    private MensajeFacade getFacade() {
         return ejbFacade;
     }
 
@@ -67,13 +67,13 @@ public class AmigosController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Amigos) getItems().getRowData();
+        current = (Mensaje) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Amigos();
+        current = new Mensaje();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -81,7 +81,7 @@ public class AmigosController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AmigosCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MensajeCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -90,7 +90,7 @@ public class AmigosController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Amigos) getItems().getRowData();
+        current = (Mensaje) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -98,7 +98,7 @@ public class AmigosController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AmigosUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MensajeUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -107,7 +107,7 @@ public class AmigosController implements Serializable {
     }
 
     public String destroy() {
-        current = (Amigos) getItems().getRowData();
+        current = (Mensaje) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -131,7 +131,7 @@ public class AmigosController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AmigosDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MensajeDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -187,21 +187,21 @@ public class AmigosController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Amigos getAmigos(java.lang.Integer id) {
+    public Mensaje getMensaje(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Amigos.class)
-    public static class AmigosControllerConverter implements Converter {
+    @FacesConverter(forClass = Mensaje.class)
+    public static class MensajeControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            AmigosController controller = (AmigosController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "amigosController");
-            return controller.getAmigos(getKey(value));
+            MensajeController controller = (MensajeController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "mensajeController");
+            return controller.getMensaje(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -221,11 +221,11 @@ public class AmigosController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Amigos) {
-                Amigos o = (Amigos) object;
-                return getStringKey(o.getAmigoId());
+            if (object instanceof Mensaje) {
+                Mensaje o = (Mensaje) object;
+                return getStringKey(o.getMsjId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Amigos.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Mensaje.class.getName());
             }
         }
     }

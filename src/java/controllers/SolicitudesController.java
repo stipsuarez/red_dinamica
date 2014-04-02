@@ -7,7 +7,6 @@ import controllers.util.PaginationHelper;
 import facade.SolicitudesFacade;
 import facade.UsuariosFacade;
 import java.io.IOException;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +25,6 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
@@ -35,14 +33,9 @@ import org.primefaces.context.RequestContext;
 
 @Named("solicitudesController")
 @SessionScoped
-//@ViewScoped
-
-
-
-
 public class SolicitudesController implements Serializable {
 
-    private Solicitudes sol_actual;
+    private Solicitudes current;
     private DataModel items = null;
     @EJB
     private facade.SolicitudesFacade ejbFacade;
@@ -53,11 +46,11 @@ public class SolicitudesController implements Serializable {
     }
 
     public Solicitudes getSelected() {
-        if (sol_actual == null) {
-            sol_actual = new Solicitudes();
+        if (current == null) {
+            current = new Solicitudes();
             selectedItemIndex = -1;
         }
-        return sol_actual;
+        return current;
     }
 
     private SolicitudesFacade getFacade() {
@@ -87,20 +80,20 @@ public class SolicitudesController implements Serializable {
     }
 
     public String prepareView() {
-        sol_actual = (Solicitudes) getItems().getRowData();
+        current = (Solicitudes) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        sol_actual = new Solicitudes();
+        current = new Solicitudes();
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
-            getFacade().create(sol_actual);
+            getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SolicitudesCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -110,14 +103,14 @@ public class SolicitudesController implements Serializable {
     }
 
     public String prepareEdit() {
-        sol_actual = (Solicitudes) getItems().getRowData();
+        current = (Solicitudes) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            getFacade().edit(sol_actual);
+            getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SolicitudesUpdated"));
             return "View";
         } catch (Exception e) {
@@ -127,7 +120,7 @@ public class SolicitudesController implements Serializable {
     }
 
     public String destroy() {
-        sol_actual = (Solicitudes) getItems().getRowData();
+        current = (Solicitudes) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -150,7 +143,7 @@ public class SolicitudesController implements Serializable {
 
     private void performDestroy() {
         try {
-            getFacade().remove(sol_actual);
+            getFacade().remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SolicitudesDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -168,7 +161,7 @@ public class SolicitudesController implements Serializable {
             }
         }
         if (selectedItemIndex >= 0) {
-            sol_actual = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
@@ -248,7 +241,7 @@ public class SolicitudesController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Solicitudes.class.getName());
             }
         }
-     }
+    }
     // otra sección
     
     private String usrNombre;
@@ -369,11 +362,11 @@ public class SolicitudesController implements Serializable {
             
             
             
-            sol_actual=new Solicitudes();
-            sol_actual.setSolicitudCc(cc_amigo);
-            sol_actual.setSolicitudFecha(fechaActual);
-            sol_actual.setSolicitudEstado(estado);
-            sol_actual.setUsuariosusrcc(usrActual);
+            current=new Solicitudes();
+            current.setSolicitudCc(cc_amigo);
+            current.setSolicitudFecha(fechaActual);
+            current.setSolicitudEstado(estado);
+            current.setSolicitudEnviadaA(usrActual);
             create();
            
             listaUsuariosE.remove(usrSelect);//Actualizar el estado del boton enviar solicitud

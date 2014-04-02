@@ -12,8 +12,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -55,12 +53,9 @@ public class Proyectos implements Serializable {
     @Column(name = "proyecto_fecha")
     @Temporal(TemporalType.DATE)
     private Date proyectoFecha;
-    @JoinTable(name = "usuarios_has_proyectos", joinColumns = {
-        @JoinColumn(name = "Proyectos_proyectos_id", referencedColumnName = "proyectos_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "Usuarios_usr_cc", referencedColumnName = "usr_cc")})
-    @ManyToMany
+    @ManyToMany(mappedBy = "proyectosCollection")
     private Collection<Usuarios> usuariosCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyectosproyectosid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "histProyectos")
     private Collection<HistorialGeneral> historialGeneralCollection;
 
     public Proyectos() {

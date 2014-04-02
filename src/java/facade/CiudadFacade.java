@@ -7,7 +7,6 @@ package facade;
 import clases.Ciudad;
 import clases.Departamentos;
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -23,7 +22,6 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class CiudadFacade extends AbstractFacade<Ciudad> {
-
     @PersistenceContext(unitName = "red_dinamicaPU")
     private EntityManager em;
 
@@ -31,10 +29,11 @@ public class CiudadFacade extends AbstractFacade<Ciudad> {
     protected EntityManager getEntityManager() {
         return em;
     }
+
     public CiudadFacade() {
         super(Ciudad.class);
     }
-    
+    //Este es mi código
      public List<Ciudad> ciudadesSelecionadas(Integer departamento_id) {
         try {            
             String cadena = "SELECT * FROM Ciudad c WHERE c.Departamentos_departamento_id =" + departamento_id;
@@ -44,6 +43,6 @@ public class CiudadFacade extends AbstractFacade<Ciudad> {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al consultar la BD: " + e + "\nLocalize: " + e.getLocalizedMessage(), "Error bd");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
-        }
+}
     }
 }

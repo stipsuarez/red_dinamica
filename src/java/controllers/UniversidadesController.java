@@ -3,8 +3,8 @@ package controllers;
 import clases.Ciudad;
 import clases.Departamentos;
 import clases.Universidades;
-import util.JsfUtil;
-import util.PaginationHelper;
+import controllers.util.JsfUtil;
+import controllers.util.PaginationHelper;
 import facade.UniversidadesFacade;
 
 import java.io.Serializable;
@@ -245,7 +245,7 @@ public class UniversidadesController implements Serializable {
 
     public List<Universidades> getUniversidad() {
         return universidad;
-    }
+}
 
     public void setUniversidad(List<Universidades> universidad) {
         this.universidad = universidad;

@@ -29,6 +29,10 @@
                     <h:selectOneMenu id="usuariosusrcc" value="#{forosController.selected.usuariosusrcc}" title="#{bundle.EditForosTitle_usuariosusrcc}" required="true" requiredMessage="#{bundle.EditForosRequiredMessage_usuariosusrcc}">
                         <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditForosLabel_foroCreadoPor}" for="foroCreadoPor" />
+                    <h:selectOneMenu id="foroCreadoPor" value="#{forosController.selected.foroCreadoPor}" title="#{bundle.EditForosTitle_foroCreadoPor}" required="true" requiredMessage="#{bundle.EditForosRequiredMessage_foroCreadoPor}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{forosController.update}" value="#{bundle.EditForosSaveLink}"/>
                 <br />

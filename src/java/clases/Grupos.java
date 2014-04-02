@@ -10,8 +10,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -53,10 +51,7 @@ public class Grupos implements Serializable {
     @Size(max = 45)
     @Column(name = "Gruposcol")
     private String gruposcol;
-    @JoinTable(name = "usr_grupos", joinColumns = {
-        @JoinColumn(name = "Grupos_grupo_id", referencedColumnName = "grupo_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "Usuarios_usr_cc", referencedColumnName = "usr_cc")})
-    @ManyToMany
+    @ManyToMany(mappedBy = "gruposCollection")
     private Collection<Usuarios> usuariosCollection;
 
     public Grupos() {

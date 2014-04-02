@@ -27,6 +27,10 @@
                     <h:selectOneMenu id="proyectosproyectosid" value="#{historialGeneralController.selected.proyectosproyectosid}" title="#{bundle.CreateHistorialGeneralTitle_proyectosproyectosid}" required="true" requiredMessage="#{bundle.CreateHistorialGeneralRequiredMessage_proyectosproyectosid}">
                         <f:selectItems value="#{proyectosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateHistorialGeneralLabel_histProyectos}" for="histProyectos" />
+                    <h:selectOneMenu id="histProyectos" value="#{historialGeneralController.selected.histProyectos}" title="#{bundle.CreateHistorialGeneralTitle_histProyectos}" required="true" requiredMessage="#{bundle.CreateHistorialGeneralRequiredMessage_histProyectos}">
+                        <f:selectItems value="#{proyectosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{historialGeneralController.create}" value="#{bundle.CreateHistorialGeneralSaveLink}" />

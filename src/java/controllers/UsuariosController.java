@@ -1,8 +1,8 @@
 package controllers;
 
 import clases.Usuarios;
-import util.JsfUtil;
-import util.PaginationHelper;
+import controllers.util.JsfUtil;
+import controllers.util.PaginationHelper;
 import facade.UsuariosFacade;
 
 import java.io.Serializable;
@@ -32,11 +32,8 @@ public class UsuariosController implements Serializable {
     private facade.UsuariosFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    private String pass1 = "";
-    private String actualPass = "";
-    private String nuevaPass = "";
-    private String nuevaPassConfir = "";
-    List<Usuarios> listaUsuarios = new ArrayList<>();
+    
+    
 
     public UsuariosController() {
     }
@@ -246,10 +243,15 @@ public class UsuariosController implements Serializable {
             }
         }
     }
-
+//Este es mi código
+    private String pass1 = "";
+    private String actualPass = "";
+    private String nuevaPass = "";
+    private String nuevaPassConfir = "";
+    List<Usuarios> listaUsuarios = new ArrayList<>();
     public String getPass1() {
         return pass1;
-    }
+}
 
     public void setPass1(String pass1) {
         this.pass1 = pass1;

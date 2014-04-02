@@ -2,10 +2,9 @@ package controllers;
 
 import clases.Ciudad;
 import clases.Departamentos;
-import util.JsfUtil;
-import util.PaginationHelper;
+import controllers.util.JsfUtil;
+import controllers.util.PaginationHelper;
 import facade.CiudadFacade;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -22,7 +21,6 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@ManagedBean
 @Named("ciudadController")
 @SessionScoped
 public class CiudadController implements Serializable {
@@ -30,14 +28,13 @@ public class CiudadController implements Serializable {
     private static Ciudad current;
     private DataModel items = null;
     @EJB
-    private CiudadFacade ejbFacade;
+    private facade.CiudadFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    
 
     public CiudadController() {
-    }   
-  
+    }
+
     public Ciudad getSelected() {
         if (current == null) {
             current = new Ciudad();
@@ -195,14 +192,12 @@ public class CiudadController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        
-        
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
+
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
-
 
     public Ciudad getCiudad(java.lang.Integer id) {
         return ejbFacade.find(id);
@@ -242,7 +237,7 @@ public class CiudadController implements Serializable {
                 Ciudad o = (Ciudad) object;
                 return getStringKey(o.getCiudadId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected 'type: " + Ciudad.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Ciudad.class.getName());
             }
         }
     }
@@ -253,7 +248,7 @@ public class CiudadController implements Serializable {
 
     public List<Ciudad> getCiudades() {
         return ciudades;
-    }
+}
 
     public void setCiudades(List<Ciudad> ciudades) {
         this.ciudades = ciudades;

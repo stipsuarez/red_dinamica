@@ -56,11 +56,11 @@ public class Foros implements Serializable {
     @Size(max = 700)
     @Column(name = "foro_descripcion")
     private String foroDescripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "forosforoid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comentForo")
     private Collection<Comentarios> comentariosCollection;
-    @JoinColumn(name = "Usuarios_usr_cc", referencedColumnName = "usr_cc")
+    @JoinColumn(name = "foro_creado_por", referencedColumnName = "usr_cc")
     @ManyToOne(optional = false)
-    private Usuarios usuariosusrcc;
+    private Usuarios foroCreadoPor;
 
     public Foros() {
     }
@@ -118,12 +118,12 @@ public class Foros implements Serializable {
         this.comentariosCollection = comentariosCollection;
     }
 
-    public Usuarios getUsuariosusrcc() {
-        return usuariosusrcc;
+    public Usuarios getForoCreadoPor() {
+        return foroCreadoPor;
     }
 
-    public void setUsuariosusrcc(Usuarios usuariosusrcc) {
-        this.usuariosusrcc = usuariosusrcc;
+    public void setForoCreadoPor(Usuarios foroCreadoPor) {
+        this.foroCreadoPor = foroCreadoPor;
     }
 
     @Override

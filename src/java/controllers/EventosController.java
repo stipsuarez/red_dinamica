@@ -1,8 +1,8 @@
 package controllers;
 
 import clases.Eventos;
-import util.JsfUtil;
-import util.PaginationHelper;
+import controllers.util.JsfUtil;
+import controllers.util.PaginationHelper;
 import facade.EventosFacade;
 
 import java.io.Serializable;

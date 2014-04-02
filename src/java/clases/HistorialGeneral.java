@@ -44,9 +44,9 @@ public class HistorialGeneral implements Serializable {
     private Date histGenFechaHora;
     @Column(name = "hist_gen_visitas")
     private Integer histGenVisitas;
-    @JoinColumn(name = "Proyectos_proyectos_id", referencedColumnName = "proyectos_id")
+    @JoinColumn(name = "hist_proyectos", referencedColumnName = "proyectos_id")
     @ManyToOne(optional = false)
-    private Proyectos proyectosproyectosid;
+    private Proyectos histProyectos;
 
     public HistorialGeneral() {
     }
@@ -79,12 +79,12 @@ public class HistorialGeneral implements Serializable {
         this.histGenVisitas = histGenVisitas;
     }
 
-    public Proyectos getProyectosproyectosid() {
-        return proyectosproyectosid;
+    public Proyectos getHistProyectos() {
+        return histProyectos;
     }
 
-    public void setProyectosproyectosid(Proyectos proyectosproyectosid) {
-        this.proyectosproyectosid = proyectosproyectosid;
+    public void setHistProyectos(Proyectos histProyectos) {
+        this.histProyectos = histProyectos;
     }
 
     @Override

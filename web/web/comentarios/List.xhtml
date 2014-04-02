@@ -54,6 +54,24 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListComentariosTitle_comentarioscomentid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.comentarioscomentid}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListComentariosTitle_comentForo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.comentForo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListComentariosTitle_comentHechoPor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.comentHechoPor}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
                             <h:commandLink action="#{comentariosController.prepareView}" value="#{bundle.ListComentariosViewLink}"/>

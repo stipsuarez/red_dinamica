@@ -48,6 +48,12 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistorialGeneralTitle_histProyectos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.histProyectos}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
                             <h:commandLink action="#{historialGeneralController.prepareView}" value="#{bundle.ListHistorialGeneralViewLink}"/>

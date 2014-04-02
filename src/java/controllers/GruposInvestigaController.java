@@ -1,8 +1,8 @@
 package controllers;
 
 import clases.GruposInvestiga;
-import util.JsfUtil;
-import util.PaginationHelper;
+import controllers.util.JsfUtil;
+import controllers.util.PaginationHelper;
 import facade.GruposInvestigaFacade;
 
 import java.io.Serializable;
@@ -82,7 +82,7 @@ public class GruposInvestigaController implements Serializable {
 
     public String create() {
         try {
-            current.getGruposInvestigaPK().setUniversidadesuniversidadid(current.getUniversidades().getUniversidadId());
+            current.getGruposInvestigaPK().setGruposInvestigaUniversidad(current.getUniversidades().getUniversidadId());
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("GruposInvestigaCreated"));
             return prepareCreate();
@@ -100,7 +100,7 @@ public class GruposInvestigaController implements Serializable {
 
     public String update() {
         try {
-            current.getGruposInvestigaPK().setUniversidadesuniversidadid(current.getUniversidades().getUniversidadId());
+            current.getGruposInvestigaPK().setGruposInvestigaUniversidad(current.getUniversidades().getUniversidadId());
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("GruposInvestigaUpdated"));
             return "View";
@@ -216,7 +216,7 @@ public class GruposInvestigaController implements Serializable {
             String values[] = value.split(SEPARATOR_ESCAPED);
             key = new clases.GruposInvestigaPK();
             key.setGruposInvestigaId(Integer.parseInt(values[0]));
-            key.setUniversidadesuniversidadid(Integer.parseInt(values[1]));
+            key.setGruposInvestigaUniversidad(Integer.parseInt(values[1]));
             return key;
         }
 
@@ -224,7 +224,7 @@ public class GruposInvestigaController implements Serializable {
             StringBuilder sb = new StringBuilder();
             sb.append(value.getGruposInvestigaId());
             sb.append(SEPARATOR);
-            sb.append(value.getUniversidadesuniversidadid());
+            sb.append(value.getGruposInvestigaUniversidad());
             return sb.toString();
         }
 
