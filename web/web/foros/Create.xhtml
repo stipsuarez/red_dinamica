@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"    
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
  <body>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -12,15 +13,13 @@
                     <h:outputLabel value="#{bundle.CreateForosLabel_foroTema}" for="foroTema" />
                     <h:inputText id="foroTema" value="#{forosController.selected.foroTema}" title="#{bundle.CreateForosTitle_foroTema}" />
                     <h:outputLabel value="#{bundle.CreateForosLabel_foroNombre}" for="foroNombre" />
-                    <h:inputText id="foroNombre" value="#{forosController.selected.foroNombre}" title="#{bundle.CreateForosTitle_foroNombre}" />                    
-                    <h:outputLabel value="#{bundle.CreateForosLabel_foroFecha}" for="foroFecha" />
-                    <h:inputText id="foroFecha" value="#{forosController.selected.foroFecha}" title="#{bundle.CreateForosTitle_foroFecha}" />
+                    <h:inputText id="foroNombre" value="#{forosController.selected.foroNombre}" title="#{bundle.CreateForosTitle_foroNombre}" />                   
                     <h:outputLabel value="#{bundle.CreateForosLabel_foroDescripcion}" for="foroDescripcion" />
                     <h:inputText id="foroDescripcion" value="#{forosController.selected.foroDescripcion}" title="#{bundle.CreateForosTitle_foroDescripcion}" />                    
                 </h:panelGrid>
                 <br />
                 <p:growl id="growl" showDetail="true" />                             
-                <p:commandButton action="#{forosController.create}" value="#{bundle.CreateForosSaveLink}" ajax="true" actionListener="#{forosController.asignarUsuario()}" update="growl"/>                
+                <p:commandButton action="#{forosController.create}" value="#{bundle.CreateForosSaveLink}" ajax="true" actionListener="#{forosController.asignarTodo()}" update="growl"/>                
 
             </h:form>
     

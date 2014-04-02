@@ -1,20 +1,17 @@
 package controllers;
 
 import clases.Comentarios;
-import clases.Foros;
-import clases.Usuarios;
 import util.JsfUtil;
 import util.PaginationHelper;
 import facade.ComentariosFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -59,10 +56,10 @@ public class ComentariosController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(ejbFacade.ComentariosForo(ForosController.getCurrent().getForoId()));
                 }
             };
-        }
+    }
         return pagination;
     }
 
@@ -160,9 +157,11 @@ public class ComentariosController implements Serializable {
         }
     }
 
-    public DataModel getItems() {
+    public DataModel getItems() {        
+        recreateModel();
+        recreatePagination();
         if (items == null) {
-            items = getPagination().createPageDataModel();            
+            items = getPagination().createPageDataModel();        
         }
         return items;
     }
@@ -241,15 +240,11 @@ public class ComentariosController implements Serializable {
     /////MI CODIGO
     
 
-        public void asignarAll(){                   
+        public void asignarTodo(){                   
              current.setUsuariosusrcc(UsuariosController.getCurrent());  
              current.setForosforoid(ForosController.getCurrent()); 
-             
-        }
-        
-        public DataModel getItems2() { 
-            List lista = ejbFacade.ComentariosForo(ForosController.getCurrent().getForoId());
-            DataModel comentario = new ListDataModel(lista);             
-            return comentario;
-    }
+             Date fecha = new Date();
+             current.setComentFechaHora(fecha);
+        }       
+       
 }

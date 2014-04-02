@@ -11,7 +11,7 @@
         <ui:composition template="./../../templates/forosTemplate.xhtml">
             
             <ui:define name="contenido">
-                <p:layoutUnit position="center" header="Foros">
+                <p:layoutUnit position="center" header="#{forosController.titulo()}">
                    <ui:include  src="./../foros/View.xhtml" />  
                    <br/>
                    <br/>

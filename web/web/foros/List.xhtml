@@ -16,11 +16,12 @@
                     <h:dataTable value="#{forosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <p:accordionPanel dynamic="true" cache="true">  
-                                <p:tab title="#{item.foroNombre} - #{item.foroFecha}">  
+                                <p:tab title="#{item.foroNombre}"> 
                                     <h:panelGrid columns="1" cellpadding="10">                               
+                                        <h:outputText  value="#{item.foroFecha}"><f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText>  
                                         <h:outputText  value="#{item.foroDescripcion}" />  
                                     </h:panelGrid>  
-                                </p:tab>  
+                                </p:tab> 
                             </p:accordionPanel> 
                         </h:column>
                         <h:column>

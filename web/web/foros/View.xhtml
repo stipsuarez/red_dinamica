@@ -15,18 +15,12 @@
                         <h:commandLink action="#{forosController.destroyAndView}" value="#{bundle.ViewForosDestroyLink}"/>
                         <br /><br /><br />
                         <h:panelGrid columns="2">
-                            <h:outputText value="#{bundle.ViewForosLabel_foroId}"/>
-                            <h:outputText value="#{forosController.selected.foroId}" title="#{bundle.ViewForosTitle_foroId}"/>
-                            <h:outputText value="#{bundle.ViewForosLabel_foroNombre}"/>
-                            <h:outputText value="#{forosController.selected.foroNombre}" title="#{bundle.ViewForosTitle_foroNombre}"/>
-                            <h:outputText value="#{bundle.ViewForosLabel_foroTema}"/>
-                            <h:outputText value="#{forosController.selected.foroTema}" title="#{bundle.ViewForosTitle_foroTema}"/>
                             <h:outputText value="#{bundle.ViewForosLabel_foroFecha}"/>
-                            <h:outputText value="#{forosController.selected.foroFecha}" title="#{bundle.ViewForosTitle_foroFecha}"/>
+                            <h:outputText value="#{forosController.selected.foroFecha}" title="#{bundle.ViewForosTitle_foroFecha}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
                             <h:outputText value="#{bundle.ViewForosLabel_foroDescripcion}"/>
-                            <h:outputText value="#{forosController.selected.foroDescripcion}" title="#{bundle.ViewForosTitle_foroDescripcion}"/>
-                            <h:outputText value="#{bundle.ViewForosLabel_usuariosusrcc}"/>
-                            <h:outputText value="#{forosController.selected.usuariosusrcc}" title="#{bundle.ViewForosTitle_usuariosusrcc}"/>
+                            <h:outputText value="#{forosController.selected.foroDescripcion}" title="#{bundle.ViewForosTitle_foroDescripcion}"/>                  
                         </h:panelGrid>                
                     </h:form>
                

@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -57,10 +56,10 @@ public class Comentarios implements Serializable {
     @JoinColumn(name = "Foros_foro_id", referencedColumnName = "foro_id")
     @ManyToOne(optional = false)
     private Foros forosforoid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comentarioscomentid")
+    @OneToMany(mappedBy = "comentarioscomentid")
     private Collection<Comentarios> comentariosCollection;
     @JoinColumn(name = "Comentarios_coment_id", referencedColumnName = "coment_id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Comentarios comentarioscomentid;
 
     public Comentarios() {

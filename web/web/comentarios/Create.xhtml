@@ -9,27 +9,10 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateComentariosLabel_comentDescripcion}" for="comentDescripcion" />
-                    <h:inputText id="comentDescripcion" value="#{comentariosController.selected.comentDescripcion}" title="#{bundle.CreateComentariosTitle_comentDescripcion}" />
-                    <h:outputLabel value="#{bundle.CreateComentariosLabel_comentFechaHora}" for="comentFechaHora" />
-                    <h:inputText id="comentFechaHora" value="#{comentariosController.selected.comentFechaHora}" title="#{bundle.CreateComentariosTitle_comentFechaHora}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>                     
-                    
-                 
-                    <h:outputLabel value="#{bundle.CreateComentariosLabel_comentarioscomentid}" for="comentarioscomentid" />
-                    <h:selectOneMenu id="comentarioscomentid" value="#{comentariosController.selected.comentarioscomentid}" title="#{bundle.CreateComentariosTitle_comentarioscomentid}" required="true" requiredMessage="#{bundle.CreateComentariosRequiredMessage_comentarioscomentid}">
-                        <f:selectItems value="#{comentariosController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                    <h:inputText id="comentDescripcion" value="#{comentariosController.selected.comentDescripcion}" title="#{bundle.CreateComentariosTitle_comentDescripcion}" />                             
                 </h:panelGrid>
                 <br />
-                <p:commandButton action="#{comentariosController.create}" value="#{bundle.CreateForosSaveLink}" ajax="false" actionListener="#{comentariosController.asignarAll()}"/>                
-                <h:commandLink action="#{comentariosController.create}" value="#{bundle.CreateComentariosSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{comentariosController.prepareList}" value="#{bundle.CreateComentariosShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateComentariosIndexLink}"/>
+                <p:commandButton action="#{comentariosController.create}" value="#{bundle.CreateForosSaveLink}" ajax="false" actionListener="#{comentariosController.asignarTodo()}"/>                              
             </h:form>      
 
 </html>

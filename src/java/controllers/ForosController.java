@@ -8,6 +8,7 @@ import facade.ForosFacade;
 import java.io.IOException;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -244,17 +245,18 @@ public class ForosController implements Serializable {
     
     private Usuarios usuario;
     Boolean mostrarLista = true;
-    public String asignarUsuario(){
+    public String asignarTodo(){
         try {            
-             this.usuario = UsuariosController.getCurrent();
+             this.usuario = UsuariosController.getCurrent();             
              current.setUsuariosusrcc(usuario);
-             FacesContext context = FacesContext.getCurrentInstance();
-             context.addMessage("messagePanel", new FacesMessage("Exito: ", "Usuario"+usuario.getUsrNombres()));
+             Date fecha = new Date();
+             current.setForoFecha(fecha);
              return current.getUsuariosusrcc().getUsrNombres();
         } catch (Exception e) {
         }
         return "nada";           
     }
+    
      public void imprimir() {
         
         FacesContext context = FacesContext.getCurrentInstance();
@@ -269,5 +271,12 @@ public class ForosController implements Serializable {
             case "foros": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/pages/foros.xhtml"); break;    
             case "regVacante": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/registrarVacante.xhtml"); break;    
         }
-    }        
+    }
+        
+    private String titulo = "";
+    public String titulo(){
+        titulo = current.getForoNombre()+" - "+current.getForoTema();
+        return titulo;
+    }
+      
 }
