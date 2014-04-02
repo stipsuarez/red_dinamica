@@ -6,6 +6,7 @@ package clases;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -38,6 +41,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Foros.findByForoFecha", query = "SELECT f FROM Foros f WHERE f.foroFecha = :foroFecha"),
     @NamedQuery(name = "Foros.findByForoDescripcion", query = "SELECT f FROM Foros f WHERE f.foroDescripcion = :foroDescripcion")})
 public class Foros implements Serializable {
+    @Column(name = "foro_fecha")
+    @Temporal(TemporalType.DATE)
+    private Date foroFecha;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,9 +56,6 @@ public class Foros implements Serializable {
     @Size(max = 45)
     @Column(name = "foro_tema")
     private String foroTema;
-    @Size(max = 45)
-    @Column(name = "foro_fecha")
-    private String foroFecha;
     @Size(max = 700)
     @Column(name = "foro_descripcion")
     private String foroDescripcion;
@@ -92,15 +95,15 @@ public class Foros implements Serializable {
     public void setForoTema(String foroTema) {
         this.foroTema = foroTema;
     }
-
-    public String getForoFecha() {
+    
+    public Date getForoFecha() {
         return foroFecha;
     }
 
-    public void setForoFecha(String foroFecha) {
+    public void setForoFecha(Date foroFecha) {
         this.foroFecha = foroFecha;
     }
-
+    
     public String getForoDescripcion() {
         return foroDescripcion;
     }
@@ -150,5 +153,5 @@ public class Foros implements Serializable {
     public String toString() {
         return "clases.Foros[ foroId=" + foroId + " ]";
     }
-    
+
 }

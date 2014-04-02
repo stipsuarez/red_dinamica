@@ -150,5 +150,4 @@ public class Comentarios implements Serializable {
     public String toString() {
         return "clases.Comentarios[ comentId=" + comentId + " ]";
     }
-    
 }
