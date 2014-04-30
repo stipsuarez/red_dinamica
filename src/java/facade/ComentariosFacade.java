@@ -9,14 +9,13 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.model.DataModel;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Stateless
 public class ComentariosFacade extends AbstractFacade<Comentarios> {
@@ -34,14 +33,14 @@ public class ComentariosFacade extends AbstractFacade<Comentarios> {
     
     public List<Comentarios> ComentariosForo(Integer foro_id) {
         try {            
-            String cadena = "SELECT * FROM Comentarios c WHERE c.Foros_foro_id =" + foro_id;
+            String cadena = "SELECT * FROM Comentarios c WHERE c.coment_foro =" + foro_id;
             TypedQuery<Comentarios> query2 = (TypedQuery<Comentarios>) em.createNativeQuery(cadena, Comentarios.class);
             return query2.getResultList();
         } catch (Exception e) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al consultar la BD: " + e + "\nLocalize: " + e.getLocalizedMessage(), "Error bd");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
-        }
+}
     }
     
 }

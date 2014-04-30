@@ -1,13 +1,13 @@
 package controllers;
 
 import clases.Comentarios;
-import util.JsfUtil;
-import util.PaginationHelper;
+import controllers.util.JsfUtil;
+import controllers.util.PaginationHelper;
 import facade.ComentariosFacade;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -59,7 +59,7 @@ public class ComentariosController implements Serializable {
                     return new ListDataModel(ejbFacade.ComentariosForo(ForosController.getCurrent().getForoId()));
                 }
             };
-    }
+        }
         return pagination;
     }
 
@@ -80,14 +80,17 @@ public class ComentariosController implements Serializable {
         return "Create";
     }
 
-    public String create() {
+    public void create() {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ComentariosCreated"));
-            return prepareCreate();
+            prepareCreate();
+            recreatePagination();
+            recreateModel();     
+           
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+            
         }
     }
 
@@ -154,11 +157,11 @@ public class ComentariosController implements Serializable {
         }
     }
 
-    public DataModel getItems() {        
+    public DataModel getItems() {
         recreateModel();
         recreatePagination();
         if (items == null) {
-            items = getPagination().createPageDataModel();        
+            items = getPagination().createPageDataModel();
         }
         return items;
     }
@@ -235,13 +238,19 @@ public class ComentariosController implements Serializable {
     }
     
     /////MI CODIGO
-    
+    private SimpleDateFormat dma = new SimpleDateFormat("dd/MM/yyyy");
+        
+        public String fecha()
+        {
+            dma.format(current.getComentFechaHora());
+            return dma.toString();
+        }
 
         public void asignarTodo(){                   
-             current.setUsuariosusrcc(UsuariosController.getCurrent());  
-             current.setForosforoid(ForosController.getCurrent()); 
+             current.setComentHechoPor(UsuariosController.getCurrent());  
+             current.setComentForo(ForosController.getCurrent()); 
              Date fecha = new Date();
              current.setComentFechaHora(fecha);
-        }       
+}
        
 }

@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -45,7 +47,12 @@ public class Comentarios implements Serializable {
     @Column(name = "coment_fecha_hora")
     @Temporal(TemporalType.DATE)
     private Date comentFechaHora;
-  
+    @JoinColumn(name = "coment_foro", referencedColumnName = "foro_id")
+    @ManyToOne(optional = false)
+    private Foros comentForo;
+    @JoinColumn(name = "coment_hecho_por", referencedColumnName = "usr_cc")
+    @ManyToOne(optional = false)
+    private Usuarios comentHechoPor;
 
     public Comentarios() {
     }
@@ -76,6 +83,22 @@ public class Comentarios implements Serializable {
 
     public void setComentFechaHora(Date comentFechaHora) {
         this.comentFechaHora = comentFechaHora;
+    }
+
+    public Foros getComentForo() {
+        return comentForo;
+    }
+
+    public void setComentForo(Foros comentForo) {
+        this.comentForo = comentForo;
+    }
+
+    public Usuarios getComentHechoPor() {
+        return comentHechoPor;
+    }
+
+    public void setComentHechoPor(Usuarios comentHechoPor) {
+        this.comentHechoPor = comentHechoPor;
     }
 
     @Override

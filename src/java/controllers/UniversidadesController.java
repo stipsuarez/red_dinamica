@@ -1,7 +1,6 @@
 package controllers;
 
 import clases.Ciudad;
-import clases.Departamentos;
 import clases.Universidades;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;

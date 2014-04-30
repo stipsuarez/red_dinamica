@@ -11,26 +11,23 @@
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>                 
                 <h:outputText escape="false" value="#{bundle.ListComentariosEmpty}" rendered="#{comentariosController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{comentariosController.items.rowCount > 0}" >              
-                    
-                    <!--<h:dataTable value="#{comentariosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">-->
-                        <p:dataTable value="#{comentariosController.items}" var="item" >
-                            <p:column >                        
+                <h:panelGroup rendered="#{comentariosController.items.rowCount > 0}" >                     
+                    <h:dataTable value="#{comentariosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">                     
+                        <p:column >                        
                                 <p:panelGrid columns="2" >                  
-                                 <p:graphicImage value="/faces/Recursos/Imagenes/perfil/default.png" style="height:70px; width:70px; alignment-adjust: baseline" />                   
-                                 <h:outputText value="#{item.usuariosusrcc}"/>
+                                <p:graphicImage value="/faces/Recursos/Imagenes/perfil/default.png" style="height:70px; width:70px;" />                           
+                                <h:panelGrid  columns="2" >
+                                    <h:outputText value="#{bundle.ListComentariosTitle_comentHechoPor}"/>          
+                                    <h:outputText value="#{item.comentHechoPor}"/>
                                     
-                                 <h:outputText value="#{bundle.ListComentariosTitle_comentDescripcion}"/>
-                                 <h:outputText value="#{item.comentDescripcion}"/>
+                                    <h:outputText value="#{bundle.ListComentariosTitle_comentDescripcion}"/>
+                                    <h:outputText value="#{item.comentDescripcion}"/>
                                     
-                                 <h:outputText value="#{bundle.ListComentariosTitle_comentDescripcion}"/>
-                                 <h:outputText value="#{item.comentDescripcion}"/>
-                              
-                                                 
+                               </h:panelGrid>                                                
                              </p:panelGrid>  
-                        </p:column> 
-                     </p:dataTable>
-                    <!--</h:dataTable>-->                 
+                        </p:column>                  
+<!--                     </p:dataTable>-->
+                    </h:dataTable>                 
                 </h:panelGroup>                
       </h:form>
 </html>

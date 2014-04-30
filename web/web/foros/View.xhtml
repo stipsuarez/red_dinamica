@@ -5,23 +5,23 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    
+
    
-                    <h:panelGroup id="messagePanel" layout="block">
-                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                    </h:panelGroup>
-                    <h:form>
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
                         <br />
                         <h:commandLink action="#{forosController.destroyAndView}" value="#{bundle.ViewForosDestroyLink}"/>
                         <br /><br /><br />
-                        <h:panelGrid columns="2">
-                            <h:outputText value="#{bundle.ViewForosLabel_foroFecha}"/>
-                            <h:outputText value="#{forosController.selected.foroFecha}" title="#{bundle.ViewForosTitle_foroFecha}">
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewForosLabel_foroFecha}"/>
+                    <h:outputText value="#{forosController.selected.foroFecha}" title="#{bundle.ViewForosTitle_foroFecha}">
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
-                            </h:outputText>
-                            <h:outputText value="#{bundle.ViewForosLabel_foroDescripcion}"/>
-                            <h:outputText value="#{forosController.selected.foroDescripcion}" title="#{bundle.ViewForosTitle_foroDescripcion}"/>                  
-                        </h:panelGrid>                
-                    </h:form>
-               
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewForosLabel_foroDescripcion}"/>
+                    <h:outputText value="#{forosController.selected.foroDescripcion}" title="#{bundle.ViewForosTitle_foroDescripcion}"/>
+                </h:panelGrid>
+            </h:form>
+
 </html>

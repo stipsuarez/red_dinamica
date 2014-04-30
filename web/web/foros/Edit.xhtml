@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -16,14 +15,24 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditForosLabel_foroId}" for="foroId" />
+                    <h:inputText id="foroId" value="#{forosController.selected.foroId}" title="#{bundle.EditForosTitle_foroId}" required="true" requiredMessage="#{bundle.EditForosRequiredMessage_foroId}"/>
                     <h:outputLabel value="#{bundle.EditForosLabel_foroNombre}" for="foroNombre" />
                     <h:inputText id="foroNombre" value="#{forosController.selected.foroNombre}" title="#{bundle.EditForosTitle_foroNombre}" />
                     <h:outputLabel value="#{bundle.EditForosLabel_foroTema}" for="foroTema" />
                     <h:inputText id="foroTema" value="#{forosController.selected.foroTema}" title="#{bundle.EditForosTitle_foroTema}" />
+                    <h:outputLabel value="#{bundle.EditForosLabel_foroFecha}" for="foroFecha" />
+                    <h:inputText id="foroFecha" value="#{forosController.selected.foroFecha}" title="#{bundle.EditForosTitle_foroFecha}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
                     <h:outputLabel value="#{bundle.EditForosLabel_foroDescripcion}" for="foroDescripcion" />
-                    <h:inputText id="foroDescripcion" value="#{forosController.selected.foroDescripcion}" title="#{bundle.EditForosTitle_foroDescripcion}" />                   
-                </h:panelGrid>                
-                <p:commandButton action="#{forosController.update}" value="#{bundle.CreateForosSaveLink}" ajax="true" actionListener="#{forosController.asignarTodo()}"/>                
+                    <h:inputText id="foroDescripcion" value="#{forosController.selected.foroDescripcion}" title="#{bundle.EditForosTitle_foroDescripcion}" />
+                    <h:outputLabel value="#{bundle.EditForosLabel_foroCreadoPor}" for="foroCreadoPor" />
+                    <h:selectOneMenu id="foroCreadoPor" value="#{forosController.selected.foroCreadoPor}" title="#{bundle.EditForosTitle_foroCreadoPor}" required="true" requiredMessage="#{bundle.EditForosRequiredMessage_foroCreadoPor}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{forosController.update}" value="#{bundle.EditForosSaveLink}"/>
                 <br />
                 <br />
                 <h:link outcome="View" value="#{bundle.EditForosViewLink}"/>

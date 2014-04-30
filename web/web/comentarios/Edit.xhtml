@@ -21,20 +21,8 @@
                     <h:inputText id="comentDescripcion" value="#{comentariosController.selected.comentDescripcion}" title="#{bundle.EditComentariosTitle_comentDescripcion}" />
                     <h:outputLabel value="#{bundle.EditComentariosLabel_comentFechaHora}" for="comentFechaHora" />
                     <h:inputText id="comentFechaHora" value="#{comentariosController.selected.comentFechaHora}" title="#{bundle.EditComentariosTitle_comentFechaHora}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
-                    <h:outputLabel value="#{bundle.EditComentariosLabel_usuariosusrcc}" for="usuariosusrcc" />
-                    <h:selectOneMenu id="usuariosusrcc" value="#{comentariosController.selected.usuariosusrcc}" title="#{bundle.EditComentariosTitle_usuariosusrcc}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_usuariosusrcc}">
-                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditComentariosLabel_forosforoid}" for="forosforoid" />
-                    <h:selectOneMenu id="forosforoid" value="#{comentariosController.selected.forosforoid}" title="#{bundle.EditComentariosTitle_forosforoid}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_forosforoid}">
-                        <f:selectItems value="#{forosController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditComentariosLabel_comentarioscomentid}" for="comentarioscomentid" />
-                    <h:selectOneMenu id="comentarioscomentid" value="#{comentariosController.selected.comentarioscomentid}" title="#{bundle.EditComentariosTitle_comentarioscomentid}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_comentarioscomentid}">
-                        <f:selectItems value="#{comentariosController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditComentariosLabel_comentForo}" for="comentForo" />
                     <h:selectOneMenu id="comentForo" value="#{comentariosController.selected.comentForo}" title="#{bundle.EditComentariosTitle_comentForo}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_comentForo}">
                         <f:selectItems value="#{forosController.itemsAvailableSelectOne}"/>

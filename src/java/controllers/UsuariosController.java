@@ -32,8 +32,6 @@ public class UsuariosController implements Serializable {
     private facade.UsuariosFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    
-    
 
     public UsuariosController() {
     }

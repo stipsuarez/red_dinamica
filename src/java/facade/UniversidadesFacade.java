@@ -4,7 +4,6 @@
  */
 package facade;
 
-
 import clases.Universidades;
 import java.util.List;
 import javax.ejb.Stateless;

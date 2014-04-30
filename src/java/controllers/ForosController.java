@@ -6,7 +6,6 @@ import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import facade.ForosFacade;
 import java.io.IOException;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -75,10 +74,10 @@ public class ForosController implements Serializable {
         return "List";
     }
 
-    public String prepareView() {
+    public void prepareView() throws IOException {
         current = (Foros) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/comentarios/comentariosTemplateClient.xhtml");        
     }
 
     public String prepareCreate() {
@@ -87,14 +86,17 @@ public class ForosController implements Serializable {
         return "Create";
     }
 
-    public String create() {
+    public void create() {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ForosCreated"));
-            return prepareCreate();
+            prepareCreate();
+            recreatePagination();
+            recreateModel();     
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/foros/forosTemplateClient.xhtml");
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+            
         }
     }
 
@@ -115,13 +117,12 @@ public class ForosController implements Serializable {
         }
     }
 
-    public String destroy() {
+    public void destroy() {
         current = (Foros) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "List";
     }
 
     public String destroyAndView() {
@@ -176,16 +177,15 @@ public class ForosController implements Serializable {
         pagination = null;
     }
 
-    public String next() {
+    public void next() {
         getPagination().nextPage();
         recreateModel();
-        return "List";
+       
     }
 
-    public String previous() {
+    public void previous() {
         getPagination().previousPage();
         recreateModel();
-        return "List";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
@@ -246,15 +246,23 @@ public class ForosController implements Serializable {
     public String asignarTodo(){
         try {            
              this.usuario = UsuariosController.getCurrent();             
-             current.setUsuariosusrcc(usuario);
+             current.setForoCreadoPor(usuario);
              Date fecha = new Date();
              current.setForoFecha(fecha);
-             return current.getUsuariosusrcc().getUsrNombres();
+             return current.getForoCreadoPor().getUsrNombres();
         } catch (Exception e) {
 }
         return "nada";           
     }
-    
+     public String asignarfecha(){
+        try {  
+             Date fecha = new Date();
+             current.setForoFecha(fecha);
+             return current.getForoCreadoPor().getUsrNombres();
+        } catch (Exception e) {
+        }
+        return "nada";           
+    }
      public void imprimir() {
         
         FacesContext context = FacesContext.getCurrentInstance();

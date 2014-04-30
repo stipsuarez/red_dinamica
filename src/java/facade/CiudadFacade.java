@@ -5,20 +5,17 @@
 package facade;
 
 import clases.Ciudad;
-import clases.Departamentos;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Stateless
 public class CiudadFacade extends AbstractFacade<Ciudad> {
