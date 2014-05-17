@@ -7,7 +7,7 @@ package bean;
 
 import clases.Usuarios;
 import controllers.UsuariosController;
-import util.JsfUtil;
+import controllers.util.JsfUtil;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.ejb.EJB;

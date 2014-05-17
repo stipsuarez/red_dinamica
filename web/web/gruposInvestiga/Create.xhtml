@@ -19,6 +19,8 @@
                     <h:inputText id="gruposInvestigaPK_gruposInvestigaId" value="#{gruposInvestigaController.selected.gruposInvestigaPK.gruposInvestigaId}" title="#{bundle.CreateGruposInvestigaTitle_gruposInvestigaPK_gruposInvestigaId}" required="true" requiredMessage="#{bundle.CreateGruposInvestigaRequiredMessage_gruposInvestigaPK_gruposInvestigaId}"/>
                     <h:outputLabel value="#{bundle.CreateGruposInvestigaLabel_gruposInvestigaNombre}" for="gruposInvestigaNombre" />
                     <h:inputText id="gruposInvestigaNombre" value="#{gruposInvestigaController.selected.gruposInvestigaNombre}" title="#{bundle.CreateGruposInvestigaTitle_gruposInvestigaNombre}" />
+                    <h:outputLabel value="#{bundle.CreateGruposInvestigaLabel_gruposInvestigaDescripcion}" for="gruposInvestigaDescripcion" />
+                    <h:inputText id="gruposInvestigaDescripcion" value="#{gruposInvestigaController.selected.gruposInvestigaDescripcion}" title="#{bundle.CreateGruposInvestigaTitle_gruposInvestigaDescripcion}" />
                     <h:outputLabel value="#{bundle.CreateGruposInvestigaLabel_universidades}" for="universidades" />
                     <h:selectOneMenu id="universidades" value="#{gruposInvestigaController.selected.universidades}" title="#{bundle.CreateGruposInvestigaTitle_universidades}" required="true" requiredMessage="#{bundle.CreateGruposInvestigaRequiredMessage_universidades}">
                         <f:selectItems value="#{universidadesController.itemsAvailableSelectOne}"/>

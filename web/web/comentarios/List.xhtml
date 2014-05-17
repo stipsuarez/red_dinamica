@@ -3,31 +3,68 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>                 
+    <ui:composition template="/template.xhtml">        
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">                
                 <h:outputText escape="false" value="#{bundle.ListComentariosEmpty}" rendered="#{comentariosController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{comentariosController.items.rowCount > 0}" >                     
-                    <h:dataTable value="#{comentariosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">                     
-                        <p:column >                        
-                                <p:panelGrid columns="2" >                  
-                                <p:graphicImage value="/faces/Recursos/Imagenes/perfil/default.png" style="height:70px; width:70px;" />                           
-                                <h:panelGrid  columns="2" >
-                                    <h:outputText value="#{bundle.ListComentariosTitle_comentHechoPor}"/>          
-                                    <h:outputText value="#{item.comentHechoPor}"/>
-                                    
-                                    <h:outputText value="#{bundle.ListComentariosTitle_comentDescripcion}"/>
-                                    <h:outputText value="#{item.comentDescripcion}"/>
-                                    
-                               </h:panelGrid>                                                
-                             </p:panelGrid>  
-                        </p:column>                  
-<!--                     </p:dataTable>-->
-                    </h:dataTable>                 
-                </h:panelGroup>                
-      </h:form>
+                <h:panelGroup rendered="#{comentariosController.items.rowCount > 0}">
+                    <h:outputText value="#{comentariosController.pagination.pageFirstItem + 1}..#{comentariosController.pagination.pageLastItem + 1}/#{comentariosController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{comentariosController.previous}" value="#{bundle.Previous} #{comentariosController.pagination.pageSize}" rendered="#{comentariosController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{comentariosController.next}" value="#{bundle.Next} #{comentariosController.pagination.pageSize}" rendered="#{comentariosController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{comentariosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListComentariosTitle_comentId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.comentId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListComentariosTitle_comentDescripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.comentDescripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListComentariosTitle_comentFecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.comentFecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListComentariosTitle_comentForoId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.comentForoId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListComentariosTitle_comentUsrId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.comentUsrId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{comentariosController.prepareView}" value="#{bundle.ListComentariosViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{comentariosController.prepareEdit}" value="#{bundle.ListComentariosEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{comentariosController.destroy}" value="#{bundle.ListComentariosDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{comentariosController.prepareCreate}" value="#{bundle.ListComentariosCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListComentariosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
 </html>

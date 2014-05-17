@@ -15,8 +15,8 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateRespuestasComentLabel_resUsuario}" for="resUsuario" />
-                    <h:selectOneMenu id="resUsuario" value="#{respuestasComentController.selected.resUsuario}" title="#{bundle.CreateRespuestasComentTitle_resUsuario}" required="true" requiredMessage="#{bundle.CreateRespuestasComentRequiredMessage_resUsuario}">
+                    <h:outputLabel value="#{bundle.CreateRespuestasComentLabel_respUsrId}" for="respUsrId" />
+                    <h:selectOneMenu id="respUsrId" value="#{respuestasComentController.selected.respUsrId}" title="#{bundle.CreateRespuestasComentTitle_respUsrId}" required="true" requiredMessage="#{bundle.CreateRespuestasComentRequiredMessage_respUsrId}">
                         <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateRespuestasComentLabel_comentarios}" for="comentarios" />

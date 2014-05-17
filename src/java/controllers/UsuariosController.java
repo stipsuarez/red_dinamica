@@ -249,7 +249,7 @@ public class UsuariosController implements Serializable {
     List<Usuarios> listaUsuarios = new ArrayList<>();
     public String getPass1() {
         return pass1;
-}
+    }
 
     public void setPass1(String pass1) {
         this.pass1 = pass1;

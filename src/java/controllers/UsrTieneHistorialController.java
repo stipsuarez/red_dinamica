@@ -1,10 +1,9 @@
 package controllers;
 
-import clases.Amigos;
-import util.JsfUtil;
-import util.PaginationHelper;
-import facade.AmigosFacade;
-
+import clases.UsrTieneHistorial;
+import controllers.util.JsfUtil;
+import controllers.util.PaginationHelper;
+import facade.UsrTieneHistorialFacade;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -18,29 +17,30 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@Named("amigosController")
+@Named("usrTieneHistorialController")
 @SessionScoped
-public class AmigosController implements Serializable {
+public class UsrTieneHistorialController implements Serializable {
 
-    private Amigos current;
+    private UsrTieneHistorial current;
     private DataModel items = null;
     @EJB
-    private facade.AmigosFacade ejbFacade;
+    private facade.UsrTieneHistorialFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public AmigosController() {
+    public UsrTieneHistorialController() {
     }
 
-    public Amigos getSelected() {
+    public UsrTieneHistorial getSelected() {
         if (current == null) {
-            current = new Amigos();
+            current = new UsrTieneHistorial();
+            current.setUsrTieneHistorialPK(new clases.UsrTieneHistorialPK());
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private AmigosFacade getFacade() {
+    private UsrTieneHistorialFacade getFacade() {
         return ejbFacade;
     }
 
@@ -67,21 +67,24 @@ public class AmigosController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Amigos) getItems().getRowData();
+        current = (UsrTieneHistorial) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Amigos();
+        current = new UsrTieneHistorial();
+        current.setUsrTieneHistorialPK(new clases.UsrTieneHistorialPK());
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
+            current.getUsrTieneHistorialPK().setHistorialUsrId(current.getUsuarios().getUsrCc());
+            current.getUsrTieneHistorialPK().setHistorialId(current.getHistorial().getHistorialId());
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AmigosCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsrTieneHistorialCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -90,15 +93,17 @@ public class AmigosController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Amigos) getItems().getRowData();
+        current = (UsrTieneHistorial) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
+            current.getUsrTieneHistorialPK().setHistorialUsrId(current.getUsuarios().getUsrCc());
+            current.getUsrTieneHistorialPK().setHistorialId(current.getHistorial().getHistorialId());
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AmigosUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsrTieneHistorialUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -107,7 +112,7 @@ public class AmigosController implements Serializable {
     }
 
     public String destroy() {
-        current = (Amigos) getItems().getRowData();
+        current = (UsrTieneHistorial) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -131,7 +136,7 @@ public class AmigosController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AmigosDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsrTieneHistorialDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -187,32 +192,40 @@ public class AmigosController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Amigos getAmigos(java.lang.Integer id) {
+    public UsrTieneHistorial getUsrTieneHistorial(clases.UsrTieneHistorialPK id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Amigos.class)
-    public static class AmigosControllerConverter implements Converter {
+    @FacesConverter(forClass = UsrTieneHistorial.class)
+    public static class UsrTieneHistorialControllerConverter implements Converter {
+
+        private static final String SEPARATOR = "#";
+        private static final String SEPARATOR_ESCAPED = "\\#";
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            AmigosController controller = (AmigosController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "amigosController");
-            return controller.getAmigos(getKey(value));
+            UsrTieneHistorialController controller = (UsrTieneHistorialController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "usrTieneHistorialController");
+            return controller.getUsrTieneHistorial(getKey(value));
         }
 
-        java.lang.Integer getKey(String value) {
-            java.lang.Integer key;
-            key = Integer.valueOf(value);
+        clases.UsrTieneHistorialPK getKey(String value) {
+            clases.UsrTieneHistorialPK key;
+            String values[] = value.split(SEPARATOR_ESCAPED);
+            key = new clases.UsrTieneHistorialPK();
+            key.setHistorialUsrId(Integer.parseInt(values[0]));
+            key.setHistorialId(Integer.parseInt(values[1]));
             return key;
         }
 
-        String getStringKey(java.lang.Integer value) {
+        String getStringKey(clases.UsrTieneHistorialPK value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value);
+            sb.append(value.getHistorialUsrId());
+            sb.append(SEPARATOR);
+            sb.append(value.getHistorialId());
             return sb.toString();
         }
 
@@ -221,11 +234,11 @@ public class AmigosController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Amigos) {
-                Amigos o = (Amigos) object;
-                return getStringKey(o.getAmigoId());
+            if (object instanceof UsrTieneHistorial) {
+                UsrTieneHistorial o = (UsrTieneHistorial) object;
+                return getStringKey(o.getUsrTieneHistorialPK());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Amigos.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + UsrTieneHistorial.class.getName());
             }
         }
     }

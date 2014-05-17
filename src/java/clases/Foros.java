@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Entity
 @Table(name = "foros")
@@ -41,9 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Foros.findByForoFecha", query = "SELECT f FROM Foros f WHERE f.foroFecha = :foroFecha"),
     @NamedQuery(name = "Foros.findByForoDescripcion", query = "SELECT f FROM Foros f WHERE f.foroDescripcion = :foroDescripcion")})
 public class Foros implements Serializable {
-    @Column(name = "foro_fecha")
-    @Temporal(TemporalType.DATE)
-    private Date foroFecha;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,14 +53,20 @@ public class Foros implements Serializable {
     @Size(max = 45)
     @Column(name = "foro_tema")
     private String foroTema;
+    @Column(name = "foro_fecha")
+    @Temporal(TemporalType.DATE)
+    private Date foroFecha;
     @Size(max = 700)
     @Column(name = "foro_descripcion")
     private String foroDescripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comentForo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comentForoId")
     private Collection<Comentarios> comentariosCollection;
-    @JoinColumn(name = "foro_creado_por", referencedColumnName = "usr_cc")
+    @JoinColumn(name = "foro_colect_id", referencedColumnName = "colect_id")
     @ManyToOne(optional = false)
-    private Usuarios foroCreadoPor;
+    private Colectivos foroColectId;
+    @JoinColumn(name = "foro_usr_id", referencedColumnName = "usr_cc")
+    @ManyToOne(optional = false)
+    private Usuarios foroUsrId;
 
     public Foros() {
     }
@@ -95,7 +98,7 @@ public class Foros implements Serializable {
     public void setForoTema(String foroTema) {
         this.foroTema = foroTema;
     }
-    
+
     public Date getForoFecha() {
         return foroFecha;
     }
@@ -103,7 +106,7 @@ public class Foros implements Serializable {
     public void setForoFecha(Date foroFecha) {
         this.foroFecha = foroFecha;
     }
-    
+
     public String getForoDescripcion() {
         return foroDescripcion;
     }
@@ -121,12 +124,20 @@ public class Foros implements Serializable {
         this.comentariosCollection = comentariosCollection;
     }
 
-    public Usuarios getForoCreadoPor() {
-        return foroCreadoPor;
+    public Colectivos getForoColectId() {
+        return foroColectId;
     }
 
-    public void setForoCreadoPor(Usuarios foroCreadoPor) {
-        this.foroCreadoPor = foroCreadoPor;
+    public void setForoColectId(Colectivos foroColectId) {
+        this.foroColectId = foroColectId;
+    }
+
+    public Usuarios getForoUsrId() {
+        return foroUsrId;
+    }
+
+    public void setForoUsrId(Usuarios foroUsrId) {
+        this.foroUsrId = foroUsrId;
     }
 
     @Override
@@ -153,5 +164,5 @@ public class Foros implements Serializable {
     public String toString() {
         return "clases.Foros[ foroId=" + foroId + " ]";
     }
-
+    
 }

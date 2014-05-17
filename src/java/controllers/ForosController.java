@@ -61,7 +61,7 @@ public class ForosController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(ejbFacade.getForosSelecionados(ColectivosController.getCurrent().getColectId()));
                 }
             };
         }
@@ -177,10 +177,10 @@ public class ForosController implements Serializable {
         pagination = null;
     }
 
-    public void next() {
+    public String next() {
         getPagination().nextPage();
         recreateModel();
-       
+        return "List";
     }
 
     public void previous() {
@@ -244,12 +244,12 @@ public class ForosController implements Serializable {
     private Usuarios usuario;
     Boolean mostrarLista = true;
     public String asignarTodo(){
-        try {            
-             this.usuario = UsuariosController.getCurrent();             
-             current.setForoCreadoPor(usuario);
-             Date fecha = new Date();
-             current.setForoFecha(fecha);
-             return current.getForoCreadoPor().getUsrNombres();
+        try {         
+                       
+             current.setForoUsrId(UsuariosController.getCurrent());             
+             current.setForoFecha(new Date());
+             current.setForoColectId(ColectivosController.getCurrent());
+             return current.getForoUsrId().getUsrNombres();
         } catch (Exception e) {
 }
         return "nada";           
@@ -258,7 +258,7 @@ public class ForosController implements Serializable {
         try {  
              Date fecha = new Date();
              current.setForoFecha(fecha);
-             return current.getForoCreadoPor().getUsrNombres();
+             return current.getForoUsrId().getUsrNombres();
         } catch (Exception e) {
         }
         return "nada";           

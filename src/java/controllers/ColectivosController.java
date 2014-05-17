@@ -1,15 +1,21 @@
 package controllers;
 
-import clases.Proyectos;
+import clases.Colectivos;
+import clases.Foros;
+import clases.Usuarios;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
-import facade.ProyectosFacade;
+import facade.ColectivosFacade;
+import java.io.IOException;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -18,29 +24,29 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@Named("proyectosController")
+@Named("colectivosController")
 @SessionScoped
-public class ProyectosController implements Serializable {
+public class ColectivosController implements Serializable {
 
-    private Proyectos current;
+    private static Colectivos current;
     private DataModel items = null;
     @EJB
-    private facade.ProyectosFacade ejbFacade;
+    private facade.ColectivosFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public ProyectosController() {
+    public ColectivosController() {
     }
 
-    public Proyectos getSelected() {
+    public Colectivos getSelected() {
         if (current == null) {
-            current = new Proyectos();
+            current = new Colectivos();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private ProyectosFacade getFacade() {
+    private ColectivosFacade getFacade() {
         return ejbFacade;
     }
 
@@ -66,31 +72,34 @@ public class ProyectosController implements Serializable {
         return "List";
     }
 
-    public String prepareView() {
-        current = (Proyectos) getItems().getRowData();
+    public void prepareView() throws IOException {
+        current = (Colectivos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/foros/forosTemplateClient.xhtml");
     }
 
     public String prepareCreate() {
-        current = new Proyectos();
+        current = new Colectivos();
         selectedItemIndex = -1;
         return "Create";
     }
 
-    public String create() {
+    public void create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ProyectosCreated"));
-            return prepareCreate();
+            prepareCreate();
+            recreatePagination();
+            recreateModel(); 
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ColectivosCreated"));
+            
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+          
         }
     }
 
     public String prepareEdit() {
-        current = (Proyectos) getItems().getRowData();
+        current = (Colectivos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -98,7 +107,7 @@ public class ProyectosController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ProyectosUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ColectivosUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -107,7 +116,7 @@ public class ProyectosController implements Serializable {
     }
 
     public String destroy() {
-        current = (Proyectos) getItems().getRowData();
+        current = (Colectivos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -131,7 +140,7 @@ public class ProyectosController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ProyectosDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ColectivosDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -187,21 +196,21 @@ public class ProyectosController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Proyectos getProyectos(java.lang.Integer id) {
+    public Colectivos getColectivos(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Proyectos.class)
-    public static class ProyectosControllerConverter implements Converter {
+    @FacesConverter(forClass = Colectivos.class)
+    public static class ColectivosControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ProyectosController controller = (ProyectosController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "proyectosController");
-            return controller.getProyectos(getKey(value));
+            ColectivosController controller = (ColectivosController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "colectivosController");
+            return controller.getColectivos(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -221,12 +230,48 @@ public class ProyectosController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Proyectos) {
-                Proyectos o = (Proyectos) object;
-                return getStringKey(o.getProyectosId());
+            if (object instanceof Colectivos) {
+                Colectivos o = (Colectivos) object;
+                return getStringKey(o.getColectId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Proyectos.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Colectivos.class.getName());
             }
         }
+    }
+    
+    //MI CODIGO
+    
+    private Usuarios usuario;
+    Boolean mostrarLista = true;
+    public String asignarTodo() {
+        try {
+            this.usuario = UsuariosController.getCurrent();
+            current.setColectUsrId(usuario);
+            current.setColectContador(2);
+            Date fecha = new Date();
+            current.setColectFecha(fecha);
+            return "exito";
+        } catch (Exception e) {
+            return "nada";  
+        }
+    }
+    
+    public String getColectivosTitulo()
+    {
+        return current.getColectTitulo();
+    }
+    
+    public void filtarforo()
+    {
+        
+    }
+    
+    
+    //MI CODIGO
+    
+   
+    public static Colectivos getCurrent()
+    {        
+        return current;
     }
 }

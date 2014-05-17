@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title><ui:insert name="title">Red Colombiana de Dinámica de sistemas</ui:insert></title>
+            <h:outputStylesheet name="css/jsfcrud.css"/>
+            <link rel="stylesheet" type="text/css" href="Recursos/Css/general.css" />
+            <link rel="stylesheet" type="text/css" href="Recursos/Banner/engine1/style.css" media="screen" />
+            <script type="text/javascript" src="Recursos/Banner/engine1/jquery.js"></script>
+        </f:facet>
+    </h:head>
+
+    <h:body>
+        <div class="cubierta">
+
+            <p:layout style="height: 1300px; padding: 0; margin: 0;">
+
+                <p:layoutUnit position="north" size="205" resizable="true" closable="true" rendered="#{loggin.activa}" collapsible="true" >
+                    <ui:include src="/componentes/menuregistro.xhtml" />
+                </p:layoutUnit>
+
+                <p:layoutUnit position="north" size="205" resizable="true" closable="true" rendered="#{!loggin.activa}" collapsible="true" >
+                    <ui:include src="/componentes/menugeneral.xhtml" />
+                </p:layoutUnit>             
+
+                <p:layoutUnit position="east" size="270" header="Sesión Iniciada" rendered="#{loggin.activa}" collapsible="true" >
+                    <ui:include src="/componentes/perfil.xhtml" class="iniciarsesion"/>
+                </p:layoutUnit>                 
+                
+                <ui:insert name="contenido" >             
+                </ui:insert>
+                
+                <p:layoutUnit position="south" size="140" closable="true" collapsible="true">
+                    <ui:include src="/componentes/piePagina.xhtml" />
+                </p:layoutUnit>
+            </p:layout>
+        </div>
+    </h:body>
+
+</html>

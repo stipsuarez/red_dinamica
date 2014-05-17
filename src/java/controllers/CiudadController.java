@@ -21,14 +21,13 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-
 @Named("ciudadController")
 @SessionScoped
 public class CiudadController implements Serializable {
 
-    private static Ciudad current;
+    private Ciudad current;
     private DataModel items = null;
-    @EJB 
+    @EJB
     private facade.CiudadFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
@@ -44,22 +43,13 @@ public class CiudadController implements Serializable {
         return current;
     }
 
-    public static Ciudad getCurrent() {
-        return current;
-    }
-
-    public static void setCurrent(Ciudad current) {
-        CiudadController.current = current;
-    }
-  
-
     private CiudadFacade getFacade() {
         return ejbFacade;
     }
+
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
-
                 @Override
                 public int getItemsCount() {
                     return getFacade().count();
@@ -67,7 +57,7 @@ public class CiudadController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
         }
@@ -80,7 +70,7 @@ public class CiudadController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Ciudad)getItems().getRowData();
+        current = (Ciudad) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -103,7 +93,7 @@ public class CiudadController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Ciudad)getItems().getRowData();
+        current = (Ciudad) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -120,7 +110,7 @@ public class CiudadController implements Serializable {
     }
 
     public String destroy() {
-        current = (Ciudad)getItems().getRowData();
+        current = (Ciudad) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -154,14 +144,14 @@ public class CiudadController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count-1;
+            selectedItemIndex = count - 1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
@@ -204,7 +194,7 @@ public class CiudadController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass=Ciudad.class)
+    @FacesConverter(forClass = Ciudad.class)
     public static class CiudadControllerConverter implements Converter {
 
         @Override
@@ -212,7 +202,7 @@ public class CiudadController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CiudadController controller = (CiudadController)facesContext.getApplication().getELResolver().
+            CiudadController controller = (CiudadController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "ciudadController");
             return controller.getCiudad(getKey(value));
         }
@@ -238,7 +228,7 @@ public class CiudadController implements Serializable {
                 Ciudad o = (Ciudad) object;
                 return getStringKey(o.getCiudadId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+Ciudad.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Ciudad.class.getName());
             }
         }
     }

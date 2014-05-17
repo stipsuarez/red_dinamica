@@ -31,8 +31,9 @@ public class CiudadFacade extends AbstractFacade<Ciudad> {
         super(Ciudad.class);
     }
     //Este es mi código
-     public List<Ciudad> ciudadesSelecionadas(Integer departamento_id) {
-        try {            
+
+    public List<Ciudad> ciudadesSelecionadas(Integer departamento_id) {
+        try {
             String cadena = "SELECT * FROM Ciudad c WHERE c.Departamentos_departamento_id =" + departamento_id;
             TypedQuery<Ciudad> query2 = (TypedQuery<Ciudad>) em.createNativeQuery(cadena, Ciudad.class);
             return query2.getResultList();
@@ -40,6 +41,6 @@ public class CiudadFacade extends AbstractFacade<Ciudad> {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al consultar la BD: " + e + "\nLocalize: " + e.getLocalizedMessage(), "Error bd");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
-}
+        }
     }
 }

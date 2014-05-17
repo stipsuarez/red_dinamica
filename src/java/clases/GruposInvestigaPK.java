@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Embeddable
 public class GruposInvestigaPK implements Serializable {

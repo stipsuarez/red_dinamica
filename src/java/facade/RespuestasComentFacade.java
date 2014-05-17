@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Stateless
 public class RespuestasComentFacade extends AbstractFacade<RespuestasComent> {

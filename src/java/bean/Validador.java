@@ -6,7 +6,7 @@ package bean;
 
 import clases.Usuarios;
 import controllers.UsuariosController;
-import util.JsfUtil;
+import controllers.util.JsfUtil;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -132,9 +132,6 @@ public class Validador implements InterfaceBean, Serializable{
 
     public void setEmail(String email) {
         this.email = email;
-    }
-      
- 
-       
+    }      
 }
     

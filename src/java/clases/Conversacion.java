@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Entity
 @Table(name = "conversacion")
@@ -63,12 +63,12 @@ public class Conversacion implements Serializable {
     private int convNumero;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "msjConversacion")
     private Collection<Mensaje> mensajeCollection;
-    @JoinColumn(name = "conv_usr2", referencedColumnName = "usr_cc")
-    @ManyToOne(optional = false)
-    private Usuarios convUsr2;
     @JoinColumn(name = "conv_usr1", referencedColumnName = "usr_cc")
     @ManyToOne(optional = false)
     private Usuarios convUsr1;
+    @JoinColumn(name = "conv_usr2", referencedColumnName = "usr_cc")
+    @ManyToOne(optional = false)
+    private Usuarios convUsr2;
 
     public Conversacion() {
     }
@@ -125,20 +125,20 @@ public class Conversacion implements Serializable {
         this.mensajeCollection = mensajeCollection;
     }
 
-    public Usuarios getConvUsr2() {
-        return convUsr2;
-    }
-
-    public void setConvUsr2(Usuarios convUsr2) {
-        this.convUsr2 = convUsr2;
-    }
-
     public Usuarios getConvUsr1() {
         return convUsr1;
     }
 
     public void setConvUsr1(Usuarios convUsr1) {
         this.convUsr1 = convUsr1;
+    }
+
+    public Usuarios getConvUsr2() {
+        return convUsr2;
+    }
+
+    public void setConvUsr2(Usuarios convUsr2) {
+        this.convUsr2 = convUsr2;
     }
 
     @Override

@@ -25,10 +25,6 @@
                     </h:inputText>
                     <h:outputLabel value="#{bundle.CreateMensajeLabel_msjLeido}" for="msjLeido" />
                     <h:inputText id="msjLeido" value="#{mensajeController.selected.msjLeido}" title="#{bundle.CreateMensajeTitle_msjLeido}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_msjLeido}"/>
-                    <h:outputLabel value="#{bundle.CreateMensajeLabel_msjConversacion}" for="msjConversacion" />
-                    <h:selectOneMenu id="msjConversacion" value="#{mensajeController.selected.msjConversacion}" title="#{bundle.CreateMensajeTitle_msjConversacion}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_msjConversacion}">
-                        <f:selectItems value="#{conversacionController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateMensajeLabel_msjDestinatario}" for="msjDestinatario" />
                     <h:selectOneMenu id="msjDestinatario" value="#{mensajeController.selected.msjDestinatario}" title="#{bundle.CreateMensajeTitle_msjDestinatario}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_msjDestinatario}">
                         <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
@@ -36,6 +32,10 @@
                     <h:outputLabel value="#{bundle.CreateMensajeLabel_msjRemitente}" for="msjRemitente" />
                     <h:selectOneMenu id="msjRemitente" value="#{mensajeController.selected.msjRemitente}" title="#{bundle.CreateMensajeTitle_msjRemitente}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_msjRemitente}">
                         <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateMensajeLabel_msjConversacion}" for="msjConversacion" />
+                    <h:selectOneMenu id="msjConversacion" value="#{mensajeController.selected.msjConversacion}" title="#{bundle.CreateMensajeTitle_msjConversacion}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_msjConversacion}">
+                        <f:selectItems value="#{conversacionController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />

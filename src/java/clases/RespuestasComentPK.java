@@ -12,48 +12,47 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Embeddable
 public class RespuestasComentPK implements Serializable {
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "res_comentario")
-    private int resComentario;
+    @Column(name = "resp_respuesta_id")
+    private int respRespuestaId;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "res_respuesta")
-    private int resRespuesta;
+    @Column(name = "resp_coment_id")
+    private int respComentId;
 
     public RespuestasComentPK() {
     }
 
-    public RespuestasComentPK(int resComentario, int resRespuesta) {
-        this.resComentario = resComentario;
-        this.resRespuesta = resRespuesta;
+    public RespuestasComentPK(int respRespuestaId, int respComentId) {
+        this.respRespuestaId = respRespuestaId;
+        this.respComentId = respComentId;
     }
 
-    public int getResComentario() {
-        return resComentario;
+    public int getRespRespuestaId() {
+        return respRespuestaId;
     }
 
-    public void setResComentario(int resComentario) {
-        this.resComentario = resComentario;
+    public void setRespRespuestaId(int respRespuestaId) {
+        this.respRespuestaId = respRespuestaId;
     }
 
-    public int getResRespuesta() {
-        return resRespuesta;
+    public int getRespComentId() {
+        return respComentId;
     }
 
-    public void setResRespuesta(int resRespuesta) {
-        this.resRespuesta = resRespuesta;
+    public void setRespComentId(int respComentId) {
+        this.respComentId = respComentId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) resComentario;
-        hash += (int) resRespuesta;
+        hash += (int) respRespuestaId;
+        hash += (int) respComentId;
         return hash;
     }
 
@@ -64,10 +63,10 @@ public class RespuestasComentPK implements Serializable {
             return false;
         }
         RespuestasComentPK other = (RespuestasComentPK) object;
-        if (this.resComentario != other.resComentario) {
+        if (this.respRespuestaId != other.respRespuestaId) {
             return false;
         }
-        if (this.resRespuesta != other.resRespuesta) {
+        if (this.respComentId != other.respComentId) {
             return false;
         }
         return true;
@@ -75,7 +74,7 @@ public class RespuestasComentPK implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.RespuestasComentPK[ resComentario=" + resComentario + ", resRespuesta=" + resRespuesta + " ]";
+        return "clases.RespuestasComentPK[ respRespuestaId=" + respRespuestaId + ", respComentId=" + respComentId + " ]";
     }
     
 }

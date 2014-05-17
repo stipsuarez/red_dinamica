@@ -4,7 +4,6 @@ import clases.Comentarios;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import facade.ComentariosFacade;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -89,7 +88,7 @@ public class ComentariosController implements Serializable {
             recreateModel();     
            
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));         
             
         }
     }
@@ -239,18 +238,16 @@ public class ComentariosController implements Serializable {
     
     /////MI CODIGO
     private SimpleDateFormat dma = new SimpleDateFormat("dd/MM/yyyy");
-        
-        public String fecha()
-        {
-            dma.format(current.getComentFechaHora());
-            return dma.toString();
-        }
 
-        public void asignarTodo(){                   
-             current.setComentHechoPor(UsuariosController.getCurrent());  
-             current.setComentForo(ForosController.getCurrent()); 
-             Date fecha = new Date();
-             current.setComentFechaHora(fecha);
-}
+    public String fecha() {
+        dma.format(current.getComentFecha());
+        return dma.toString();
+    }
+
+    public void asignarTodo() {
+        current.setComentUsrId(UsuariosController.getCurrent());
+        current.setComentForoId(ForosController.getCurrent());
+        current.setComentFecha(new Date());
+    }
        
 }

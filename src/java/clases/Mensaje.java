@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -24,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Entity
 @Table(name = "mensaje")
@@ -37,8 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Mensaje implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "msj_id")
     private Integer msjId;
     @Lob
@@ -54,15 +56,15 @@ public class Mensaje implements Serializable {
     @NotNull
     @Column(name = "msj_leido")
     private boolean msjLeido;
-    @JoinColumn(name = "msj_conversacion", referencedColumnName = "conv_id")
-    @ManyToOne(optional = false)
-    private Conversacion msjConversacion;
     @JoinColumn(name = "msj_destinatario", referencedColumnName = "usr_cc")
     @ManyToOne(optional = false)
     private Usuarios msjDestinatario;
     @JoinColumn(name = "msj_remitente", referencedColumnName = "usr_cc")
     @ManyToOne(optional = false)
     private Usuarios msjRemitente;
+    @JoinColumn(name = "msj_conversacion", referencedColumnName = "conv_id")
+    @ManyToOne(optional = false)
+    private Conversacion msjConversacion;
 
     public Mensaje() {
     }
@@ -109,14 +111,6 @@ public class Mensaje implements Serializable {
         this.msjLeido = msjLeido;
     }
 
-    public Conversacion getMsjConversacion() {
-        return msjConversacion;
-    }
-
-    public void setMsjConversacion(Conversacion msjConversacion) {
-        this.msjConversacion = msjConversacion;
-    }
-
     public Usuarios getMsjDestinatario() {
         return msjDestinatario;
     }
@@ -131,6 +125,14 @@ public class Mensaje implements Serializable {
 
     public void setMsjRemitente(Usuarios msjRemitente) {
         this.msjRemitente = msjRemitente;
+    }
+
+    public Conversacion getMsjConversacion() {
+        return msjConversacion;
+    }
+
+    public void setMsjConversacion(Conversacion msjConversacion) {
+        this.msjConversacion = msjConversacion;
     }
 
     @Override

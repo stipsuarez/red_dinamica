@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Entity
 @Table(name = "grupos_investiga")
@@ -27,7 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "GruposInvestiga.findAll", query = "SELECT g FROM GruposInvestiga g"),
     @NamedQuery(name = "GruposInvestiga.findByGruposInvestigaId", query = "SELECT g FROM GruposInvestiga g WHERE g.gruposInvestigaPK.gruposInvestigaId = :gruposInvestigaId"),
     @NamedQuery(name = "GruposInvestiga.findByGruposInvestigaNombre", query = "SELECT g FROM GruposInvestiga g WHERE g.gruposInvestigaNombre = :gruposInvestigaNombre"),
-    @NamedQuery(name = "GruposInvestiga.findByGruposInvestigaUniversidad", query = "SELECT g FROM GruposInvestiga g WHERE g.gruposInvestigaPK.gruposInvestigaUniversidad = :gruposInvestigaUniversidad")})
+    @NamedQuery(name = "GruposInvestiga.findByGruposInvestigaUniversidad", query = "SELECT g FROM GruposInvestiga g WHERE g.gruposInvestigaPK.gruposInvestigaUniversidad = :gruposInvestigaUniversidad"),
+    @NamedQuery(name = "GruposInvestiga.findByGruposInvestigaDescripcion", query = "SELECT g FROM GruposInvestiga g WHERE g.gruposInvestigaDescripcion = :gruposInvestigaDescripcion")})
 public class GruposInvestiga implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -35,6 +36,9 @@ public class GruposInvestiga implements Serializable {
     @Size(max = 45)
     @Column(name = "grupos_investiga_nombre")
     private String gruposInvestigaNombre;
+    @Size(max = 100)
+    @Column(name = "grupos_investiga_descripcion")
+    private String gruposInvestigaDescripcion;
     @JoinColumn(name = "grupos_investiga_universidad", referencedColumnName = "universidad_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Universidades universidades;
@@ -64,6 +68,14 @@ public class GruposInvestiga implements Serializable {
 
     public void setGruposInvestigaNombre(String gruposInvestigaNombre) {
         this.gruposInvestigaNombre = gruposInvestigaNombre;
+    }
+
+    public String getGruposInvestigaDescripcion() {
+        return gruposInvestigaDescripcion;
+    }
+
+    public void setGruposInvestigaDescripcion(String gruposInvestigaDescripcion) {
+        this.gruposInvestigaDescripcion = gruposInvestigaDescripcion;
     }
 
     public Universidades getUniversidades() {

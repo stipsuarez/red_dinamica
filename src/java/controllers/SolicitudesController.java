@@ -30,7 +30,6 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
 
-
 @Named("solicitudesController")
 @SessionScoped
 public class SolicitudesController implements Serializable {
@@ -366,7 +365,7 @@ public class SolicitudesController implements Serializable {
             current.setSolicitudCc(cc_amigo);
             current.setSolicitudFecha(fechaActual);
             current.setSolicitudEstado(estado);
-            current.setSolicitudEnviadaA(usrActual);
+            current.setSolicitudUsrId(usrActual);
             create();
            
             listaUsuariosE.remove(usrSelect);//Actualizar el estado del boton enviar solicitud
@@ -397,7 +396,7 @@ public class SolicitudesController implements Serializable {
 
             listaUsuariosE = ejbUsuariosFacade.buscarUsuarios_por_nombre(this.nombre_buscar);
 
-            HashSet<Usuarios> hashSet = new HashSet <Usuarios>(listaUsuariosE);
+            HashSet<Usuarios> hashSet = new HashSet(listaUsuariosE);
             for (int i = 0; i < listaUsuariosE.size(); i++) {
                 listaUsuariosE.remove(i);
             }

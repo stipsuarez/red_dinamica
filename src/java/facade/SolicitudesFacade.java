@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Stateless
 public class SolicitudesFacade extends AbstractFacade<Solicitudes> {
@@ -26,6 +26,4 @@ public class SolicitudesFacade extends AbstractFacade<Solicitudes> {
     public SolicitudesFacade() {
         super(Solicitudes.class);
     }
-    
-    
 }

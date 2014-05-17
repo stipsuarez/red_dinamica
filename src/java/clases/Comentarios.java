@@ -5,8 +5,10 @@
 package clases;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,11 +18,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Comentarios.findAll", query = "SELECT c FROM Comentarios c"),
     @NamedQuery(name = "Comentarios.findByComentId", query = "SELECT c FROM Comentarios c WHERE c.comentId = :comentId"),
     @NamedQuery(name = "Comentarios.findByComentDescripcion", query = "SELECT c FROM Comentarios c WHERE c.comentDescripcion = :comentDescripcion"),
-    @NamedQuery(name = "Comentarios.findByComentFechaHora", query = "SELECT c FROM Comentarios c WHERE c.comentFechaHora = :comentFechaHora")})
+    @NamedQuery(name = "Comentarios.findByComentFecha", query = "SELECT c FROM Comentarios c WHERE c.comentFecha = :comentFecha")})
 public class Comentarios implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,15 +48,19 @@ public class Comentarios implements Serializable {
     @Size(max = 700)
     @Column(name = "coment_descripcion")
     private String comentDescripcion;
-    @Column(name = "coment_fecha_hora")
+    @Column(name = "coment_fecha")
     @Temporal(TemporalType.DATE)
-    private Date comentFechaHora;
-    @JoinColumn(name = "coment_foro", referencedColumnName = "foro_id")
+    private Date comentFecha;
+    @JoinColumn(name = "coment_foro_id", referencedColumnName = "foro_id")
     @ManyToOne(optional = false)
-    private Foros comentForo;
-    @JoinColumn(name = "coment_hecho_por", referencedColumnName = "usr_cc")
+    private Foros comentForoId;
+    @JoinColumn(name = "coment_usr_id", referencedColumnName = "usr_cc")
     @ManyToOne(optional = false)
-    private Usuarios comentHechoPor;
+    private Usuarios comentUsrId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comentarios")
+    private Collection<RespuestasComent> respuestasComentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comentarios1")
+    private Collection<RespuestasComent> respuestasComentCollection1;
 
     public Comentarios() {
     }
@@ -77,28 +85,46 @@ public class Comentarios implements Serializable {
         this.comentDescripcion = comentDescripcion;
     }
 
-    public Date getComentFechaHora() {
-        return comentFechaHora;
+    public Date getComentFecha() {
+        return comentFecha;
     }
 
-    public void setComentFechaHora(Date comentFechaHora) {
-        this.comentFechaHora = comentFechaHora;
+    public void setComentFecha(Date comentFecha) {
+        this.comentFecha = comentFecha;
     }
 
-    public Foros getComentForo() {
-        return comentForo;
+    public Foros getComentForoId() {
+        return comentForoId;
     }
 
-    public void setComentForo(Foros comentForo) {
-        this.comentForo = comentForo;
+    public void setComentForoId(Foros comentForoId) {
+        this.comentForoId = comentForoId;
     }
 
-    public Usuarios getComentHechoPor() {
-        return comentHechoPor;
+    public Usuarios getComentUsrId() {
+        return comentUsrId;
     }
 
-    public void setComentHechoPor(Usuarios comentHechoPor) {
-        this.comentHechoPor = comentHechoPor;
+    public void setComentUsrId(Usuarios comentUsrId) {
+        this.comentUsrId = comentUsrId;
+    }
+
+    @XmlTransient
+    public Collection<RespuestasComent> getRespuestasComentCollection() {
+        return respuestasComentCollection;
+    }
+
+    public void setRespuestasComentCollection(Collection<RespuestasComent> respuestasComentCollection) {
+        this.respuestasComentCollection = respuestasComentCollection;
+    }
+
+    @XmlTransient
+    public Collection<RespuestasComent> getRespuestasComentCollection1() {
+        return respuestasComentCollection1;
+    }
+
+    public void setRespuestasComentCollection1(Collection<RespuestasComent> respuestasComentCollection1) {
+        this.respuestasComentCollection1 = respuestasComentCollection1;
     }
 
     @Override

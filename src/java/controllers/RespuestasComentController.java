@@ -82,8 +82,8 @@ public class RespuestasComentController implements Serializable {
 
     public String create() {
         try {
-            current.getRespuestasComentPK().setResComentario(current.getComentarios1().getComentId());
-            current.getRespuestasComentPK().setResRespuesta(current.getComentarios().getComentId());
+            current.getRespuestasComentPK().setRespComentId(current.getComentarios().getComentId());
+            current.getRespuestasComentPK().setRespRespuestaId(current.getComentarios1().getComentId());
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RespuestasComentCreated"));
             return prepareCreate();
@@ -101,8 +101,8 @@ public class RespuestasComentController implements Serializable {
 
     public String update() {
         try {
-            current.getRespuestasComentPK().setResComentario(current.getComentarios1().getComentId());
-            current.getRespuestasComentPK().setResRespuesta(current.getComentarios().getComentId());
+            current.getRespuestasComentPK().setRespComentId(current.getComentarios().getComentId());
+            current.getRespuestasComentPK().setRespRespuestaId(current.getComentarios1().getComentId());
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RespuestasComentUpdated"));
             return "View";
@@ -217,16 +217,16 @@ public class RespuestasComentController implements Serializable {
             clases.RespuestasComentPK key;
             String values[] = value.split(SEPARATOR_ESCAPED);
             key = new clases.RespuestasComentPK();
-            key.setResComentario(Integer.parseInt(values[0]));
-            key.setResRespuesta(Integer.parseInt(values[1]));
+            key.setRespRespuestaId(Integer.parseInt(values[0]));
+            key.setRespComentId(Integer.parseInt(values[1]));
             return key;
         }
 
         String getStringKey(clases.RespuestasComentPK value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value.getResComentario());
+            sb.append(value.getRespRespuestaId());
             sb.append(SEPARATOR);
-            sb.append(value.getResRespuesta());
+            sb.append(value.getRespComentId());
             return sb.toString();
         }
 

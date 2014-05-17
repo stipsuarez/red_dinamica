@@ -21,12 +21,8 @@
                     <h:inputText id="eventoTitulo" value="#{eventosController.selected.eventoTitulo}" title="#{bundle.EditEventosTitle_eventoTitulo}" />
                     <h:outputLabel value="#{bundle.EditEventosLabel_eventoDescripcion}" for="eventoDescripcion" />
                     <h:inputText id="eventoDescripcion" value="#{eventosController.selected.eventoDescripcion}" title="#{bundle.EditEventosTitle_eventoDescripcion}" />
-                    <h:outputLabel value="#{bundle.EditEventosLabel_usuariosusrcc}" for="usuariosusrcc" />
-                    <h:selectOneMenu id="usuariosusrcc" value="#{eventosController.selected.usuariosusrcc}" title="#{bundle.EditEventosTitle_usuariosusrcc}" required="true" requiredMessage="#{bundle.EditEventosRequiredMessage_usuariosusrcc}">
-                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditEventosLabel_eventoCreadoPor}" for="eventoCreadoPor" />
-                    <h:selectOneMenu id="eventoCreadoPor" value="#{eventosController.selected.eventoCreadoPor}" title="#{bundle.EditEventosTitle_eventoCreadoPor}" required="true" requiredMessage="#{bundle.EditEventosRequiredMessage_eventoCreadoPor}">
+                    <h:outputLabel value="#{bundle.EditEventosLabel_eventoUsrId}" for="eventoUsrId" />
+                    <h:selectOneMenu id="eventoUsrId" value="#{eventosController.selected.eventoUsrId}" title="#{bundle.EditEventosTitle_eventoUsrId}" required="true" requiredMessage="#{bundle.EditEventosRequiredMessage_eventoUsrId}">
                         <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>

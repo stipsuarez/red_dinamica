@@ -27,8 +27,12 @@
                     </h:inputText>
                     <h:outputLabel value="#{bundle.EditForosLabel_foroDescripcion}" for="foroDescripcion" />
                     <h:inputText id="foroDescripcion" value="#{forosController.selected.foroDescripcion}" title="#{bundle.EditForosTitle_foroDescripcion}" />
-                    <h:outputLabel value="#{bundle.EditForosLabel_foroCreadoPor}" for="foroCreadoPor" />
-                    <h:selectOneMenu id="foroCreadoPor" value="#{forosController.selected.foroCreadoPor}" title="#{bundle.EditForosTitle_foroCreadoPor}" required="true" requiredMessage="#{bundle.EditForosRequiredMessage_foroCreadoPor}">
+                    <h:outputLabel value="#{bundle.EditForosLabel_foroColectId}" for="foroColectId" />
+                    <h:selectOneMenu id="foroColectId" value="#{forosController.selected.foroColectId}" title="#{bundle.EditForosTitle_foroColectId}" required="true" requiredMessage="#{bundle.EditForosRequiredMessage_foroColectId}">
+                        <f:selectItems value="#{colectivosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditForosLabel_foroUsrId}" for="foroUsrId" />
+                    <h:selectOneMenu id="foroUsrId" value="#{forosController.selected.foroUsrId}" title="#{bundle.EditForosTitle_foroUsrId}" required="true" requiredMessage="#{bundle.EditForosRequiredMessage_foroUsrId}">
                         <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>

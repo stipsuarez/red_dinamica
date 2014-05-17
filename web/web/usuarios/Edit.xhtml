@@ -31,10 +31,8 @@
                     <h:inputText id="usrTipo" value="#{usuariosController.selected.usrTipo}" title="#{bundle.EditUsuariosTitle_usrTipo}" />
                     <h:outputLabel value="#{bundle.EditUsuariosLabel_usrEstado}" for="usrEstado" />
                     <h:inputText id="usrEstado" value="#{usuariosController.selected.usrEstado}" title="#{bundle.EditUsuariosTitle_usrEstado}" />
-                    <h:outputLabel value="#{bundle.EditUsuariosLabel_usrCiudad}" for="usrCiudad" />
-                    <h:selectOneMenu id="usrCiudad" value="#{usuariosController.selected.usrCiudad}" title="#{bundle.EditUsuariosTitle_usrCiudad}" >
-                        <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditUsuariosLabel_usrFoto}" for="usrFoto" />
+                    <h:inputText id="usrFoto" value="#{usuariosController.selected.usrFoto}" title="#{bundle.EditUsuariosTitle_usrFoto}" />
                     <h:outputLabel value="#{bundle.EditUsuariosLabel_usrUniversidad}" for="usrUniversidad" />
                     <h:selectOneMenu id="usrUniversidad" value="#{usuariosController.selected.usrUniversidad}" title="#{bundle.EditUsuariosTitle_usrUniversidad}" >
                         <f:selectItems value="#{universidadesController.itemsAvailableSelectOne}"/>
@@ -43,8 +41,10 @@
                     <h:selectOneMenu id="usrDepartamento" value="#{usuariosController.selected.usrDepartamento}" title="#{bundle.EditUsuariosTitle_usrDepartamento}" >
                         <f:selectItems value="#{departamentosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditUsuariosLabel_usrFoto}" for="usrFoto" />
-                    <h:inputText id="usrFoto" value="#{usuariosController.selected.usrFoto}" title="#{bundle.EditUsuariosTitle_usrFoto}" />
+                    <h:outputLabel value="#{bundle.EditUsuariosLabel_usrCiudad}" for="usrCiudad" />
+                    <h:selectOneMenu id="usrCiudad" value="#{usuariosController.selected.usrCiudad}" title="#{bundle.EditUsuariosTitle_usrCiudad}" >
+                        <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{usuariosController.update}" value="#{bundle.EditUsuariosSaveLink}"/>
                 <br />

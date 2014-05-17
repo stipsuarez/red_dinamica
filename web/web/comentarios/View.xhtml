@@ -9,24 +9,21 @@
         <ui:define name="title">
             <h:outputText value="#{bundle.ViewComentariosTitle}"></h:outputText>
         </ui:define>
-        <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
+        <ui:define name="body">         
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputText value="#{bundle.ViewComentariosLabel_comentId}"/>
                     <h:outputText value="#{comentariosController.selected.comentId}" title="#{bundle.ViewComentariosTitle_comentId}"/>
                     <h:outputText value="#{bundle.ViewComentariosLabel_comentDescripcion}"/>
                     <h:outputText value="#{comentariosController.selected.comentDescripcion}" title="#{bundle.ViewComentariosTitle_comentDescripcion}"/>
-                    <h:outputText value="#{bundle.ViewComentariosLabel_comentFechaHora}"/>
-                    <h:outputText value="#{comentariosController.selected.comentFechaHora}" title="#{bundle.ViewComentariosTitle_comentFechaHora}">
+                    <h:outputText value="#{bundle.ViewComentariosLabel_comentFecha}"/>
+                    <h:outputText value="#{comentariosController.selected.comentFecha}" title="#{bundle.ViewComentariosTitle_comentFecha}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:outputText>
-                    <h:outputText value="#{bundle.ViewComentariosLabel_comentForo}"/>
-                    <h:outputText value="#{comentariosController.selected.comentForo}" title="#{bundle.ViewComentariosTitle_comentForo}"/>
-                    <h:outputText value="#{bundle.ViewComentariosLabel_comentHechoPor}"/>
-                    <h:outputText value="#{comentariosController.selected.comentHechoPor}" title="#{bundle.ViewComentariosTitle_comentHechoPor}"/>
+                    <h:outputText value="#{bundle.ViewComentariosLabel_comentForoId}"/>
+                    <h:outputText value="#{comentariosController.selected.comentForoId}" title="#{bundle.ViewComentariosTitle_comentForoId}"/>
+                    <h:outputText value="#{bundle.ViewComentariosLabel_comentUsrId}"/>
+                    <h:outputText value="#{comentariosController.selected.comentUsrId}" title="#{bundle.ViewComentariosTitle_comentUsrId}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{comentariosController.destroyAndView}" value="#{bundle.ViewComentariosDestroyLink}"/>

@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Entity
 @Table(name = "eventos")
@@ -43,9 +43,9 @@ public class Eventos implements Serializable {
     @Size(max = 1000)
     @Column(name = "evento_descripcion")
     private String eventoDescripcion;
-    @JoinColumn(name = "evento_creado_por", referencedColumnName = "usr_cc")
+    @JoinColumn(name = "evento_usr_id", referencedColumnName = "usr_cc")
     @ManyToOne(optional = false)
-    private Usuarios eventoCreadoPor;
+    private Usuarios eventoUsrId;
 
     public Eventos() {
     }
@@ -78,12 +78,12 @@ public class Eventos implements Serializable {
         this.eventoDescripcion = eventoDescripcion;
     }
 
-    public Usuarios getEventoCreadoPor() {
-        return eventoCreadoPor;
+    public Usuarios getEventoUsrId() {
+        return eventoUsrId;
     }
 
-    public void setEventoCreadoPor(Usuarios eventoCreadoPor) {
-        this.eventoCreadoPor = eventoCreadoPor;
+    public void setEventoUsrId(Usuarios eventoUsrId) {
+        this.eventoUsrId = eventoUsrId;
     }
 
     @Override

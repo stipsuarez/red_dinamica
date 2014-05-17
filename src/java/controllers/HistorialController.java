@@ -1,10 +1,9 @@
 package controllers;
 
-import clases.Grupos;
+import clases.Historial;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
-import facade.GruposFacade;
-
+import facade.HistorialFacade;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -18,29 +17,29 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@Named("gruposController")
+@Named("historialController")
 @SessionScoped
-public class GruposController implements Serializable {
+public class HistorialController implements Serializable {
 
-    private Grupos current;
+    private Historial current;
     private DataModel items = null;
     @EJB
-    private facade.GruposFacade ejbFacade;
+    private facade.HistorialFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public GruposController() {
+    public HistorialController() {
     }
 
-    public Grupos getSelected() {
+    public Historial getSelected() {
         if (current == null) {
-            current = new Grupos();
+            current = new Historial();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private GruposFacade getFacade() {
+    private HistorialFacade getFacade() {
         return ejbFacade;
     }
 
@@ -67,13 +66,13 @@ public class GruposController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Grupos) getItems().getRowData();
+        current = (Historial) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Grupos();
+        current = new Historial();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -81,7 +80,7 @@ public class GruposController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("GruposCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("HistorialCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -90,7 +89,7 @@ public class GruposController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Grupos) getItems().getRowData();
+        current = (Historial) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -98,7 +97,7 @@ public class GruposController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("GruposUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("HistorialUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -107,7 +106,7 @@ public class GruposController implements Serializable {
     }
 
     public String destroy() {
-        current = (Grupos) getItems().getRowData();
+        current = (Historial) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -131,7 +130,7 @@ public class GruposController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("GruposDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("HistorialDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -187,21 +186,21 @@ public class GruposController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Grupos getGrupos(java.lang.Integer id) {
+    public Historial getHistorial(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Grupos.class)
-    public static class GruposControllerConverter implements Converter {
+    @FacesConverter(forClass = Historial.class)
+    public static class HistorialControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            GruposController controller = (GruposController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "gruposController");
-            return controller.getGrupos(getKey(value));
+            HistorialController controller = (HistorialController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "historialController");
+            return controller.getHistorial(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -221,11 +220,11 @@ public class GruposController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Grupos) {
-                Grupos o = (Grupos) object;
-                return getStringKey(o.getGrupoId());
+            if (object instanceof Historial) {
+                Historial o = (Historial) object;
+                return getStringKey(o.getHistorialId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Grupos.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Historial.class.getName());
             }
         }
     }

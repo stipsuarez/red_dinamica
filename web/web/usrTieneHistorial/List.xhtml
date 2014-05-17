@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListUsrTieneHistorialTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListUsrTieneHistorialEmpty}" rendered="#{usrTieneHistorialController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{usrTieneHistorialController.items.rowCount > 0}">
+                    <h:outputText value="#{usrTieneHistorialController.pagination.pageFirstItem + 1}..#{usrTieneHistorialController.pagination.pageLastItem + 1}/#{usrTieneHistorialController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{usrTieneHistorialController.previous}" value="#{bundle.Previous} #{usrTieneHistorialController.pagination.pageSize}" rendered="#{usrTieneHistorialController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{usrTieneHistorialController.next}" value="#{bundle.Next} #{usrTieneHistorialController.pagination.pageSize}" rendered="#{usrTieneHistorialController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{usrTieneHistorialController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsrTieneHistorialTitle_historialFecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.historialFecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsrTieneHistorialTitle_historial}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.historial}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsrTieneHistorialTitle_usuarios}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usuarios}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{usrTieneHistorialController.prepareView}" value="#{bundle.ListUsrTieneHistorialViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{usrTieneHistorialController.prepareEdit}" value="#{bundle.ListUsrTieneHistorialEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{usrTieneHistorialController.destroy}" value="#{bundle.ListUsrTieneHistorialDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{usrTieneHistorialController.prepareCreate}" value="#{bundle.ListUsrTieneHistorialCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListUsrTieneHistorialIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

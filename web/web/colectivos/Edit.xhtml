@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditColectivosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditColectivosLabel_colectId}" for="colectId" />
+                    <h:inputText id="colectId" value="#{colectivosController.selected.colectId}" title="#{bundle.EditColectivosTitle_colectId}" required="true" requiredMessage="#{bundle.EditColectivosRequiredMessage_colectId}"/>
+                    <h:outputLabel value="#{bundle.EditColectivosLabel_colectContador}" for="colectContador" />
+                    <h:inputText id="colectContador" value="#{colectivosController.selected.colectContador}" title="#{bundle.EditColectivosTitle_colectContador}" />
+                    <h:outputLabel value="#{bundle.EditColectivosLabel_colectTitulo}" for="colectTitulo" />
+                    <h:inputText id="colectTitulo" value="#{colectivosController.selected.colectTitulo}" title="#{bundle.EditColectivosTitle_colectTitulo}" />
+                    <h:outputLabel value="#{bundle.EditColectivosLabel_colectDescripcion}" for="colectDescripcion" />
+                    <h:inputText id="colectDescripcion" value="#{colectivosController.selected.colectDescripcion}" title="#{bundle.EditColectivosTitle_colectDescripcion}" />
+                    <h:outputLabel value="#{bundle.EditColectivosLabel_colectFecha}" for="colectFecha" />
+                    <h:inputText id="colectFecha" value="#{colectivosController.selected.colectFecha}" title="#{bundle.EditColectivosTitle_colectFecha}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditColectivosLabel_colectUsrId}" for="colectUsrId" />
+                    <h:selectOneMenu id="colectUsrId" value="#{colectivosController.selected.colectUsrId}" title="#{bundle.EditColectivosTitle_colectUsrId}" required="true" requiredMessage="#{bundle.EditColectivosRequiredMessage_colectUsrId}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{colectivosController.update}" value="#{bundle.EditColectivosSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditColectivosViewLink}"/>
+                <br />
+                <h:commandLink action="#{colectivosController.prepareList}" value="#{bundle.EditColectivosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditColectivosIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

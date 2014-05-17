@@ -25,8 +25,8 @@
                     </h:inputText>
                     <h:outputLabel value="#{bundle.EditSolicitudesLabel_solicitudEstado}" for="solicitudEstado" />
                     <h:inputText id="solicitudEstado" value="#{solicitudesController.selected.solicitudEstado}" title="#{bundle.EditSolicitudesTitle_solicitudEstado}" />
-                    <h:outputLabel value="#{bundle.EditSolicitudesLabel_solicitudEnviadaA}" for="solicitudEnviadaA" />
-                    <h:selectOneMenu id="solicitudEnviadaA" value="#{solicitudesController.selected.solicitudEnviadaA}" title="#{bundle.EditSolicitudesTitle_solicitudEnviadaA}" required="true" requiredMessage="#{bundle.EditSolicitudesRequiredMessage_solicitudEnviadaA}">
+                    <h:outputLabel value="#{bundle.EditSolicitudesLabel_solicitudUsrId}" for="solicitudUsrId" />
+                    <h:selectOneMenu id="solicitudUsrId" value="#{solicitudesController.selected.solicitudUsrId}" title="#{bundle.EditSolicitudesTitle_solicitudUsrId}" required="true" requiredMessage="#{bundle.EditSolicitudesRequiredMessage_solicitudUsrId}">
                         <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>

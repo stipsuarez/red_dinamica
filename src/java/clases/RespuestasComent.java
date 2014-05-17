@@ -16,26 +16,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Entity
 @Table(name = "respuestas_coment")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RespuestasComent.findAll", query = "SELECT r FROM RespuestasComent r"),
-    @NamedQuery(name = "RespuestasComent.findByResComentario", query = "SELECT r FROM RespuestasComent r WHERE r.respuestasComentPK.resComentario = :resComentario"),
-    @NamedQuery(name = "RespuestasComent.findByResRespuesta", query = "SELECT r FROM RespuestasComent r WHERE r.respuestasComentPK.resRespuesta = :resRespuesta")})
+    @NamedQuery(name = "RespuestasComent.findByRespRespuestaId", query = "SELECT r FROM RespuestasComent r WHERE r.respuestasComentPK.respRespuestaId = :respRespuestaId"),
+    @NamedQuery(name = "RespuestasComent.findByRespComentId", query = "SELECT r FROM RespuestasComent r WHERE r.respuestasComentPK.respComentId = :respComentId")})
 public class RespuestasComent implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected RespuestasComentPK respuestasComentPK;
-    @JoinColumn(name = "res_usuario", referencedColumnName = "usr_cc")
+    @JoinColumn(name = "resp_usr_id", referencedColumnName = "usr_cc")
     @ManyToOne(optional = false)
-    private Usuarios resUsuario;
-    @JoinColumn(name = "res_respuesta", referencedColumnName = "coment_id", insertable = false, updatable = false)
+    private Usuarios respUsrId;
+    @JoinColumn(name = "resp_coment_id", referencedColumnName = "coment_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Comentarios comentarios;
-    @JoinColumn(name = "res_comentario", referencedColumnName = "coment_id", insertable = false, updatable = false)
+    @JoinColumn(name = "resp_respuesta_id", referencedColumnName = "coment_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Comentarios comentarios1;
 
@@ -46,8 +46,8 @@ public class RespuestasComent implements Serializable {
         this.respuestasComentPK = respuestasComentPK;
     }
 
-    public RespuestasComent(int resComentario, int resRespuesta) {
-        this.respuestasComentPK = new RespuestasComentPK(resComentario, resRespuesta);
+    public RespuestasComent(int respRespuestaId, int respComentId) {
+        this.respuestasComentPK = new RespuestasComentPK(respRespuestaId, respComentId);
     }
 
     public RespuestasComentPK getRespuestasComentPK() {
@@ -58,12 +58,12 @@ public class RespuestasComent implements Serializable {
         this.respuestasComentPK = respuestasComentPK;
     }
 
-    public Usuarios getResUsuario() {
-        return resUsuario;
+    public Usuarios getRespUsrId() {
+        return respUsrId;
     }
 
-    public void setResUsuario(Usuarios resUsuario) {
-        this.resUsuario = resUsuario;
+    public void setRespUsrId(Usuarios respUsrId) {
+        this.respUsrId = respUsrId;
     }
 
     public Comentarios getComentarios() {

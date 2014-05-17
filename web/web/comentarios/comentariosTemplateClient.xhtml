@@ -7,14 +7,11 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
-
-        <ui:composition template="./../../templates/forosTemplate.xhtml">
+        <ui:composition template="./../../templates/GeneralTemplate.xhtml">
             
             <ui:define name="contenido">
                 <p:layoutUnit position="center" header="#{forosController.titulo()}">
-                   <ui:include  src="./../foros/View.xhtml" />  
-                   <br/>
-                   <br/>
+                   
                    <h:outputText value="-----------------------------------------" />
                    <br/>
                    <br/> 
@@ -27,6 +24,5 @@
             </ui:define>
 
         </ui:composition>
-
     </body>
 </html>

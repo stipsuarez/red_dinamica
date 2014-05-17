@@ -19,16 +19,16 @@
                     <h:inputText id="comentId" value="#{comentariosController.selected.comentId}" title="#{bundle.EditComentariosTitle_comentId}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_comentId}"/>
                     <h:outputLabel value="#{bundle.EditComentariosLabel_comentDescripcion}" for="comentDescripcion" />
                     <h:inputText id="comentDescripcion" value="#{comentariosController.selected.comentDescripcion}" title="#{bundle.EditComentariosTitle_comentDescripcion}" />
-                    <h:outputLabel value="#{bundle.EditComentariosLabel_comentFechaHora}" for="comentFechaHora" />
-                    <h:inputText id="comentFechaHora" value="#{comentariosController.selected.comentFechaHora}" title="#{bundle.EditComentariosTitle_comentFechaHora}" >
+                    <h:outputLabel value="#{bundle.EditComentariosLabel_comentFecha}" for="comentFecha" />
+                    <h:inputText id="comentFecha" value="#{comentariosController.selected.comentFecha}" title="#{bundle.EditComentariosTitle_comentFecha}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
-                    <h:outputLabel value="#{bundle.EditComentariosLabel_comentForo}" for="comentForo" />
-                    <h:selectOneMenu id="comentForo" value="#{comentariosController.selected.comentForo}" title="#{bundle.EditComentariosTitle_comentForo}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_comentForo}">
+                    <h:outputLabel value="#{bundle.EditComentariosLabel_comentForoId}" for="comentForoId" />
+                    <h:selectOneMenu id="comentForoId" value="#{comentariosController.selected.comentForoId}" title="#{bundle.EditComentariosTitle_comentForoId}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_comentForoId}">
                         <f:selectItems value="#{forosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditComentariosLabel_comentHechoPor}" for="comentHechoPor" />
-                    <h:selectOneMenu id="comentHechoPor" value="#{comentariosController.selected.comentHechoPor}" title="#{bundle.EditComentariosTitle_comentHechoPor}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_comentHechoPor}">
+                    <h:outputLabel value="#{bundle.EditComentariosLabel_comentUsrId}" for="comentUsrId" />
+                    <h:selectOneMenu id="comentUsrId" value="#{comentariosController.selected.comentUsrId}" title="#{bundle.EditComentariosTitle_comentUsrId}" required="true" requiredMessage="#{bundle.EditComentariosRequiredMessage_comentUsrId}">
                         <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>

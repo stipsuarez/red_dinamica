@@ -25,12 +25,12 @@
                     </h:inputText>
                     <h:outputLabel value="#{bundle.EditConversacionLabel_convNumero}" for="convNumero" />
                     <h:inputText id="convNumero" value="#{conversacionController.selected.convNumero}" title="#{bundle.EditConversacionTitle_convNumero}" required="true" requiredMessage="#{bundle.EditConversacionRequiredMessage_convNumero}"/>
-                    <h:outputLabel value="#{bundle.EditConversacionLabel_convUsr2}" for="convUsr2" />
-                    <h:selectOneMenu id="convUsr2" value="#{conversacionController.selected.convUsr2}" title="#{bundle.EditConversacionTitle_convUsr2}" required="true" requiredMessage="#{bundle.EditConversacionRequiredMessage_convUsr2}">
-                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditConversacionLabel_convUsr1}" for="convUsr1" />
                     <h:selectOneMenu id="convUsr1" value="#{conversacionController.selected.convUsr1}" title="#{bundle.EditConversacionTitle_convUsr1}" required="true" requiredMessage="#{bundle.EditConversacionRequiredMessage_convUsr1}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditConversacionLabel_convUsr2}" for="convUsr2" />
+                    <h:selectOneMenu id="convUsr2" value="#{conversacionController.selected.convUsr2}" title="#{bundle.EditConversacionTitle_convUsr2}" required="true" requiredMessage="#{bundle.EditConversacionRequiredMessage_convUsr2}">
                         <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>

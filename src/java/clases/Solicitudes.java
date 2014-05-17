@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Naturaleza
+ * @author Miguel
  */
 @Entity
 @Table(name = "solicitudes")
@@ -50,9 +50,9 @@ public class Solicitudes implements Serializable {
     @Size(max = 30)
     @Column(name = "solicitud_estado")
     private String solicitudEstado;
-    @JoinColumn(name = "solicitud_enviada_a", referencedColumnName = "usr_cc")
+    @JoinColumn(name = "solicitud_usr_id", referencedColumnName = "usr_cc")
     @ManyToOne(optional = false)
-    private Usuarios solicitudEnviadaA;
+    private Usuarios solicitudUsrId;
 
     public Solicitudes() {
     }
@@ -93,12 +93,12 @@ public class Solicitudes implements Serializable {
         this.solicitudEstado = solicitudEstado;
     }
 
-    public Usuarios getSolicitudEnviadaA() {
-        return solicitudEnviadaA;
+    public Usuarios getSolicitudUsrId() {
+        return solicitudUsrId;
     }
 
-    public void setSolicitudEnviadaA(Usuarios solicitudEnviadaA) {
-        this.solicitudEnviadaA = solicitudEnviadaA;
+    public void setSolicitudUsrId(Usuarios solicitudUsrId) {
+        this.solicitudUsrId = solicitudUsrId;
     }
 
     @Override

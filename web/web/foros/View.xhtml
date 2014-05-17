@@ -3,25 +3,50 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-   
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewForosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                        <br />
-                        <h:commandLink action="#{forosController.destroyAndView}" value="#{bundle.ViewForosDestroyLink}"/>
-                        <br /><br /><br />
                 <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewForosLabel_foroId}"/>
+                    <h:outputText value="#{forosController.selected.foroId}" title="#{bundle.ViewForosTitle_foroId}"/>
+                    <h:outputText value="#{bundle.ViewForosLabel_foroNombre}"/>
+                    <h:outputText value="#{forosController.selected.foroNombre}" title="#{bundle.ViewForosTitle_foroNombre}"/>
+                    <h:outputText value="#{bundle.ViewForosLabel_foroTema}"/>
+                    <h:outputText value="#{forosController.selected.foroTema}" title="#{bundle.ViewForosTitle_foroTema}"/>
                     <h:outputText value="#{bundle.ViewForosLabel_foroFecha}"/>
                     <h:outputText value="#{forosController.selected.foroFecha}" title="#{bundle.ViewForosTitle_foroFecha}">
-                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:outputText>
                     <h:outputText value="#{bundle.ViewForosLabel_foroDescripcion}"/>
                     <h:outputText value="#{forosController.selected.foroDescripcion}" title="#{bundle.ViewForosTitle_foroDescripcion}"/>
+                    <h:outputText value="#{bundle.ViewForosLabel_foroColectId}"/>
+                    <h:outputText value="#{forosController.selected.foroColectId}" title="#{bundle.ViewForosTitle_foroColectId}"/>
+                    <h:outputText value="#{bundle.ViewForosLabel_foroUsrId}"/>
+                    <h:outputText value="#{forosController.selected.foroUsrId}" title="#{bundle.ViewForosTitle_foroUsrId}"/>
                 </h:panelGrid>
+                <br />
+                <h:commandLink action="#{forosController.destroyAndView}" value="#{bundle.ViewForosDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewForosEditLink}"/>
+                <br />
+                <h:commandLink action="#{forosController.prepareCreate}" value="#{bundle.ViewForosCreateLink}" />
+                <br />
+                <h:commandLink action="#{forosController.prepareList}" value="#{bundle.ViewForosShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewForosIndexLink}"/>
+
             </h:form>
+        </ui:define>
+    </ui:composition>
 
 </html>

@@ -6,10 +6,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <h:body>
-        <ui:composition template="./../../templates/forosTemplate.xhtml">
+        <ui:composition template="./../../templates/GeneralTemplate.xhtml">
 
             <ui:define name="contenido">                
-                <p:layoutUnit position="center" header="Foros">
+                <p:layoutUnit position="center" header="#{colectivosController.colectivosTitulo}">
                     <p:tabView  style="height: auto;" effect="fade">
                         <p:tab title="Foros creados" >                           
                             <ui:include id="lista" src="/web/foros/List.xhtml" />          

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewUsrTieneHistorialTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewUsrTieneHistorialLabel_historialFecha}"/>
+                    <h:outputText value="#{usrTieneHistorialController.selected.historialFecha}" title="#{bundle.ViewUsrTieneHistorialTitle_historialFecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewUsrTieneHistorialLabel_historial}"/>
+                    <h:outputText value="#{usrTieneHistorialController.selected.historial}" title="#{bundle.ViewUsrTieneHistorialTitle_historial}"/>
+                    <h:outputText value="#{bundle.ViewUsrTieneHistorialLabel_usuarios}"/>
+                    <h:outputText value="#{usrTieneHistorialController.selected.usuarios}" title="#{bundle.ViewUsrTieneHistorialTitle_usuarios}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{usrTieneHistorialController.destroyAndView}" value="#{bundle.ViewUsrTieneHistorialDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewUsrTieneHistorialEditLink}"/>
+                <br />
+                <h:commandLink action="#{usrTieneHistorialController.prepareCreate}" value="#{bundle.ViewUsrTieneHistorialCreateLink}" />
+                <br />
+                <h:commandLink action="#{usrTieneHistorialController.prepareList}" value="#{bundle.ViewUsrTieneHistorialShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewUsrTieneHistorialIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
