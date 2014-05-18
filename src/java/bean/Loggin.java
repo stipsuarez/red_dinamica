@@ -1,6 +1,6 @@
 package bean;
 
-import clases.Foros;
+
 import clases.Usuarios;
 import com.sun.xml.ws.developer.Serialization;
 import controllers.UsuariosController;
@@ -26,7 +26,7 @@ public class Loggin implements InterfaceBean {
 
    
     @EJB
-    UsuariosFacade usr;
+    private UsuariosFacade usr;
 
     public Loggin(String cedula, String contrasena) {
         this.cedula = cedula;
@@ -100,8 +100,8 @@ public class Loggin implements InterfaceBean {
 
         try {
             Usuarios user;
-            int ced = Integer.parseInt(cedula);
-            user = (Usuarios) usr.find(ced);
+            int cedu = Integer.parseInt(cedula);
+            user = (Usuarios) usr.find(cedu);
             if (user != null && user.getUsrPass().trim().matches(contrasena)) {
                 UsuariosController.setCurrent(user);
                 usrActual=usuarioActual();
@@ -142,6 +142,7 @@ public class Loggin implements InterfaceBean {
             case "index": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/"); break;
             case "perfil": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/pages/perfiles.xhtml"); break; 
             case "contacto": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/pages/contactenos.xhtml"); break;    
+            case "colectivos": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/colectivos/colectivosTemplateClient.xhtml"); break;    
             case "foros": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/foros/forosTemplateClient.xhtml"); break;    
             case "regVacante": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/registrarVacante.xhtml"); break;    
         }
