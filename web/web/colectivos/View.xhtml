@@ -17,8 +17,6 @@
                 <h:panelGrid columns="2">
                     <h:outputText value="#{bundle.ViewColectivosLabel_colectId}"/>
                     <h:outputText value="#{colectivosController.selected.colectId}" title="#{bundle.ViewColectivosTitle_colectId}"/>
-                    <h:outputText value="#{bundle.ViewColectivosLabel_colectContador}"/>
-                    <h:outputText value="#{colectivosController.selected.colectContador}" title="#{bundle.ViewColectivosTitle_colectContador}"/>
                     <h:outputText value="#{bundle.ViewColectivosLabel_colectTitulo}"/>
                     <h:outputText value="#{colectivosController.selected.colectTitulo}" title="#{bundle.ViewColectivosTitle_colectTitulo}"/>
                     <h:outputText value="#{bundle.ViewColectivosLabel_colectDescripcion}"/>
@@ -27,8 +25,6 @@
                     <h:outputText value="#{colectivosController.selected.colectFecha}" title="#{bundle.ViewColectivosTitle_colectFecha}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:outputText>
-                    <h:outputText value="#{bundle.ViewColectivosLabel_colectUsrId}"/>
-                    <h:outputText value="#{colectivosController.selected.colectUsrId}" title="#{bundle.ViewColectivosTitle_colectUsrId}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{colectivosController.destroyAndView}" value="#{bundle.ViewColectivosDestroyLink}"/>

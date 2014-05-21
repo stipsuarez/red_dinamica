@@ -112,7 +112,7 @@ public class SessionBean implements InterfaceBean, Serializable {
 
     public String cerrarSesion() {
 
-        UsuariosController.getCurrent().setUsrCc(null);
+        UsuariosController.getCurrent().setUsrId(null);
         UsuariosController.setCurrent(new Usuarios());
         session.setActiva(false);
         return "index";

@@ -41,6 +41,17 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Conversacion.findByUltimo", query = "SELECT c FROM Conversacion c WHERE c.ultimo = :ultimo"),
     @NamedQuery(name = "Conversacion.findByConvNumero", query = "SELECT c FROM Conversacion c WHERE c.convNumero = :convNumero")})
 public class Conversacion implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "conv_ultimo")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date convUltimo;
+    @JoinColumn(name = "conv_usr2_id", referencedColumnName = "usr_id")
+    @ManyToOne(optional = false)
+    private Usuarios convUsr2Id;
+    @JoinColumn(name = "conv_usr1_id", referencedColumnName = "usr_id")
+    @ManyToOne(optional = false)
+    private Usuarios convUsr1Id;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -164,6 +175,30 @@ public class Conversacion implements Serializable {
     @Override
     public String toString() {
         return "clases.Conversacion[ convId=" + convId + " ]";
+    }
+
+    public Date getConvUltimo() {
+        return convUltimo;
+    }
+
+    public void setConvUltimo(Date convUltimo) {
+        this.convUltimo = convUltimo;
+    }
+
+    public Usuarios getConvUsr2Id() {
+        return convUsr2Id;
+    }
+
+    public void setConvUsr2Id(Usuarios convUsr2Id) {
+        this.convUsr2Id = convUsr2Id;
+    }
+
+    public Usuarios getConvUsr1Id() {
+        return convUsr1Id;
+    }
+
+    public void setConvUsr1Id(Usuarios convUsr1Id) {
+        this.convUsr1Id = convUsr1Id;
     }
     
 }

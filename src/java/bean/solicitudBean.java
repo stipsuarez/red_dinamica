@@ -88,8 +88,8 @@ public class solicitudBean {
             listaNoAceptados.remove(i);
         }
         for (int i = 0; i < listaUsuarios.size(); i++) {
-            if (listaUsuarios.get(i).getUsrEstado() == null || !listaUsuarios.get(i).getUsrEstado().equals("0")
-                    || !listaUsuarios.get(i).getUsrEstado().equals("")) {
+            if (listaUsuarios.get(i).getUsrEstado() != false) {
+            } else {
                 listaNoAceptados.add(listaUsuarios.get(i));
                 ac += "\n" + listaNoAceptados.get(i);
             }
@@ -137,11 +137,11 @@ public class solicitudBean {
             String sentencia = "SELECT MAX(solicitud_id) AS id FROM solicitudes";
             Query q = em.createNativeQuery(sentencia, Usuarios.class);
             int id_soli = q.getFirstResult()+1;
-            int cc_amigo = usrSelect.getUsrCc();
+            int cc_amigo = usrSelect.getUsrId();
             Date fechaActual= new Date();
             String estado ="0";
             usrActual = (Usuarios) component.getAttributes().get("usrAct");
-            int cc_usrActual =usrActual.getUsrCc() ;
+            int cc_usrActual =usrActual.getUsrId();
             
             
             

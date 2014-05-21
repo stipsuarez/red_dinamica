@@ -10,46 +10,46 @@
             <h:outputText value="#{bundle.ListHistorialTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListHistorialEmpty}" rendered="#{historialController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{historialController.items.rowCount > 0}">
-                    <h:outputText value="#{historialController.pagination.pageFirstItem + 1}..#{historialController.pagination.pageLastItem + 1}/#{historialController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{historialController.previous}" value="#{bundle.Previous} #{historialController.pagination.pageSize}" rendered="#{historialController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{historialController.next}" value="#{bundle.Next} #{historialController.pagination.pageSize}" rendered="#{historialController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{historialController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListHistorialTitle_historialId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.historialId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListHistorialTitle_historialDescrip}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.historialDescrip}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{historialController.prepareView}" value="#{bundle.ListHistorialViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{historialController.prepareEdit}" value="#{bundle.ListHistorialEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{historialController.destroy}" value="#{bundle.ListHistorialDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{historialController.prepareCreate}" value="#{bundle.ListHistorialCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListHistorialIndexLink}"/>
-            </h:form>
+        <h:form styleClass="jsfcrud_list_form">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:outputText escape="false" value="#{bundle.ListHistorialEmpty}" rendered="#{historialController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{historialController.items.rowCount > 0}">
+                <h:outputText value="#{historialController.pagination.pageFirstItem + 1}..#{historialController.pagination.pageLastItem + 1}/#{historialController.pagination.itemsCount}"/>&nbsp;
+                <h:commandLink action="#{historialController.previous}" value="#{bundle.Previous} #{historialController.pagination.pageSize}" rendered="#{historialController.pagination.hasPreviousPage}"/>&nbsp;
+                <h:commandLink action="#{historialController.next}" value="#{bundle.Next} #{historialController.pagination.pageSize}" rendered="#{historialController.pagination.hasNextPage}"/>&nbsp;
+                <h:dataTable value="#{historialController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListHistorialTitle_historialId}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.historialId}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListHistorialTitle_historialDescrip}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.historialDescrip}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:commandLink action="#{historialController.prepareView}" value="#{bundle.ListHistorialViewLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{historialController.prepareEdit}" value="#{bundle.ListHistorialEditLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{historialController.destroy}" value="#{bundle.ListHistorialDestroyLink}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+            <br />
+            <h:commandLink action="#{historialController.prepareCreate}" value="#{bundle.ListHistorialCreateLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ListHistorialIndexLink}"/>
+        </h:form>
         </ui:define>
     </ui:composition>
 

@@ -5,7 +5,6 @@ import clases.Departamentos;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import facade.CiudadFacade;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -239,7 +238,7 @@ public class CiudadController implements Serializable {
 
     public List<Ciudad> getCiudades() {
         return ciudades;
-    }
+}
 
     public void setCiudades(List<Ciudad> ciudades) {
         this.ciudades = ciudades;

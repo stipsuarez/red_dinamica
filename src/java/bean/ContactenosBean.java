@@ -30,13 +30,11 @@ private List<Usuarios> admins = new ArrayList<>();
             
         }
         
-        for(int i = 0; i<usuarios.size();i++){
-            if(usuarios.get(i).getUsrTipo()!= null)
-            if(usuarios.get(i).getUsrTipo()==1){
+        for(int i = 0; i<usuarios.size();i++){            
+            if(usuarios.get(i).getUsrTipo()==true){
                 admins.add(usuarios.get(i));
             }
-        }
-        
+        }    
         return admins;
     }
 

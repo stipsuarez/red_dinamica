@@ -5,6 +5,8 @@
 package clases;
 
 import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -26,6 +31,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "RespuestasComent.findByRespRespuestaId", query = "SELECT r FROM RespuestasComent r WHERE r.respuestasComentPK.respRespuestaId = :respRespuestaId"),
     @NamedQuery(name = "RespuestasComent.findByRespComentId", query = "SELECT r FROM RespuestasComent r WHERE r.respuestasComentPK.respComentId = :respComentId")})
 public class RespuestasComent implements Serializable {
+    @Size(max = 145)
+    @Column(name = "resp_descripcion")
+    private String respDescripcion;
+    @Column(name = "resp_fecha")
+    @Temporal(TemporalType.DATE)
+    private Date respFecha;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected RespuestasComentPK respuestasComentPK;
@@ -105,6 +116,22 @@ public class RespuestasComent implements Serializable {
     @Override
     public String toString() {
         return "clases.RespuestasComent[ respuestasComentPK=" + respuestasComentPK + " ]";
+    }
+
+    public String getRespDescripcion() {
+        return respDescripcion;
+    }
+
+    public void setRespDescripcion(String respDescripcion) {
+        this.respDescripcion = respDescripcion;
+    }
+
+    public Date getRespFecha() {
+        return respFecha;
+    }
+
+    public void setRespFecha(Date respFecha) {
+        this.respFecha = respFecha;
     }
     
 }

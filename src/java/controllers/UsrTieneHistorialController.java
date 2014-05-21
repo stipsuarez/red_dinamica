@@ -4,6 +4,7 @@ import clases.UsrTieneHistorial;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import facade.UsrTieneHistorialFacade;
+
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -81,7 +82,6 @@ public class UsrTieneHistorialController implements Serializable {
 
     public String create() {
         try {
-            current.getUsrTieneHistorialPK().setHistorialUsrId(current.getUsuarios().getUsrCc());
             current.getUsrTieneHistorialPK().setHistorialId(current.getHistorial().getHistorialId());
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsrTieneHistorialCreated"));
@@ -100,7 +100,6 @@ public class UsrTieneHistorialController implements Serializable {
 
     public String update() {
         try {
-            current.getUsrTieneHistorialPK().setHistorialUsrId(current.getUsuarios().getUsrCc());
             current.getUsrTieneHistorialPK().setHistorialId(current.getHistorial().getHistorialId());
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsrTieneHistorialUpdated"));

@@ -10,106 +10,106 @@
             <h:outputText value="#{bundle.ListUsuariosTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListUsuariosEmpty}" rendered="#{usuariosController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{usuariosController.items.rowCount > 0}">
-                    <h:outputText value="#{usuariosController.pagination.pageFirstItem + 1}..#{usuariosController.pagination.pageLastItem + 1}/#{usuariosController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{usuariosController.previous}" value="#{bundle.Previous} #{usuariosController.pagination.pageSize}" rendered="#{usuariosController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{usuariosController.next}" value="#{bundle.Next} #{usuariosController.pagination.pageSize}" rendered="#{usuariosController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{usuariosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrCc}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrCc}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrNombres}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrNombres}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrApellidos}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrApellidos}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrEmail}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrEmail}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrPass}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrPass}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrSexo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrSexo}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrTipo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrTipo}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrEstado}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrEstado}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrFoto}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrFoto}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrUniversidad}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrUniversidad}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrDepartamento}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrDepartamento}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usrCiudad}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrCiudad}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{usuariosController.prepareView}" value="#{bundle.ListUsuariosViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{usuariosController.prepareEdit}" value="#{bundle.ListUsuariosEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{usuariosController.destroy}" value="#{bundle.ListUsuariosDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{usuariosController.prepareCreate}" value="#{bundle.ListUsuariosCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListUsuariosIndexLink}"/>
-            </h:form>
+        <h:form styleClass="jsfcrud_list_form">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:outputText escape="false" value="#{bundle.ListUsuariosEmpty}" rendered="#{usuariosController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{usuariosController.items.rowCount > 0}">
+                <h:outputText value="#{usuariosController.pagination.pageFirstItem + 1}..#{usuariosController.pagination.pageLastItem + 1}/#{usuariosController.pagination.itemsCount}"/>&nbsp;
+                <h:commandLink action="#{usuariosController.previous}" value="#{bundle.Previous} #{usuariosController.pagination.pageSize}" rendered="#{usuariosController.pagination.hasPreviousPage}"/>&nbsp;
+                <h:commandLink action="#{usuariosController.next}" value="#{bundle.Next} #{usuariosController.pagination.pageSize}" rendered="#{usuariosController.pagination.hasNextPage}"/>&nbsp;
+                <h:dataTable value="#{usuariosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUsuariosTitle_usrId}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usrId}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUsuariosTitle_usrNombres}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usrNombres}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUsuariosTitle_usrApellidos}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usrApellidos}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUsuariosTitle_usrEmail}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usrEmail}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUsuariosTitle_usrPass}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usrPass}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUsuariosTitle_usrSexo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usrSexo}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUsuariosTitle_usrTipo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usrTipo}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUsuariosTitle_usrEstado}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usrEstado}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUsuariosTitle_usrFoto}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usrFoto}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUsuariosTitle_usrCiudad}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usrCiudad}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUsuariosTitle_usrUniversidad}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usrUniversidad}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUsuariosTitle_usrDepartamento}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usrDepartamento}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:commandLink action="#{usuariosController.prepareView}" value="#{bundle.ListUsuariosViewLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{usuariosController.prepareEdit}" value="#{bundle.ListUsuariosEditLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{usuariosController.destroy}" value="#{bundle.ListUsuariosDestroyLink}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+            <br />
+            <h:commandLink action="#{usuariosController.prepareCreate}" value="#{bundle.ListUsuariosCreateLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ListUsuariosIndexLink}"/>
+        </h:form>
         </ui:define>
     </ui:composition>
 

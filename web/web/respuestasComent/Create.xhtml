@@ -27,6 +27,12 @@
                     <h:selectOneMenu id="comentarios1" value="#{respuestasComentController.selected.comentarios1}" title="#{bundle.CreateRespuestasComentTitle_comentarios1}" required="true" requiredMessage="#{bundle.CreateRespuestasComentRequiredMessage_comentarios1}">
                         <f:selectItems value="#{comentariosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateRespuestasComentLabel_respDescripcion}" for="respDescripcion" />
+                    <h:inputText id="respDescripcion" value="#{respuestasComentController.selected.respDescripcion}" title="#{bundle.CreateRespuestasComentTitle_respDescripcion}" />
+                    <h:outputLabel value="#{bundle.CreateRespuestasComentLabel_respFecha}" for="respFecha" />
+                    <h:inputText id="respFecha" value="#{respuestasComentController.selected.respFecha}" title="#{bundle.CreateRespuestasComentTitle_respFecha}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{respuestasComentController.create}" value="#{bundle.CreateRespuestasComentSaveLink}" />

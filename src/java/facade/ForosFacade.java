@@ -30,7 +30,7 @@ public class ForosFacade extends AbstractFacade<Foros> {
     public ForosFacade() {
         super(Foros.class);
     }
-       
+    
     //MI CODIGO
 
     public List<Foros> getForosSelecionados(Integer colectivo_id) {
@@ -42,7 +42,6 @@ public class ForosFacade extends AbstractFacade<Foros> {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al consultar la BD de foros: " + e + "\nLocalize: " + e.getLocalizedMessage(), "Error bd");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
-        }
-    }
-    
+           }
+        }    
 }

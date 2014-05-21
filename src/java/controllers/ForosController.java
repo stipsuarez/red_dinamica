@@ -251,7 +251,7 @@ public class ForosController implements Serializable {
              current.setForoColectId(ColectivosController.getCurrent());
              return current.getForoUsrId().getUsrNombres();
         } catch (Exception e) {
-}
+        }      
         return "nada";           
     }
      public String asignarfecha(){

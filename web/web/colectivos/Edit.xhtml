@@ -17,20 +17,14 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditColectivosLabel_colectId}" for="colectId" />
                     <h:inputText id="colectId" value="#{colectivosController.selected.colectId}" title="#{bundle.EditColectivosTitle_colectId}" required="true" requiredMessage="#{bundle.EditColectivosRequiredMessage_colectId}"/>
-                    <h:outputLabel value="#{bundle.EditColectivosLabel_colectContador}" for="colectContador" />
-                    <h:inputText id="colectContador" value="#{colectivosController.selected.colectContador}" title="#{bundle.EditColectivosTitle_colectContador}" />
                     <h:outputLabel value="#{bundle.EditColectivosLabel_colectTitulo}" for="colectTitulo" />
-                    <h:inputText id="colectTitulo" value="#{colectivosController.selected.colectTitulo}" title="#{bundle.EditColectivosTitle_colectTitulo}" />
+                    <h:inputText id="colectTitulo" value="#{colectivosController.selected.colectTitulo}" title="#{bundle.EditColectivosTitle_colectTitulo}" required="true" requiredMessage="#{bundle.EditColectivosRequiredMessage_colectTitulo}"/>
                     <h:outputLabel value="#{bundle.EditColectivosLabel_colectDescripcion}" for="colectDescripcion" />
-                    <h:inputText id="colectDescripcion" value="#{colectivosController.selected.colectDescripcion}" title="#{bundle.EditColectivosTitle_colectDescripcion}" />
+                    <h:inputTextarea rows="4" cols="30" id="colectDescripcion" value="#{colectivosController.selected.colectDescripcion}" title="#{bundle.EditColectivosTitle_colectDescripcion}" required="true" requiredMessage="#{bundle.EditColectivosRequiredMessage_colectDescripcion}"/>
                     <h:outputLabel value="#{bundle.EditColectivosLabel_colectFecha}" for="colectFecha" />
-                    <h:inputText id="colectFecha" value="#{colectivosController.selected.colectFecha}" title="#{bundle.EditColectivosTitle_colectFecha}" >
+                    <h:inputText id="colectFecha" value="#{colectivosController.selected.colectFecha}" title="#{bundle.EditColectivosTitle_colectFecha}" required="true" requiredMessage="#{bundle.EditColectivosRequiredMessage_colectFecha}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
-                    <h:outputLabel value="#{bundle.EditColectivosLabel_colectUsrId}" for="colectUsrId" />
-                    <h:selectOneMenu id="colectUsrId" value="#{colectivosController.selected.colectUsrId}" title="#{bundle.EditColectivosTitle_colectUsrId}" required="true" requiredMessage="#{bundle.EditColectivosRequiredMessage_colectUsrId}">
-                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{colectivosController.update}" value="#{bundle.EditColectivosSaveLink}"/>
                 <br />

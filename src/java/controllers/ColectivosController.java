@@ -7,7 +7,6 @@ import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import facade.ColectivosFacade;
 import java.io.IOException;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -246,8 +245,7 @@ public class ColectivosController implements Serializable {
     public String asignarTodo() {
         try {
             this.usuario = UsuariosController.getCurrent();
-            current.setColectUsrId(usuario);
-            current.setColectContador(2);
+            current.setColectUsrId(usuario);          
             Date fecha = new Date();
             current.setColectFecha(fecha);
             return "exito";

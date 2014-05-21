@@ -33,16 +33,16 @@
                     </p:layoutUnit>
 
                     <p:layoutUnit position="east" size="270" header="Iniciar sesión" collapsible="true" rendered="#{!loggin.activa}">
-                        <ui:include src="/componentes/iniciarSesion.xhtml" class="iniciarsesion"/>
+                        <ui:include src="/web/usuarios/iniciarSesion.xhtml" class="iniciarsesion"/>
                         <br/>
                         <h:form >
                             <p:growl id="growl" showDetail="true" /> 
-                            <p:commandButton value="Solicitar inscripción" actionListener="#{loggin.solicitarInscripcion()}" styleClass="ui-priority-primary"/> 
+                            <p:commandButton value="Solicitar inscripción" actionListener="#{loggin.solicitarInscripcion}" styleClass="ui-priority-primary"/> 
                         </h:form>
                     </p:layoutUnit>
 
                     <p:layoutUnit position="east" size="270" header="Sesión Iniciada" collapsible="true" rendered="#{loggin.activa}">
-                        <ui:include src="/componentes/perfil.xhtml" class="iniciarsesion"/>                                         
+                        <ui:include src="/web/usuarios/perfil.xhtml" class="iniciarsesion"/>                                         
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center" size="500" >
@@ -66,6 +66,62 @@
 
             </div>
         </h:body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

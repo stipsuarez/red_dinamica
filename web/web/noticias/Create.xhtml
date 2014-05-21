@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateNoticiasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_noticiaId}" for="noticiaId" />
+                    <h:inputText id="noticiaId" value="#{noticiasController.selected.noticiaId}" title="#{bundle.CreateNoticiasTitle_noticiaId}" required="true" requiredMessage="#{bundle.CreateNoticiasRequiredMessage_noticiaId}"/>
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_noticiaTitulo}" for="noticiaTitulo" />
+                    <h:inputText id="noticiaTitulo" value="#{noticiasController.selected.noticiaTitulo}" title="#{bundle.CreateNoticiasTitle_noticiaTitulo}" required="true" requiredMessage="#{bundle.CreateNoticiasRequiredMessage_noticiaTitulo}"/>
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_noticiaFecha}" for="noticiaFecha" />
+                    <h:inputText id="noticiaFecha" value="#{noticiasController.selected.noticiaFecha}" title="#{bundle.CreateNoticiasTitle_noticiaFecha}" required="true" requiredMessage="#{bundle.CreateNoticiasRequiredMessage_noticiaFecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_noticiaImagen}" for="noticiaImagen" />
+                    <h:inputText id="noticiaImagen" value="#{noticiasController.selected.noticiaImagen}" title="#{bundle.CreateNoticiasTitle_noticiaImagen}" required="true" requiredMessage="#{bundle.CreateNoticiasRequiredMessage_noticiaImagen}"/>
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_noticiaDescripcion}" for="noticiaDescripcion" />
+                    <h:inputTextarea rows="4" cols="30" id="noticiaDescripcion" value="#{noticiasController.selected.noticiaDescripcion}" title="#{bundle.CreateNoticiasTitle_noticiaDescripcion}" required="true" requiredMessage="#{bundle.CreateNoticiasRequiredMessage_noticiaDescripcion}"/>
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_noticiaFuente}" for="noticiaFuente" />
+                    <h:inputText id="noticiaFuente" value="#{noticiasController.selected.noticiaFuente}" title="#{bundle.CreateNoticiasTitle_noticiaFuente}" />
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_noticiaUsrId}" for="noticiaUsrId" />
+                    <h:selectOneMenu id="noticiaUsrId" value="#{noticiasController.selected.noticiaUsrId}" title="#{bundle.CreateNoticiasTitle_noticiaUsrId}" required="true" requiredMessage="#{bundle.CreateNoticiasRequiredMessage_noticiaUsrId}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{noticiasController.create}" value="#{bundle.CreateNoticiasSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{noticiasController.prepareList}" value="#{bundle.CreateNoticiasShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateNoticiasIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

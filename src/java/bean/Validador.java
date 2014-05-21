@@ -59,7 +59,7 @@ public class Validador implements InterfaceBean, Serializable{
            
            try{
             user = (Usuarios) ejbFacadeUsuarios.find(arg2.toString());
-            cedula = user.getUsrCc();
+            cedula = user.getUsrId();
            }
            catch(Exception e)
            {
@@ -72,7 +72,7 @@ public class Validador implements InterfaceBean, Serializable{
            
            try{
             user = (Usuarios) ejbFacadeUsuarios.find(arg2.toString());
-            cedula =user.getUsrCc();
+            cedula =user.getUsrId();
             if(cedula == 0)
             {throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "La cedula ingresada ya está registrada","La cedula ingresada ya está registrada"));
             }

@@ -21,6 +21,12 @@
                     <h:outputText value="#{respuestasComentController.selected.comentarios}" title="#{bundle.ViewRespuestasComentTitle_comentarios}"/>
                     <h:outputText value="#{bundle.ViewRespuestasComentLabel_comentarios1}"/>
                     <h:outputText value="#{respuestasComentController.selected.comentarios1}" title="#{bundle.ViewRespuestasComentTitle_comentarios1}"/>
+                    <h:outputText value="#{bundle.ViewRespuestasComentLabel_respDescripcion}"/>
+                    <h:outputText value="#{respuestasComentController.selected.respDescripcion}" title="#{bundle.ViewRespuestasComentTitle_respDescripcion}"/>
+                    <h:outputText value="#{bundle.ViewRespuestasComentLabel_respFecha}"/>
+                    <h:outputText value="#{respuestasComentController.selected.respFecha}" title="#{bundle.ViewRespuestasComentTitle_respFecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{respuestasComentController.destroyAndView}" value="#{bundle.ViewRespuestasComentDestroyLink}"/>

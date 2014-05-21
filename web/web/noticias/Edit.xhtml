@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditNoticiasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditNoticiasLabel_noticiaId}" for="noticiaId" />
+                    <h:inputText id="noticiaId" value="#{noticiasController.selected.noticiaId}" title="#{bundle.EditNoticiasTitle_noticiaId}" required="true" requiredMessage="#{bundle.EditNoticiasRequiredMessage_noticiaId}"/>
+                    <h:outputLabel value="#{bundle.EditNoticiasLabel_noticiaTitulo}" for="noticiaTitulo" />
+                    <h:inputText id="noticiaTitulo" value="#{noticiasController.selected.noticiaTitulo}" title="#{bundle.EditNoticiasTitle_noticiaTitulo}" required="true" requiredMessage="#{bundle.EditNoticiasRequiredMessage_noticiaTitulo}"/>
+                    <h:outputLabel value="#{bundle.EditNoticiasLabel_noticiaFecha}" for="noticiaFecha" />
+                    <h:inputText id="noticiaFecha" value="#{noticiasController.selected.noticiaFecha}" title="#{bundle.EditNoticiasTitle_noticiaFecha}" required="true" requiredMessage="#{bundle.EditNoticiasRequiredMessage_noticiaFecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditNoticiasLabel_noticiaImagen}" for="noticiaImagen" />
+                    <h:inputText id="noticiaImagen" value="#{noticiasController.selected.noticiaImagen}" title="#{bundle.EditNoticiasTitle_noticiaImagen}" required="true" requiredMessage="#{bundle.EditNoticiasRequiredMessage_noticiaImagen}"/>
+                    <h:outputLabel value="#{bundle.EditNoticiasLabel_noticiaDescripcion}" for="noticiaDescripcion" />
+                    <h:inputTextarea rows="4" cols="30" id="noticiaDescripcion" value="#{noticiasController.selected.noticiaDescripcion}" title="#{bundle.EditNoticiasTitle_noticiaDescripcion}" required="true" requiredMessage="#{bundle.EditNoticiasRequiredMessage_noticiaDescripcion}"/>
+                    <h:outputLabel value="#{bundle.EditNoticiasLabel_noticiaFuente}" for="noticiaFuente" />
+                    <h:inputText id="noticiaFuente" value="#{noticiasController.selected.noticiaFuente}" title="#{bundle.EditNoticiasTitle_noticiaFuente}" />
+                    <h:outputLabel value="#{bundle.EditNoticiasLabel_noticiaUsrId}" for="noticiaUsrId" />
+                    <h:selectOneMenu id="noticiaUsrId" value="#{noticiasController.selected.noticiaUsrId}" title="#{bundle.EditNoticiasTitle_noticiaUsrId}" required="true" requiredMessage="#{bundle.EditNoticiasRequiredMessage_noticiaUsrId}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{noticiasController.update}" value="#{bundle.EditNoticiasSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditNoticiasViewLink}"/>
+                <br />
+                <h:commandLink action="#{noticiasController.prepareList}" value="#{bundle.EditNoticiasShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditNoticiasIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

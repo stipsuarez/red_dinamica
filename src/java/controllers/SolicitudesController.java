@@ -43,7 +43,7 @@ public class SolicitudesController implements Serializable {
 
     public SolicitudesController() {
     }
-
+    
     public Solicitudes getSelected() {
         if (current == null) {
             current = new Solicitudes();
@@ -241,6 +241,8 @@ public class SolicitudesController implements Serializable {
             }
         }
     }
+    
+    
     // otra sección
     
     private String usrNombre;
@@ -250,7 +252,7 @@ public class SolicitudesController implements Serializable {
     private String nombre_buscar;
     @EJB
     private UsuariosFacade ejbUsuariosFacade;
-    List<Usuarios> listaNoAceptados = new ArrayList<>();
+    
     List<Usuarios> listaUsuarios = new ArrayList<>();
     List<Usuarios> listaUsuariosE = new ArrayList<>();
     List<Usuarios> listaAceptados = new ArrayList<>();
@@ -296,20 +298,22 @@ public class SolicitudesController implements Serializable {
     }
 
     public List<Usuarios> getListaNoAceptados() {
-        String ac = "";
+        try {
         listaUsuarios = ejbUsuariosFacade.findAll();
-        for (int i = 0; i < listaNoAceptados.size(); i++) {
-            listaNoAceptados.remove(i);
-        }
+        List<Usuarios> listaNoAceptados = new ArrayList<>();
+       
         for (int i = 0; i < listaUsuarios.size(); i++) {
-            if (listaUsuarios.get(i).getUsrEstado() == null || !listaUsuarios.get(i).getUsrEstado().equals("0")
-                    || !listaUsuarios.get(i).getUsrEstado().equals("")) {
+            if (listaUsuarios.get(i).getUsrEstado() == false) {
                 listaNoAceptados.add(listaUsuarios.get(i));
-                ac += "\n" + listaNoAceptados.get(i);
             }
         }
-
         return listaNoAceptados;
+        
+        } catch (Exception e) {
+             FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null , new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: "+e, "Las contraseñas no coinciden"));
+            return null;
+        }
     }
 
     public String getUsrNombre() {
@@ -351,7 +355,7 @@ public class SolicitudesController implements Serializable {
              //Asignamos el id a la solicitud
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "VANMOS!! ",""));
-            int cc_amigo = usrSelect.getUsrCc();
+            int cc_amigo = usrSelect.getUsrId();
             
             Date fechaActual= new Date();
             String estado ="0";
@@ -397,9 +401,7 @@ public class SolicitudesController implements Serializable {
             listaUsuariosE = ejbUsuariosFacade.buscarUsuarios_por_nombre(this.nombre_buscar);
 
             HashSet<Usuarios> hashSet = new HashSet(listaUsuariosE);
-            for (int i = 0; i < listaUsuariosE.size(); i++) {
-                listaUsuariosE.remove(i);
-            }
+           
             // Eliminamos Usuarios repetidos
             for (Iterator it = hashSet.iterator(); it.hasNext();) {
                 listaUsuariosE.add((Usuarios) it.next());
@@ -413,8 +415,17 @@ public class SolicitudesController implements Serializable {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: " + this.nombre_buscar + "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage(), "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage()));
         }
     }
+    //acá va mi código 
 
-  
-    
- 
+    public void aceptarSolicitudes() throws IOException {
+        for (int i = 0; i < listaAceptados.size(); i++) {
+            listaAceptados.get(i).setUsrEstado(true);
+            ejbUsuariosFacade.edit(listaAceptados.get(i));
+        }
+        if (listaAceptados.size() > 0) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Confirmación", "Cambios efectuados satisfactoriamente"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/pages/perfiles.xhtml");
+        }
+    }
 }

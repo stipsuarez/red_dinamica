@@ -37,6 +37,14 @@
                     <h:selectOneMenu id="msjConversacion" value="#{mensajeController.selected.msjConversacion}" title="#{bundle.EditMensajeTitle_msjConversacion}" required="true" requiredMessage="#{bundle.EditMensajeRequiredMessage_msjConversacion}">
                         <f:selectItems value="#{conversacionController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditMensajeLabel_convUsr2Id}" for="convUsr2Id" />
+                    <h:selectOneMenu id="convUsr2Id" value="#{mensajeController.selected.convUsr2Id}" title="#{bundle.EditMensajeTitle_convUsr2Id}" required="true" requiredMessage="#{bundle.EditMensajeRequiredMessage_convUsr2Id}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditMensajeLabel_convUsr1Id}" for="convUsr1Id" />
+                    <h:selectOneMenu id="convUsr1Id" value="#{mensajeController.selected.convUsr1Id}" title="#{bundle.EditMensajeTitle_convUsr1Id}" required="true" requiredMessage="#{bundle.EditMensajeRequiredMessage_convUsr1Id}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{mensajeController.update}" value="#{bundle.EditMensajeSaveLink}"/>
                 <br />

@@ -1,15 +1,18 @@
 package controllers;
 
+import clases.Ciudad;
 import clases.Universidades;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import facade.UniversidadesFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -229,4 +232,45 @@ public class UniversidadesController implements Serializable {
             }
         }
     }
+    
+    
+    
+        //NUESTRO CÓDIGO INICIA AQUÍ
+    
+    private Ciudad ciudad;
+    private List<Universidades> universidad;
+  
+
+
+    public List<Universidades> getUniversidad() {
+        return universidad;
+}
+
+    public void setUniversidad(List<Universidades> universidad) {
+        this.universidad = universidad;
+    }
+    
+    public void asignarUniversidades() {
+        try {
+
+            universidad = ejbFacade.UniversidadSelecionadas(ciudad.getCiudadId());
+        } catch (Exception e) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mi ciudad:" + ciudad + "Error: ", "" + e + "   " + e.getLocalizedMessage());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+
+    public void correcto() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage("datosFrom", new FacesMessage("Exito", "Miiiiii " + ciudad.toString()));
+    }
+
+    public void asignarCiudad(FacesContext arg0, UIComponent arg1, Object arg2) {
+        try {
+
+            this.ciudad = (Ciudad) arg2;
+
+        } catch (Exception e) {
+        }
+    }  
 }

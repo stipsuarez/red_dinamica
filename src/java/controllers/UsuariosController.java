@@ -94,6 +94,7 @@ public class UsuariosController implements Serializable {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuariosCreated"));
+             FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica");
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -235,7 +236,7 @@ public class UsuariosController implements Serializable {
             }
             if (object instanceof Usuarios) {
                 Usuarios o = (Usuarios) object;
-                return getStringKey(o.getUsrCc());
+                return getStringKey(o.getUsrId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Usuarios.class.getName());
             }
@@ -249,7 +250,7 @@ public class UsuariosController implements Serializable {
     List<Usuarios> listaUsuarios = new ArrayList<>();
     public String getPass1() {
         return pass1;
-    }
+}
 
     public void setPass1(String pass1) {
         this.pass1 = pass1;

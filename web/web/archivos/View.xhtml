@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewArchivosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewArchivosLabel_archivoId}"/>
+                    <h:outputText value="#{archivosController.selected.archivoId}" title="#{bundle.ViewArchivosTitle_archivoId}"/>
+                    <h:outputText value="#{bundle.ViewArchivosLabel_archivoTipo}"/>
+                    <h:outputText value="#{archivosController.selected.archivoTipo}" title="#{bundle.ViewArchivosTitle_archivoTipo}"/>
+                    <h:outputText value="#{bundle.ViewArchivosLabel_archivoNombre}"/>
+                    <h:outputText value="#{archivosController.selected.archivoNombre}" title="#{bundle.ViewArchivosTitle_archivoNombre}"/>
+                    <h:outputText value="#{bundle.ViewArchivosLabel_archivoAutor}"/>
+                    <h:outputText value="#{archivosController.selected.archivoAutor}" title="#{bundle.ViewArchivosTitle_archivoAutor}"/>
+                    <h:outputText value="#{bundle.ViewArchivosLabel_archivoTema}"/>
+                    <h:outputText value="#{archivosController.selected.archivoTema}" title="#{bundle.ViewArchivosTitle_archivoTema}"/>
+                    <h:outputText value="#{bundle.ViewArchivosLabel_archivoResumen}"/>
+                    <h:outputText value="#{archivosController.selected.archivoResumen}" title="#{bundle.ViewArchivosTitle_archivoResumen}"/>
+                    <h:outputText value="#{bundle.ViewArchivosLabel_archivoVisitas}"/>
+                    <h:outputText value="#{archivosController.selected.archivoVisitas}" title="#{bundle.ViewArchivosTitle_archivoVisitas}"/>
+                    <h:outputText value="#{bundle.ViewArchivosLabel_archivoUsrId}"/>
+                    <h:outputText value="#{archivosController.selected.archivoUsrId}" title="#{bundle.ViewArchivosTitle_archivoUsrId}"/>
+                    <h:outputText value="#{bundle.ViewArchivosLabel_archivoColectivoId}"/>
+                    <h:outputText value="#{archivosController.selected.archivoColectivoId}" title="#{bundle.ViewArchivosTitle_archivoColectivoId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{archivosController.destroyAndView}" value="#{bundle.ViewArchivosDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewArchivosEditLink}"/>
+                <br />
+                <h:commandLink action="#{archivosController.prepareCreate}" value="#{bundle.ViewArchivosCreateLink}" />
+                <br />
+                <h:commandLink action="#{archivosController.prepareList}" value="#{bundle.ViewArchivosShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewArchivosIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

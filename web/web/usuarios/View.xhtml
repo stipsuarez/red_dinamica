@@ -15,8 +15,8 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewUsuariosLabel_usrCc}"/>
-                    <h:outputText value="#{usuariosController.selected.usrCc}" title="#{bundle.ViewUsuariosTitle_usrCc}"/>
+                    <h:outputText value="#{bundle.ViewUsuariosLabel_usrId}"/>
+                    <h:outputText value="#{usuariosController.selected.usrId}" title="#{bundle.ViewUsuariosTitle_usrId}"/>
                     <h:outputText value="#{bundle.ViewUsuariosLabel_usrNombres}"/>
                     <h:outputText value="#{usuariosController.selected.usrNombres}" title="#{bundle.ViewUsuariosTitle_usrNombres}"/>
                     <h:outputText value="#{bundle.ViewUsuariosLabel_usrApellidos}"/>
@@ -33,12 +33,12 @@
                     <h:outputText value="#{usuariosController.selected.usrEstado}" title="#{bundle.ViewUsuariosTitle_usrEstado}"/>
                     <h:outputText value="#{bundle.ViewUsuariosLabel_usrFoto}"/>
                     <h:outputText value="#{usuariosController.selected.usrFoto}" title="#{bundle.ViewUsuariosTitle_usrFoto}"/>
+                    <h:outputText value="#{bundle.ViewUsuariosLabel_usrCiudad}"/>
+                    <h:outputText value="#{usuariosController.selected.usrCiudad}" title="#{bundle.ViewUsuariosTitle_usrCiudad}"/>
                     <h:outputText value="#{bundle.ViewUsuariosLabel_usrUniversidad}"/>
                     <h:outputText value="#{usuariosController.selected.usrUniversidad}" title="#{bundle.ViewUsuariosTitle_usrUniversidad}"/>
                     <h:outputText value="#{bundle.ViewUsuariosLabel_usrDepartamento}"/>
                     <h:outputText value="#{usuariosController.selected.usrDepartamento}" title="#{bundle.ViewUsuariosTitle_usrDepartamento}"/>
-                    <h:outputText value="#{bundle.ViewUsuariosLabel_usrCiudad}"/>
-                    <h:outputText value="#{usuariosController.selected.usrCiudad}" title="#{bundle.ViewUsuariosTitle_usrCiudad}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{usuariosController.destroyAndView}" value="#{bundle.ViewUsuariosDestroyLink}"/>

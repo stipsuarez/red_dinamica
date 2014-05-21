@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      lang="es"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <link rel="stylesheet" type="text/css" href="../Recursos/Css/general.css" />
+    </h:head>
+    <h:body>
+        <h:form style="border: 1px #3a4f54 solid" class="iniciarsesion" id="formIniciarSesion">
+            <p:messages id="msgs" />
+            <p:growl id="growl" showDetail="true" /> 
+            <h:panelGrid columns="3">
+                <h:outputLabel for="cedula" value="Cédula: *" />
+                <h:inputText id="cedula" value="#{loggin.cedula}" rendered="true" >
+                    <f:validateLength minimum="1" />  
+                    <f:validateRequired />  
+                    <p:ajax update="msgCedula,growl" event="keyup"/>
+                </h:inputText>
+                <p:message for="cedula" id="msgCedula" display="tooltip" />  
+                 <h:outputLabel value="Contraseña: *" for="pass" />
+                 <p:password id="pass" value="#{loggin.contrasena}"   required="true">
+                   <f:validateLength minimum="3" />  
+                   <f:validateRequired /> 
+                   <p:ajax update="msgPass,growl" event="keyup" />
+                 </p:password>
+                 <p:message for="pass" id="msgPass" display="tooltip" />  
+                                  
+           </h:panelGrid>
+            <p:commandButton value="Ingresar" actionListener="#{loggin.comprobar()}" update="msgs" />             
+         </h:form>
+     </h:body>
+</html>

@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u"),
-    @NamedQuery(name = "Usuarios.findByUsrCc", query = "SELECT u FROM Usuarios u WHERE u.usrCc = :usrCc"),
+    @NamedQuery(name = "Usuarios.findByUsrId", query = "SELECT u FROM Usuarios u WHERE u.usrId = :usrId"),
     @NamedQuery(name = "Usuarios.findByUsrNombres", query = "SELECT u FROM Usuarios u WHERE u.usrNombres = :usrNombres"),
     @NamedQuery(name = "Usuarios.findByUsrApellidos", query = "SELECT u FROM Usuarios u WHERE u.usrApellidos = :usrApellidos"),
     @NamedQuery(name = "Usuarios.findByUsrEmail", query = "SELECT u FROM Usuarios u WHERE u.usrEmail = :usrEmail"),
@@ -45,18 +45,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuarios.findByUsrEstado", query = "SELECT u FROM Usuarios u WHERE u.usrEstado = :usrEstado"),
     @NamedQuery(name = "Usuarios.findByUsrFoto", query = "SELECT u FROM Usuarios u WHERE u.usrFoto = :usrFoto")})
 public class Usuarios implements Serializable {
-    @ManyToMany(mappedBy = "usuariosCollection")
-    private Collection<Colectivos> colectivosCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colectUsrId")
-    private Collection<Colectivos> colectivosCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarios")
-    private Collection<UsrTieneHistorial> usrTieneHistorialCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "usr_cc")
-    private Integer usrCc;
+    @Column(name = "usr_id")
+    private Integer usrId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -77,19 +71,22 @@ public class Usuarios implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "usr_pass")
     private String usrPass;
-    @Size(max = 30)
     @Column(name = "usr_sexo")
-    private String usrSexo;
+    private Boolean usrSexo;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "usr_tipo")
-    private Integer usrTipo;
-    @Size(max = 30)
+    private boolean usrTipo;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "usr_estado")
-    private String usrEstado;
+    private boolean usrEstado;
+    @Size(max = 45)
     @Column(name = "usr_foto")
-    private Boolean usrFoto;
+    private String usrFoto;
     @JoinTable(name = "contactos", joinColumns = {
-        @JoinColumn(name = "cont_usr_id", referencedColumnName = "usr_cc")}, inverseJoinColumns = {
-        @JoinColumn(name = "cont_contacto_id", referencedColumnName = "usr_cc")})
+        @JoinColumn(name = "cont_usr_id", referencedColumnName = "usr_id")}, inverseJoinColumns = {
+        @JoinColumn(name = "cont_contacto_id", referencedColumnName = "usr_id")})
     @ManyToMany
     private Collection<Usuarios> usuariosCollection;
     @ManyToMany(mappedBy = "usuariosCollection")
@@ -107,24 +104,26 @@ public class Usuarios implements Serializable {
     public Usuarios() {
     }
 
-    public Usuarios(Integer usrCc) {
-        this.usrCc = usrCc;
+    public Usuarios(Integer usrId) {
+        this.usrId = usrId;
     }
 
-    public Usuarios(Integer usrCc, String usrNombres, String usrApellidos, String usrEmail, String usrPass) {
-        this.usrCc = usrCc;
+    public Usuarios(Integer usrId, String usrNombres, String usrApellidos, String usrEmail, String usrPass, boolean usrTipo, boolean usrEstado) {
+        this.usrId = usrId;
         this.usrNombres = usrNombres;
         this.usrApellidos = usrApellidos;
         this.usrEmail = usrEmail;
         this.usrPass = usrPass;
+        this.usrTipo = usrTipo;
+        this.usrEstado = usrEstado;
     }
 
-    public Integer getUsrCc() {
-        return usrCc;
+    public Integer getUsrId() {
+        return usrId;
     }
 
-    public void setUsrCc(Integer usrCc) {
-        this.usrCc = usrCc;
+    public void setUsrId(Integer usrId) {
+        this.usrId = usrId;
     }
 
     public String getUsrNombres() {
@@ -159,35 +158,35 @@ public class Usuarios implements Serializable {
         this.usrPass = usrPass;
     }
 
-    public String getUsrSexo() {
+    public Boolean getUsrSexo() {
         return usrSexo;
     }
 
-    public void setUsrSexo(String usrSexo) {
+    public void setUsrSexo(Boolean usrSexo) {
         this.usrSexo = usrSexo;
     }
 
-    public Integer getUsrTipo() {
+    public boolean getUsrTipo() {
         return usrTipo;
     }
 
-    public void setUsrTipo(Integer usrTipo) {
+    public void setUsrTipo(boolean usrTipo) {
         this.usrTipo = usrTipo;
     }
 
-    public String getUsrEstado() {
+    public boolean getUsrEstado() {
         return usrEstado;
     }
 
-    public void setUsrEstado(String usrEstado) {
+    public void setUsrEstado(boolean usrEstado) {
         this.usrEstado = usrEstado;
     }
 
-    public Boolean getUsrFoto() {
+    public String getUsrFoto() {
         return usrFoto;
     }
 
-    public void setUsrFoto(Boolean usrFoto) {
+    public void setUsrFoto(String usrFoto) {
         this.usrFoto = usrFoto;
     }
 
@@ -236,7 +235,7 @@ public class Usuarios implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (usrCc != null ? usrCc.hashCode() : 0);
+        hash += (usrId != null ? usrId.hashCode() : 0);
         return hash;
     }
 
@@ -247,7 +246,7 @@ public class Usuarios implements Serializable {
             return false;
         }
         Usuarios other = (Usuarios) object;
-        if ((this.usrCc == null && other.usrCc != null) || (this.usrCc != null && !this.usrCc.equals(other.usrCc))) {
+        if ((this.usrId == null && other.usrId != null) || (this.usrId != null && !this.usrId.equals(other.usrId))) {
             return false;
         }
         return true;
@@ -255,33 +254,7 @@ public class Usuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.Usuarios[ usrCc=" + usrCc + " ]";
+        return "clases.Usuarios[ usrId=" + usrId + " ]";
     }
-
-    @XmlTransient
-    public Collection<UsrTieneHistorial> getUsrTieneHistorialCollection() {
-        return usrTieneHistorialCollection;
-    }
-
-    public void setUsrTieneHistorialCollection(Collection<UsrTieneHistorial> usrTieneHistorialCollection) {
-        this.usrTieneHistorialCollection = usrTieneHistorialCollection;
-    }
-
-    @XmlTransient
-    public Collection<Colectivos> getColectivosCollection() {
-        return colectivosCollection;
-    }
-
-    public void setColectivosCollection(Collection<Colectivos> colectivosCollection) {
-        this.colectivosCollection = colectivosCollection;
-    }
-
-    @XmlTransient
-    public Collection<Colectivos> getColectivosCollection1() {
-        return colectivosCollection1;
-    }
-
-    public void setColectivosCollection1(Collection<Colectivos> colectivosCollection1) {
-        this.colectivosCollection1 = colectivosCollection1;
-    }    
+    
 }

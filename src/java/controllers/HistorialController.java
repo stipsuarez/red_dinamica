@@ -4,6 +4,7 @@ import clases.Historial;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import facade.HistorialFacade;
+
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;

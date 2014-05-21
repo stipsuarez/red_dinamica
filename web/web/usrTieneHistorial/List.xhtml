@@ -22,6 +22,12 @@
                     <h:dataTable value="#{usrTieneHistorialController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsrTieneHistorialTitle_usrTieneHistorialPK_historialUsrId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usrTieneHistorialPK.historialUsrId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsrTieneHistorialTitle_historialFecha}"/>
                             </f:facet>
                             <h:outputText value="#{item.historialFecha}">
@@ -30,15 +36,15 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsrTieneHistorialTitle_historial}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.historial}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsrTieneHistorialTitle_usuarios}"/>
                             </f:facet>
                             <h:outputText value="#{item.usuarios}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsrTieneHistorialTitle_historial}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.historial}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

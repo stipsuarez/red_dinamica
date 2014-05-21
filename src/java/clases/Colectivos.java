@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -22,6 +23,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -36,9 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Colectivos.findAll", query = "SELECT c FROM Colectivos c"),
     @NamedQuery(name = "Colectivos.findByColectId", query = "SELECT c FROM Colectivos c WHERE c.colectId = :colectId"),
-    @NamedQuery(name = "Colectivos.findByColectContador", query = "SELECT c FROM Colectivos c WHERE c.colectContador = :colectContador"),
     @NamedQuery(name = "Colectivos.findByColectTitulo", query = "SELECT c FROM Colectivos c WHERE c.colectTitulo = :colectTitulo"),
-    @NamedQuery(name = "Colectivos.findByColectDescripcion", query = "SELECT c FROM Colectivos c WHERE c.colectDescripcion = :colectDescripcion"),
     @NamedQuery(name = "Colectivos.findByColectFecha", query = "SELECT c FROM Colectivos c WHERE c.colectFecha = :colectFecha")})
 public class Colectivos implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -47,23 +47,28 @@ public class Colectivos implements Serializable {
     @Basic(optional = false)
     @Column(name = "colect_id")
     private Integer colectId;
-    @Column(name = "colect_contador")
-    private Integer colectContador;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "colect_titulo")
     private String colectTitulo;
-    @Size(max = 105)
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Size(min = 1, max = 16777215)
     @Column(name = "colect_descripcion")
     private String colectDescripcion;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "colect_fecha")
     @Temporal(TemporalType.DATE)
     private Date colectFecha;
-    @JoinTable(name = "usr_pertenece_colectivo", joinColumns = {
-        @JoinColumn(name = "colect_id", referencedColumnName = "colect_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "usr_id", referencedColumnName = "usr_cc")})
+    @JoinTable(name = "forma_parte", joinColumns = {
+        @JoinColumn(name = "forma_colect_id", referencedColumnName = "colect_id")}, inverseJoinColumns = {
+        @JoinColumn(name = "forma_usr_id", referencedColumnName = "usr_id")})
     @ManyToMany
     private Collection<Usuarios> usuariosCollection;
-    @JoinColumn(name = "colect_usr_id", referencedColumnName = "usr_cc")
+    @JoinColumn(name = "colect_usr_id", referencedColumnName = "usr_id")
     @ManyToOne(optional = false)
     private Usuarios colectUsrId;
 
@@ -74,20 +79,19 @@ public class Colectivos implements Serializable {
         this.colectId = colectId;
     }
 
+    public Colectivos(Integer colectId, String colectTitulo, String colectDescripcion, Date colectFecha) {
+        this.colectId = colectId;
+        this.colectTitulo = colectTitulo;
+        this.colectDescripcion = colectDescripcion;
+        this.colectFecha = colectFecha;
+    }
+
     public Integer getColectId() {
         return colectId;
     }
 
     public void setColectId(Integer colectId) {
         this.colectId = colectId;
-    }
-
-    public Integer getColectContador() {
-        return colectContador;
-    }
-
-    public void setColectContador(Integer colectContador) {
-        this.colectContador = colectContador;
     }
 
     public String getColectTitulo() {

@@ -10,78 +10,78 @@
             <h:outputText value="#{bundle.ListForosTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListForosEmpty}" rendered="#{forosController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{forosController.items.rowCount > 0}">
-                    <h:outputText value="#{forosController.pagination.pageFirstItem + 1}..#{forosController.pagination.pageLastItem + 1}/#{forosController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{forosController.previous}" value="#{bundle.Previous} #{forosController.pagination.pageSize}" rendered="#{forosController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{forosController.next}" value="#{bundle.Next} #{forosController.pagination.pageSize}" rendered="#{forosController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{forosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListForosTitle_foroId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.foroId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListForosTitle_foroNombre}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.foroNombre}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListForosTitle_foroTema}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.foroTema}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListForosTitle_foroFecha}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.foroFecha}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListForosTitle_foroDescripcion}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.foroDescripcion}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListForosTitle_foroColectId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.foroColectId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListForosTitle_foroUsrId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.foroUsrId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{forosController.prepareView}" value="#{bundle.ListForosViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{forosController.prepareEdit}" value="#{bundle.ListForosEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{forosController.destroy}" value="#{bundle.ListForosDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{forosController.prepareCreate}" value="#{bundle.ListForosCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListForosIndexLink}"/>
-            </h:form>
+        <h:form styleClass="jsfcrud_list_form">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:outputText escape="false" value="#{bundle.ListForosEmpty}" rendered="#{forosController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{forosController.items.rowCount > 0}">
+                <h:outputText value="#{forosController.pagination.pageFirstItem + 1}..#{forosController.pagination.pageLastItem + 1}/#{forosController.pagination.itemsCount}"/>&nbsp;
+                <h:commandLink action="#{forosController.previous}" value="#{bundle.Previous} #{forosController.pagination.pageSize}" rendered="#{forosController.pagination.hasPreviousPage}"/>&nbsp;
+                <h:commandLink action="#{forosController.next}" value="#{bundle.Next} #{forosController.pagination.pageSize}" rendered="#{forosController.pagination.hasNextPage}"/>&nbsp;
+                <h:dataTable value="#{forosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListForosTitle_foroId}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.foroId}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListForosTitle_foroNombre}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.foroNombre}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListForosTitle_foroTema}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.foroTema}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListForosTitle_foroFecha}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.foroFecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListForosTitle_foroDescripcion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.foroDescripcion}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListForosTitle_foroColectId}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.foroColectId}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListForosTitle_foroUsrId}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.foroUsrId}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:commandLink action="#{forosController.prepareView}" value="#{bundle.ListForosViewLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{forosController.prepareEdit}" value="#{bundle.ListForosEditLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{forosController.destroy}" value="#{bundle.ListForosDestroyLink}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+            <br />
+            <h:commandLink action="#{forosController.prepareCreate}" value="#{bundle.ListForosCreateLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ListForosIndexLink}"/>
+        </h:form>
         </ui:define>
     </ui:composition>
 

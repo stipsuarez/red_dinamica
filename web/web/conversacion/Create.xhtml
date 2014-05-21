@@ -33,6 +33,18 @@
                     <h:selectOneMenu id="convUsr2" value="#{conversacionController.selected.convUsr2}" title="#{bundle.CreateConversacionTitle_convUsr2}" required="true" requiredMessage="#{bundle.CreateConversacionRequiredMessage_convUsr2}">
                         <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateConversacionLabel_convUltimo}" for="convUltimo" />
+                    <h:inputText id="convUltimo" value="#{conversacionController.selected.convUltimo}" title="#{bundle.CreateConversacionTitle_convUltimo}" required="true" requiredMessage="#{bundle.CreateConversacionRequiredMessage_convUltimo}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateConversacionLabel_convUsr2Id}" for="convUsr2Id" />
+                    <h:selectOneMenu id="convUsr2Id" value="#{conversacionController.selected.convUsr2Id}" title="#{bundle.CreateConversacionTitle_convUsr2Id}" required="true" requiredMessage="#{bundle.CreateConversacionRequiredMessage_convUsr2Id}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateConversacionLabel_convUsr1Id}" for="convUsr1Id" />
+                    <h:selectOneMenu id="convUsr1Id" value="#{conversacionController.selected.convUsr1Id}" title="#{bundle.CreateConversacionTitle_convUsr1Id}" required="true" requiredMessage="#{bundle.CreateConversacionRequiredMessage_convUsr1Id}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{conversacionController.create}" value="#{bundle.CreateConversacionSaveLink}" />

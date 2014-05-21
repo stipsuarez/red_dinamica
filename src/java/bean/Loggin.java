@@ -86,8 +86,8 @@ public class Loggin implements InterfaceBean {
     public boolean isAdmin(){
         try {
             
-        int tipoUst = UsuariosController.getCurrent().getUsrTipo();
-        return tipoUst==1;
+            boolean tipoUst = UsuariosController.getCurrent().getUsrTipo();
+        return tipoUst==true;
         } catch (Exception e) {
              FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", ""+e+"\nLocalización: "+e.getLocalizedMessage()));
@@ -131,7 +131,7 @@ public class Loggin implements InterfaceBean {
 
     public void cerrarSesion() throws IOException {
 
-        UsuariosController.getCurrent().setUsrCc(null);
+        UsuariosController.getCurrent().setUsrId(null);
         UsuariosController.setCurrent(new Usuarios());
         session.setActiva(false);
         FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/");
@@ -140,11 +140,10 @@ public class Loggin implements InterfaceBean {
     public void irA(String dire) throws IOException{
         switch(dire){
             case "index": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/"); break;
-            case "perfil": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/pages/perfiles.xhtml"); break; 
-            case "contacto": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/pages/contactenos.xhtml"); break;    
+            case "perfil": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/usuarios/perfiles.xhtml"); break; 
+            case "contacto": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/componentes/contactenos.xhtml"); break;    
             case "colectivos": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/colectivos/colectivosTemplateClient.xhtml"); break;    
-            case "foros": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/foros/forosTemplateClient.xhtml"); break;    
-            case "regVacante": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/registrarVacante.xhtml"); break;    
+            case "foros": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/foros/forosTemplateClient.xhtml"); break;   
         }
     }
     
@@ -168,7 +167,7 @@ public class Loggin implements InterfaceBean {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Ingreso", "Bienvenido " + cedula));
         context.addMessage(null, new FacesMessage("Second Message", "Additional Info Here..."));
-        FacesContext.getCurrentInstance().getExternalContext().redirect("componentes/registro_usr.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/usuarios/registro_usr.xhtml");
 
     }
    

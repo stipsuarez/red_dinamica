@@ -15,17 +15,19 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateUsrTieneHistorialLabel_usrTieneHistorialPK_historialUsrId}" for="usrTieneHistorialPK_historialUsrId" />
+                    <h:inputText id="usrTieneHistorialPK_historialUsrId" value="#{usrTieneHistorialController.selected.usrTieneHistorialPK.historialUsrId}" title="#{bundle.CreateUsrTieneHistorialTitle_usrTieneHistorialPK_historialUsrId}" required="true" requiredMessage="#{bundle.CreateUsrTieneHistorialRequiredMessage_usrTieneHistorialPK_historialUsrId}"/>
                     <h:outputLabel value="#{bundle.CreateUsrTieneHistorialLabel_historialFecha}" for="historialFecha" />
                     <h:inputText id="historialFecha" value="#{usrTieneHistorialController.selected.historialFecha}" title="#{bundle.CreateUsrTieneHistorialTitle_historialFecha}" required="true" requiredMessage="#{bundle.CreateUsrTieneHistorialRequiredMessage_historialFecha}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateUsrTieneHistorialLabel_historial}" for="historial" />
-                    <h:selectOneMenu id="historial" value="#{usrTieneHistorialController.selected.historial}" title="#{bundle.CreateUsrTieneHistorialTitle_historial}" required="true" requiredMessage="#{bundle.CreateUsrTieneHistorialRequiredMessage_historial}">
-                        <f:selectItems value="#{historialController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateUsrTieneHistorialLabel_usuarios}" for="usuarios" />
                     <h:selectOneMenu id="usuarios" value="#{usrTieneHistorialController.selected.usuarios}" title="#{bundle.CreateUsrTieneHistorialTitle_usuarios}" required="true" requiredMessage="#{bundle.CreateUsrTieneHistorialRequiredMessage_usuarios}">
                         <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateUsrTieneHistorialLabel_historial}" for="historial" />
+                    <h:selectOneMenu id="historial" value="#{usrTieneHistorialController.selected.historial}" title="#{bundle.CreateUsrTieneHistorialTitle_historial}" required="true" requiredMessage="#{bundle.CreateUsrTieneHistorialRequiredMessage_historial}">
+                        <f:selectItems value="#{historialController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />

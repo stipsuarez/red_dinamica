@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewNoticiasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewNoticiasLabel_noticiaId}"/>
+                    <h:outputText value="#{noticiasController.selected.noticiaId}" title="#{bundle.ViewNoticiasTitle_noticiaId}"/>
+                    <h:outputText value="#{bundle.ViewNoticiasLabel_noticiaTitulo}"/>
+                    <h:outputText value="#{noticiasController.selected.noticiaTitulo}" title="#{bundle.ViewNoticiasTitle_noticiaTitulo}"/>
+                    <h:outputText value="#{bundle.ViewNoticiasLabel_noticiaFecha}"/>
+                    <h:outputText value="#{noticiasController.selected.noticiaFecha}" title="#{bundle.ViewNoticiasTitle_noticiaFecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewNoticiasLabel_noticiaImagen}"/>
+                    <h:outputText value="#{noticiasController.selected.noticiaImagen}" title="#{bundle.ViewNoticiasTitle_noticiaImagen}"/>
+                    <h:outputText value="#{bundle.ViewNoticiasLabel_noticiaDescripcion}"/>
+                    <h:outputText value="#{noticiasController.selected.noticiaDescripcion}" title="#{bundle.ViewNoticiasTitle_noticiaDescripcion}"/>
+                    <h:outputText value="#{bundle.ViewNoticiasLabel_noticiaFuente}"/>
+                    <h:outputText value="#{noticiasController.selected.noticiaFuente}" title="#{bundle.ViewNoticiasTitle_noticiaFuente}"/>
+                    <h:outputText value="#{bundle.ViewNoticiasLabel_noticiaUsrId}"/>
+                    <h:outputText value="#{noticiasController.selected.noticiaUsrId}" title="#{bundle.ViewNoticiasTitle_noticiaUsrId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{noticiasController.destroyAndView}" value="#{bundle.ViewNoticiasDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewNoticiasEditLink}"/>
+                <br />
+                <h:commandLink action="#{noticiasController.prepareCreate}" value="#{bundle.ViewNoticiasCreateLink}" />
+                <br />
+                <h:commandLink action="#{noticiasController.prepareList}" value="#{bundle.ViewNoticiasShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewNoticiasIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

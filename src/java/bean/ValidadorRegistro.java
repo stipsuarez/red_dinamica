@@ -130,26 +130,6 @@ public class ValidadorRegistro {
         }
     }
 
-    public void ExisteCedula(FacesContext arg0, UIComponent arg1, Object arg2)
-            throws ValidatorException {
-
-        try {
-
-            user = (Usuarios) ejbFacadeUsuarios.find(arg2);
-            if (user != null) {
-                valorCedula = "Usuario actual: " + user;
-                cedula = user.getUsrCc();
-                if (cedula != 0) {
-                    cedula = 0;
-                    throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "La cedula ingresada ya está registrada", "La cedula ingresada ya está registrada"));
-                }
-            }
-
-        } catch (Exception e) {
-            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Error: " + e.getLocalizedMessage()));
-        }
-    }
-
     public String getEmail() {
         return email;
     }

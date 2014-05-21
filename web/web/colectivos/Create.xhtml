@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -16,16 +15,25 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateColectivosLabel_colectId}" for="colectId" />
+                    <h:inputText id="colectId" value="#{colectivosController.selected.colectId}" title="#{bundle.CreateColectivosTitle_colectId}" required="true" requiredMessage="#{bundle.CreateColectivosRequiredMessage_colectId}"/>
                     <h:outputLabel value="#{bundle.CreateColectivosLabel_colectTitulo}" for="colectTitulo" />
-                    <h:inputText id="colectTitulo" value="#{colectivosController.selected.colectTitulo}" title="#{bundle.CreateColectivosTitle_colectTitulo}" />
+                    <h:inputText id="colectTitulo" value="#{colectivosController.selected.colectTitulo}" title="#{bundle.CreateColectivosTitle_colectTitulo}" required="true" requiredMessage="#{bundle.CreateColectivosRequiredMessage_colectTitulo}"/>
                     <h:outputLabel value="#{bundle.CreateColectivosLabel_colectDescripcion}" for="colectDescripcion" />
-                    <h:inputText id="colectDescripcion" value="#{colectivosController.selected.colectDescripcion}" title="#{bundle.CreateColectivosTitle_colectDescripcion}" />
-                    </h:panelGrid>
+                    <h:inputTextarea rows="4" cols="30" id="colectDescripcion" value="#{colectivosController.selected.colectDescripcion}" title="#{bundle.CreateColectivosTitle_colectDescripcion}" required="true" requiredMessage="#{bundle.CreateColectivosRequiredMessage_colectDescripcion}"/>
+                    <h:outputLabel value="#{bundle.CreateColectivosLabel_colectFecha}" for="colectFecha" />
+                    <h:inputText id="colectFecha" value="#{colectivosController.selected.colectFecha}" title="#{bundle.CreateColectivosTitle_colectFecha}" required="true" requiredMessage="#{bundle.CreateColectivosRequiredMessage_colectFecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                </h:panelGrid>
                 <br />
-                <p:commandButton action="#{colectivosController.create}" value="#{bundle.CreateColectivosSaveLink}" ajax="false" actionListener="#{colectivosController.asignarTodo()}"/>                
+                <h:commandLink action="#{colectivosController.create}" value="#{bundle.CreateColectivosSaveLink}" />
                 <br />
                 <br />
-                
+                <h:commandLink action="#{colectivosController.prepareList}" value="#{bundle.CreateColectivosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateColectivosIndexLink}"/>
             </h:form>
         </ui:define>
     </ui:composition>

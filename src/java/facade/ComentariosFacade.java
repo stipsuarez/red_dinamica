@@ -40,6 +40,6 @@ public class ComentariosFacade extends AbstractFacade<Comentarios> {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al consultar la BD: " + e + "\nLocalize: " + e.getLocalizedMessage(), "Error bd");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
-        }
-    }    
+          }
+        }    
 }

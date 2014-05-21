@@ -25,5 +25,6 @@ public class ColectivosFacade extends AbstractFacade<Colectivos> {
 
     public ColectivosFacade() {
         super(Colectivos.class);
-    }   
+    }
+    
 }

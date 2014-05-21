@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
@@ -16,17 +15,35 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateForosLabel_foroId}" for="foroId" />
+                    <h:inputText id="foroId" value="#{forosController.selected.foroId}" title="#{bundle.CreateForosTitle_foroId}" required="true" requiredMessage="#{bundle.CreateForosRequiredMessage_foroId}"/>
                     <h:outputLabel value="#{bundle.CreateForosLabel_foroNombre}" for="foroNombre" />
                     <h:inputText id="foroNombre" value="#{forosController.selected.foroNombre}" title="#{bundle.CreateForosTitle_foroNombre}" />
                     <h:outputLabel value="#{bundle.CreateForosLabel_foroTema}" for="foroTema" />
                     <h:inputText id="foroTema" value="#{forosController.selected.foroTema}" title="#{bundle.CreateForosTitle_foroTema}" />
+                    <h:outputLabel value="#{bundle.CreateForosLabel_foroFecha}" for="foroFecha" />
+                    <h:inputText id="foroFecha" value="#{forosController.selected.foroFecha}" title="#{bundle.CreateForosTitle_foroFecha}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
                     <h:outputLabel value="#{bundle.CreateForosLabel_foroDescripcion}" for="foroDescripcion" />
                     <h:inputText id="foroDescripcion" value="#{forosController.selected.foroDescripcion}" title="#{bundle.CreateForosTitle_foroDescripcion}" />
-                    </h:panelGrid>
+                    <h:outputLabel value="#{bundle.CreateForosLabel_foroColectId}" for="foroColectId" />
+                    <h:selectOneMenu id="foroColectId" value="#{forosController.selected.foroColectId}" title="#{bundle.CreateForosTitle_foroColectId}" required="true" requiredMessage="#{bundle.CreateForosRequiredMessage_foroColectId}">
+                        <f:selectItems value="#{colectivosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateForosLabel_foroUsrId}" for="foroUsrId" />
+                    <h:selectOneMenu id="foroUsrId" value="#{forosController.selected.foroUsrId}" title="#{bundle.CreateForosTitle_foroUsrId}" required="true" requiredMessage="#{bundle.CreateForosRequiredMessage_foroUsrId}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
                 <br />
-                <p:growl id="growl" showDetail="true" />                             
-                <p:commandButton action="#{forosController.create}" value="#{bundle.CreateForosSaveLink}" ajax="true" actionListener="#{forosController.asignarTodo()}" update="growl"/>                
-
+                <h:commandLink action="#{forosController.create}" value="#{bundle.CreateForosSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{forosController.prepareList}" value="#{bundle.CreateForosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateForosIndexLink}"/>
             </h:form>
         </ui:define>
     </ui:composition>

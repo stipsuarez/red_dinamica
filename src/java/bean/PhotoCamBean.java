@@ -36,14 +36,14 @@ public class PhotoCamBean implements InterfaceBean, Serializable{
         final ServletContext servletContext = (ServletContext)FacesContext.getCurrentInstance().getExternalContext()
                 .getContext();
         //asignamos un nombre a la foto segun el usuario actual.
-        String foto = UsuariosController.getCurrent().getUsrCc()+ ".png"; 
+        String foto = UsuariosController.getCurrent().getUsrId()+ ".png"; 
         
         FacesContext context = FacesContext.getCurrentInstance(); 
        // context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Foto dir = "+foto, "Foto dir = "+foto));
         
         //final String fileFoto = "C:\\red_dinamica\\web\\Recursos\\Imagenes\\perfil\\"+ foto;//para Stip
         final String fileFoto = "C:\\WebApplication1\\WebApplication1\\web\\Recursos\\Imagenes\\perfil\\"+ foto;//para oscar
-        //Alteramos el valor de UsrCC para el usuario actual con el fin de usar ese valor para rellenar el campo de imagen en el formulario
+        //Alteramos el valor de UsrId para el usuario actual con el fin de usar ese valor para rellenar el campo de imagen en el formulario
         
         System.out.println(fileFoto);
         
@@ -77,7 +77,7 @@ public class PhotoCamBean implements InterfaceBean, Serializable{
         
         final ServletContext servletContext = (ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext();
         Usuarios u = UsuariosController.getCurrent();
-        String foto = ""+u.getUsrCc();
+        String foto = ""+u.getUsrId();
         
         String fileFoto = servletContext.getRealPath("") + File.separator + "/Recursos/Imagenes/perfil/" + File.separator + foto;
         
@@ -90,8 +90,7 @@ public class PhotoCamBean implements InterfaceBean, Serializable{
     //Arreglarlo
     public boolean isTieneFoto(){
      Usuarios u = UsuariosController.getCurrent();
-        if(u.getUsrFoto()!=null)
-            return u.getUsrFoto();
+        if(u.getUsrFoto()!=null) return true;
         return false;
     }
 }
