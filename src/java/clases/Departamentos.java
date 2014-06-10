@@ -5,9 +5,7 @@
 package clases;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,15 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Miguel
+ * @author Naturaleza
  */
 @Entity
 @Table(name = "departamentos")
@@ -42,10 +38,6 @@ public class Departamentos implements Serializable {
     @Size(max = 45)
     @Column(name = "departamento_nombre")
     private String departamentoNombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudadDepartamento")
-    private Collection<Ciudad> ciudadCollection;
-    @OneToMany(mappedBy = "usrDepartamento")
-    private Collection<Usuarios> usuariosCollection;
 
     public Departamentos() {
     }
@@ -70,24 +62,6 @@ public class Departamentos implements Serializable {
         this.departamentoNombre = departamentoNombre;
     }
 
-    @XmlTransient
-    public Collection<Ciudad> getCiudadCollection() {
-        return ciudadCollection;
-    }
-
-    public void setCiudadCollection(Collection<Ciudad> ciudadCollection) {
-        this.ciudadCollection = ciudadCollection;
-    }
-
-    @XmlTransient
-    public Collection<Usuarios> getUsuariosCollection() {
-        return usuariosCollection;
-    }
-
-    public void setUsuariosCollection(Collection<Usuarios> usuariosCollection) {
-        this.usuariosCollection = usuariosCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -110,7 +84,7 @@ public class Departamentos implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.Departamentos[ departamentoId=" + departamentoId + " ]";
+        return ""+departamentoNombre;
     }
     
 }

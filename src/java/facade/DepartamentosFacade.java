@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Miguel
+ * @author Naturaleza
  */
 @Stateless
 public class DepartamentosFacade extends AbstractFacade<Departamentos> {

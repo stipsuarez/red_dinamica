@@ -3,113 +3,96 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.ListUsuariosTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-        <h:form styleClass="jsfcrud_list_form">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:outputText escape="false" value="#{bundle.ListUsuariosEmpty}" rendered="#{usuariosController.items.rowCount == 0}"/>
-            <h:panelGroup rendered="#{usuariosController.items.rowCount > 0}">
-                <h:outputText value="#{usuariosController.pagination.pageFirstItem + 1}..#{usuariosController.pagination.pageLastItem + 1}/#{usuariosController.pagination.itemsCount}"/>&nbsp;
-                <h:commandLink action="#{usuariosController.previous}" value="#{bundle.Previous} #{usuariosController.pagination.pageSize}" rendered="#{usuariosController.pagination.hasPreviousPage}"/>&nbsp;
-                <h:commandLink action="#{usuariosController.next}" value="#{bundle.Next} #{usuariosController.pagination.pageSize}" rendered="#{usuariosController.pagination.hasNextPage}"/>&nbsp;
-                <h:dataTable value="#{usuariosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListUsuariosTitle_usrId}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usrId}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListUsuariosTitle_usrNombres}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usrNombres}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListUsuariosTitle_usrApellidos}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usrApellidos}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListUsuariosTitle_usrEmail}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usrEmail}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListUsuariosTitle_usrPass}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usrPass}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListUsuariosTitle_usrSexo}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usrSexo}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListUsuariosTitle_usrTipo}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usrTipo}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListUsuariosTitle_usrEstado}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usrEstado}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListUsuariosTitle_usrFoto}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usrFoto}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListUsuariosTitle_usrCiudad}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usrCiudad}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListUsuariosTitle_usrUniversidad}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usrUniversidad}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListUsuariosTitle_usrDepartamento}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usrDepartamento}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="&nbsp;"/>
-                        </f:facet>
-                        <h:commandLink action="#{usuariosController.prepareView}" value="#{bundle.ListUsuariosViewLink}"/>
-                        <h:outputText value=" "/>
-                        <h:commandLink action="#{usuariosController.prepareEdit}" value="#{bundle.ListUsuariosEditLink}"/>
-                        <h:outputText value=" "/>
-                        <h:commandLink action="#{usuariosController.destroy}" value="#{bundle.ListUsuariosDestroyLink}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:panelGroup>
-            <br />
-            <h:commandLink action="#{usuariosController.prepareCreate}" value="#{bundle.ListUsuariosCreateLink}"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.ListUsuariosIndexLink}"/>
-        </h:form>
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListUsuariosEmpty}" rendered="#{usuariosController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{usuariosController.items.rowCount > 0}">
+                    <p:growl id="msgs_errores" ></p:growl> 
+                    <h:outputLabel value="Filtrar por: " for="filtro"  />
+                    <h:selectOneMenu id="filtro" value="#{usuariosController.filtar_por}" title="Filtar usuarios por" validator="#{usuariosController.asignarFiltro}" >
+                        <f:selectItem itemValue="1" itemLabel="Nombre" />
+                        <f:selectItem itemValue="2" itemLabel="Email" />
+                        <f:selectItem itemValue="3" itemLabel="Universidad" />
+                        <p:ajax  update="grupo_buscar,tablaEnc" />
+                    </h:selectOneMenu>
+
+                    <h:panelGroup id="grupo_buscar">
+
+                        <h:inputText id="nombre_buscar" rendered="#{!usuariosController.buscarU}" value="#{usuariosController.nombre_buscar}" title="Usuario a buscar" validator="#{usuariosController.asignarNombreBuscar}" >
+                            <p:ajax  event="keyup" listener="#{usuariosController.aplicarFiltro}"   update="tablaEnc,msgs_errores" />  
+                        </h:inputText>
+
+                        <h:selectOneMenu id="U_buscar"  rendered="#{usuariosController.buscarU}" value="#{usuariosController.u_select}" title="Universidades" validator="#{usuariosController.aplicarFiltroUs}">
+                            <f:selectItems value="#{usuariosController.listaUs}"/>
+                            <p:ajax update="tablaEnc,,msgs_errores" />  
+                        </h:selectOneMenu>
+                    </h:panelGroup>
+                    
+                    
+                    <p:dataTable id="tablaEnc" sortMode="multiple" value="#{usuariosController.items}" var="item"  style="border: 0px" emptyMessage="No hay solicitudes disponibles" paginator="true" rows="10" widgetVar="tablaPost" >
+
+                        <p:column style="width:5%" headerText="Mas Info.">
+                            <p:rowToggler />
+                        </p:column>
+                        <p:column style="width:20%" headerText="Imágen de Perfil">
+                            <p:graphicImage value="/Recursos/Imagenes/perfil/#{item.usrFoto}" width="170" height="200"/>
+                        </p:column>
+                        <p:column id="nombre" style="width:20%"  headerText="Nombres" filterValue="#{item.usrNombres}"
+                                  filterMatchMode="contains" sortBy="#{item.usrNombres}" filterBy="#{item.usrNombres}">
+
+                            <h:outputText value="#{item.usrNombres}"/>
+                        </p:column>
+                        <p:column id="apellido"  style="width:20%" filterBy="#{item.usrApellidos}"
+                                  headerText="Apellidos"   filterMatchMode="contains" sortBy="#{item.usrApellidos}">
+
+                            <h:outputText value="#{item.usrApellidos}"/>
+                        </p:column>
+                        <p:column id="email" style="width:20%" filterBy="#{item.usrEmail}"
+                                  headerText="E-Mail"   filterMatchMode="contains" sortBy="#{item.usrEmail}">
+
+                            <h:outputText value="#{item.usrEmail}"/>
+                        </p:column>
+
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <p:commandButton action="#{usuariosController.enviarMsj}" actionListener="#{conversacionController.setUsrDestino(item)}" value="Enviar Mensaje">
+
+                            </p:commandButton>
+
+                        </p:column>
+                        <p:rowExpansion>
+                            <h:panelGrid id="display" columns="2" cellpadding="5" style="width:100%"
+                                         styleClass="ui-widget-content grid">
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usrUniversidad}"/>
+                                <h:outputText value="#{item.usrUniversidad}"/>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usrDepartamento}"/>
+                                <h:outputText value="#{item.usrDepartamento}"/>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usrCiudad}"/>
+                                <h:outputText value="#{item.usrCiudad}"/>
+
+                            </h:panelGrid>
+                        </p:rowExpansion>
+                    </p:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{usuariosController.prepareCreate}" value="#{bundle.ListUsuariosCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListUsuariosIndexLink}"/>
+            </h:form>
         </ui:define>
     </ui:composition>
 

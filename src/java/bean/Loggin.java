@@ -84,8 +84,7 @@ public class Loggin implements InterfaceBean {
     }
 
     public boolean isAdmin(){
-        try {
-            
+        try {            
             boolean tipoUst = UsuariosController.getCurrent().getUsrTipo();
         return tipoUst==true;
         } catch (Exception e) {
@@ -144,6 +143,7 @@ public class Loggin implements InterfaceBean {
             case "contacto": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/componentes/contactenos.xhtml"); break;    
             case "colectivos": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/colectivos/colectivosTemplateClient.xhtml"); break;    
             case "foros": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/foros/forosTemplateClient.xhtml"); break;   
+            case "conversacion": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/conversacion/buscarTemplateClient.xhtml"); break;   
         }
     }
     
@@ -158,8 +158,6 @@ public class Loggin implements InterfaceBean {
         }
     }
 
-
- 
 //Hay un problema con el redireccionamiento. Me tocó poner la dirección faces/crearUsuario.xhtml en lugar de red_dinamica/crearUsuario.xhtml para que
 //pudiera funcionar.
 

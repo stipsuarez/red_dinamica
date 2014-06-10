@@ -34,7 +34,7 @@ public class CiudadFacade extends AbstractFacade<Ciudad> {
     
     public List<Ciudad> ciudadesSelecionadas(Integer departamento_id) {
         try {
-            String cadena = "SELECT * FROM Ciudad c WHERE c.Departamentos_departamento_id =" + departamento_id;
+            String cadena = "SELECT * FROM Ciudad c WHERE c.ciudad_departamento =" + departamento_id;
             TypedQuery<Ciudad> query2 = (TypedQuery<Ciudad>) em.createNativeQuery(cadena, Ciudad.class);
             return query2.getResultList();
         } catch (Exception e) {

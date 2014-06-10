@@ -1,11 +1,14 @@
 package controllers;
 
 import clases.Noticias;
+import clases.Usuarios;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import facade.NoticiasFacade;
+import java.io.IOException;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -17,6 +20,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 
 @Named("noticiasController")
@@ -31,6 +36,7 @@ public class NoticiasController implements Serializable {
     private int selectedItemIndex;
 
     public NoticiasController() {
+        
     }
 
     public Noticias getSelected() {
@@ -81,6 +87,12 @@ public class NoticiasController implements Serializable {
 
     public String create() {
         try {
+            // Hay que cambiar la dirección de la imagen
+            FacesContext context2 = FacesContext.getCurrentInstance();
+            HttpSession sessionv = (HttpSession) context2.getExternalContext().getSession(true);
+            usrActual=(Usuarios) sessionv.getAttribute("user");
+            current.setNoticiaUsrId(usrActual);
+            current.setNoticiaImagen("nombre_imagen.jpg");
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("NoticiasCreated"));
             return prepareCreate();
@@ -231,5 +243,54 @@ public class NoticiasController implements Serializable {
         }
 
     }
+    //Mi código
+    Usuarios usrActual;
+
+    public Usuarios getUsrActual() {
+        return usrActual;
+    }
+
+    public void setUsrActual(Usuarios usrActual) {
+        this.usrActual = usrActual;
+    }
+
+    //archivo
+    private Part minuta;
+    //para la tabla
+    private List<Noticias> noticias; //Mostrar las noticias en la tabla
+    private Noticias noticia_selec;
+   public Part getMinuta() {
+
+        return minuta;
+    }
+
+    public void setMinuta(Part minuta) {
+        this.minuta = minuta;
+    } 
+
+    public List<Noticias> getNoticias() {
+        return noticias=ejbFacade.findAll();
+    }
+
+    public void setNoticias(List<Noticias> noticias) {
+        this.noticias = noticias;
+    }
+
+    public Noticias getNoticia_selec() {
+        return noticia_selec=getSelected();
+    }
+
+    public void setNoticia_selec(Noticias noticia_selec) {
+        this.noticia_selec = noticia_selec;
+    }
+    
+    
+    public void leer_mas() throws IOException{
+        JsfUtil.addSuccessMessage("Vamos a leer la noticia: "+noticia_selec);
+        current=noticia_selec;
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/noticias/verNoticia.xhtml");
+    }
+    
 
 }
+

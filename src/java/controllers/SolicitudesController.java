@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -43,7 +41,7 @@ public class SolicitudesController implements Serializable {
 
     public SolicitudesController() {
     }
-    
+
     public Solicitudes getSelected() {
         if (current == null) {
             current = new Solicitudes();
@@ -241,34 +239,29 @@ public class SolicitudesController implements Serializable {
             }
         }
     }
-    
-    
     // otra sección
-    
+    //acá va mi código 
     private String usrNombre;
     private String usrApellido;
     @PersistenceContext(unitName = "red_dinamicaPU")
     private EntityManager em;
-    private String nombre_buscar;
+   
     @EJB
     private UsuariosFacade ejbUsuariosFacade;
-    
     List<Usuarios> listaUsuarios = new ArrayList<>();
     List<Usuarios> listaUsuariosE = new ArrayList<>();
     List<Usuarios> listaAceptados = new ArrayList<>();
     private Usuarios usrSelect;
     private Usuarios usrActual;
-
-   
-
+    
     public Usuarios getUsrActual() {
         return usrActual;
-}
+    }
 
     public void setUsrActual(Usuarios usrActual) {
         this.usrActual = usrActual;
     }
-    
+
     protected EntityManager getEntityManager() {
         return em;
     }
@@ -299,37 +292,21 @@ public class SolicitudesController implements Serializable {
 
     public List<Usuarios> getListaNoAceptados() {
         try {
-        listaUsuarios = ejbUsuariosFacade.findAll();
-        List<Usuarios> listaNoAceptados = new ArrayList<>();
-       
-        for (int i = 0; i < listaUsuarios.size(); i++) {
-            if (listaUsuarios.get(i).getUsrEstado() == false) {
-                listaNoAceptados.add(listaUsuarios.get(i));
+            listaUsuarios = ejbUsuariosFacade.findAll();
+            List<Usuarios> listaNoAceptados = new ArrayList<>();
+
+            for (int i = 0; i < listaUsuarios.size(); i++) {
+                if (listaUsuarios.get(i).getUsrEstado() == false) {
+                    listaNoAceptados.add(listaUsuarios.get(i));
+                }
             }
-        }
-        return listaNoAceptados;
-        
+            return listaNoAceptados;
+
         } catch (Exception e) {
-             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null , new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: "+e, "Las contraseñas no coinciden"));
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: " + e, "Las contraseñas no coinciden"));
             return null;
         }
-    }
-
-    public String getUsrNombre() {
-        return usrNombre;
-    }
-
-    public void setUsrNombre(String usrNombre) {
-        this.usrNombre = usrNombre;
-    }
-
-    public String getUsrApellido() {
-        return usrApellido;
-    }
-
-    public void setUsrApellido(String usrApellido) {
-        this.usrApellido = usrApellido;
     }
 
     public List<Usuarios> getListaUsuarios() {
@@ -341,40 +318,30 @@ public class SolicitudesController implements Serializable {
         this.listaUsuarios = listaUsuarios;
     }
 
-    public String getNombre_buscar() {
-        return nombre_buscar;
-    }
-
-    public void setNombre_buscar(String nombre_buscar) {
-        this.nombre_buscar = nombre_buscar;
-        
-    }
-
     public void enviarSolicitud() throws IOException {
         try {
-             //Asignamos el id a la solicitud
+            //Asignamos el id a la solicitud
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "VANMOS!! ",""));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "VANMOS!! ", ""));
             int cc_amigo = usrSelect.getUsrId();
-            
-            Date fechaActual= new Date();
-            String estado ="0";
+            Date fechaActual = new Date();
+            String estado = "0";
             FacesContext context2 = FacesContext.getCurrentInstance();
             HttpSession sessionv = (HttpSession) context2.getExternalContext().getSession(true);
-            usrActual = (Usuarios)sessionv.getAttribute("user");
-            
-            
-            
-            current=new Solicitudes();
+            usrActual = (Usuarios) sessionv.getAttribute("user");
+
+
+
+            current = new Solicitudes();
             current.setSolicitudCc(cc_amigo);
             current.setSolicitudFecha(fechaActual);
             current.setSolicitudEstado(estado);
             current.setSolicitudUsrId(usrActual);
             create();
-           
+
             listaUsuariosE.remove(usrSelect);//Actualizar el estado del boton enviar solicitud
             RequestContext context1 = RequestContext.getCurrentInstance();
-            
+
             context1.update("growlB");
 
         } catch (Exception e) {
@@ -382,41 +349,6 @@ public class SolicitudesController implements Serializable {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al realizar la consulta en la BD: " + e + "\nLocalize:" + e.getLocalizedMessage(), "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage()));
         }
     }
-
-    public void asignarNombreBuscar(FacesContext facesContext, UIComponent component, Object value) {
-        try {
-            this.nombre_buscar = value.toString();
-
-        } catch (Exception e) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nombre: " + value + "Error: ", "" + e + "   " + e.getLocalizedMessage());
-            FacesContext.getCurrentInstance().addMessage("buscar", msg);
-        }
-    }
-
-
-
-    public void asignarUsuariosEncontrados() {
-        try {
-
-            listaUsuariosE = ejbUsuariosFacade.buscarUsuarios_por_nombre(this.nombre_buscar);
-
-            HashSet<Usuarios> hashSet = new HashSet(listaUsuariosE);
-           
-            // Eliminamos Usuarios repetidos
-            for (Iterator it = hashSet.iterator(); it.hasNext();) {
-                listaUsuariosE.add((Usuarios) it.next());
-
-            }
-            
-
-
-        } catch (Exception e) {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: " + this.nombre_buscar + "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage(), "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage()));
-        }
-    }
-    //acá va mi código 
-
     public void aceptarSolicitudes() throws IOException {
         for (int i = 0; i < listaAceptados.size(); i++) {
             listaAceptados.get(i).setUsrEstado(true);
@@ -428,4 +360,8 @@ public class SolicitudesController implements Serializable {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/pages/perfiles.xhtml");
         }
     }
+    //asignar el tipo del filtro
+
+ 
+
 }

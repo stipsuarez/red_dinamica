@@ -4,7 +4,7 @@
     Author     : Naturaleza
     Description:
         Purpose of the stylesheet follows.
-		Para el título: 
+		Para el tï¿½tulo: 
 		background:linear-gradient(#deddd8,#ebebe4) ;
 		color: green;
 */
@@ -37,6 +37,12 @@ body{
 titu{
     background: #99CC66;
 border-color: #339933;
+}
+.boton-mini {
+    padding: 2px 6px;
+    font-size: 11px;
+    line-height: 17px;
+    min-height: 20px;
 }
 .iniciarsesion{
 	font-size: 0.7em;

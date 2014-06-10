@@ -25,16 +25,8 @@
                     </h:outputText>
                     <h:outputText value="#{bundle.ViewMensajeLabel_msjLeido}"/>
                     <h:outputText value="#{mensajeController.selected.msjLeido}" title="#{bundle.ViewMensajeTitle_msjLeido}"/>
-                    <h:outputText value="#{bundle.ViewMensajeLabel_msjDestinatario}"/>
-                    <h:outputText value="#{mensajeController.selected.msjDestinatario}" title="#{bundle.ViewMensajeTitle_msjDestinatario}"/>
-                    <h:outputText value="#{bundle.ViewMensajeLabel_msjRemitente}"/>
-                    <h:outputText value="#{mensajeController.selected.msjRemitente}" title="#{bundle.ViewMensajeTitle_msjRemitente}"/>
                     <h:outputText value="#{bundle.ViewMensajeLabel_msjConversacion}"/>
                     <h:outputText value="#{mensajeController.selected.msjConversacion}" title="#{bundle.ViewMensajeTitle_msjConversacion}"/>
-                    <h:outputText value="#{bundle.ViewMensajeLabel_convUsr2Id}"/>
-                    <h:outputText value="#{mensajeController.selected.convUsr2Id}" title="#{bundle.ViewMensajeTitle_convUsr2Id}"/>
-                    <h:outputText value="#{bundle.ViewMensajeLabel_convUsr1Id}"/>
-                    <h:outputText value="#{mensajeController.selected.convUsr1Id}" title="#{bundle.ViewMensajeTitle_convUsr1Id}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{mensajeController.destroyAndView}" value="#{bundle.ViewMensajeDestroyLink}"/>

@@ -5,9 +5,7 @@
 package clases;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,15 +15,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Miguel
+ * @author Naturaleza
  */
 @Entity
 @Table(name = "universidades")
@@ -44,13 +40,9 @@ public class Universidades implements Serializable {
     @Size(max = 70)
     @Column(name = "universidad_nombre")
     private String universidadNombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "universidades")
-    private Collection<GruposInvestiga> gruposInvestigaCollection;
     @JoinColumn(name = "universidad_ciudad", referencedColumnName = "ciudad_id")
     @ManyToOne(optional = false)
     private Ciudad universidadCiudad;
-    @OneToMany(mappedBy = "usrUniversidad")
-    private Collection<Usuarios> usuariosCollection;
 
     public Universidades() {
     }
@@ -75,30 +67,12 @@ public class Universidades implements Serializable {
         this.universidadNombre = universidadNombre;
     }
 
-    @XmlTransient
-    public Collection<GruposInvestiga> getGruposInvestigaCollection() {
-        return gruposInvestigaCollection;
-    }
-
-    public void setGruposInvestigaCollection(Collection<GruposInvestiga> gruposInvestigaCollection) {
-        this.gruposInvestigaCollection = gruposInvestigaCollection;
-    }
-
     public Ciudad getUniversidadCiudad() {
         return universidadCiudad;
     }
 
     public void setUniversidadCiudad(Ciudad universidadCiudad) {
         this.universidadCiudad = universidadCiudad;
-    }
-
-    @XmlTransient
-    public Collection<Usuarios> getUsuariosCollection() {
-        return usuariosCollection;
-    }
-
-    public void setUsuariosCollection(Collection<Usuarios> usuariosCollection) {
-        this.usuariosCollection = usuariosCollection;
     }
 
     @Override
@@ -123,7 +97,7 @@ public class Universidades implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.Universidades[ universidadId=" + universidadId + " ]";
+        return ""+universidadNombre;
     }
     
 }

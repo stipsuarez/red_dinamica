@@ -1,12 +1,20 @@
 package controllers;
 
 import clases.Conversacion;
+import clases.Mensaje;
+import clases.Usuarios;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import facade.ConversacionFacade;
+import java.io.IOException;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Map;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -17,6 +25,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 
 @Named("conversacionController")
 @SessionScoped
@@ -80,11 +89,17 @@ public class ConversacionController implements Serializable {
 
     public String create() {
         try {
+            current.setConvUsr1Id(UsuariosController.getCurrent());
+            current.setConvUsr2Id(usrDestino);
+            current.setConvNumero(current.getConvNumero() + 1);
+            Date fechaActual = new Date();
+            current.setConvUltimo(fechaActual);
+            JsfUtil.addErrorMessage("creando ...");
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ConversacionCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, "Error al cre: " + e + "  Localización: " + e.getLocalizedMessage() + ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
@@ -227,6 +242,96 @@ public class ConversacionController implements Serializable {
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Conversacion.class.getName());
             }
+        }
+    }
+    //Mi código acá
+    private String textoMsj;
+    private Mensaje nuevo;
+    private Usuarios usrDestino;
+    private String ms;
+
+    public String getMs() {
+        return ms;
+    }
+
+    public Usuarios getUsrDestino() {
+        return usrDestino;
+    }
+
+    public void setUsrDestino(Usuarios usrDestino) throws IOException {
+        try {
+            this.usrDestino = usrDestino;
+        ms = "Mi pruega"+usrDestino.getUsrApellidos();
+        } catch (Exception e) {
+            //FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/conversacion/conversacionTemplateClient.xhtml"); 
+            ms = "error; "+e;
+        }
+        
+                
+    }
+
+    public String getTextoMsj() {
+        return textoMsj;
+    }
+
+    public void setTextoMsj(String textoMsj) {
+        this.textoMsj = textoMsj;
+    }
+
+    public void enviarMsj() {
+        try {
+
+            JsfUtil.addSuccessMessage("Vamos a crear la conversación ... ");
+            current.setConvUsr1Id(UsuariosController.getCurrent());
+            current.setConvUsr2Id(usrDestino);
+            current.setConvNumero(current.getConvNumero() + 1);
+            Date fechaActual = new Date();
+            current.setConvUltimo(fechaActual);
+            JsfUtil.addSuccessMessage("Antes del facade ... " + current.getConvNumero());
+            getFacade().create(current);
+            JsfUtil.addSuccessMessage("Ahora va el mensaje ... ");
+            Collection<Mensaje> mensajes = new ArrayList<>();
+            Mensaje mensaje = new Mensaje();
+            mensaje.setMsjTexto(textoMsj);
+            mensaje.setMsjConversacion(current);
+            mensaje.setMsjFecha(fechaActual);
+            mensaje.setMsjLeido(false);
+            mensajes.add(mensaje);
+            current.setMensajeCollection(mensajes);
+
+
+            JsfUtil.addSuccessMessage("Conversación creada ... ");
+
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, "Error al crear la conversación: " + e + "  Localización: " + e.getLocalizedMessage() + ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+    }
+
+    @PostConstruct
+    public void init() {
+        try {
+            
+        current = new Conversacion();
+        current.setConvUsr1Id(UsuariosController.getCurrent());
+        nuevo = new Mensaje();
+        FacesContext context2 = FacesContext.getCurrentInstance();
+        HttpSession sessionv = (HttpSession) context2.getExternalContext().getSession(true);
+        this.usrDestino= (Usuarios) sessionv.getAttribute("user_select");
+        JsfUtil.addSuccessMessage("Usuario seleccionado asignado: " + usrDestino);
+        
+        } catch (Exception e) {
+            JsfUtil.addSuccessMessage("Error al cargar la conversación: ");
+        }
+    }
+
+    public void asignarUsuario(Object arg2) {
+        try {
+            this.usrDestino = (Usuarios) arg2;
+            JsfUtil.addSuccessMessage("Usuario seleccionado: " + arg2);
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/conversacion/conversacionTemplateClient.xhtml");
+
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("Error al asignar el usuario: ");
         }
     }
 }

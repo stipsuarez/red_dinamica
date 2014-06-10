@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Miguel
+ * @author Naturaleza
  */
 @Entity
 @Table(name = "conversacion")
@@ -38,20 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Conversacion.findAll", query = "SELECT c FROM Conversacion c"),
     @NamedQuery(name = "Conversacion.findByConvId", query = "SELECT c FROM Conversacion c WHERE c.convId = :convId"),
     @NamedQuery(name = "Conversacion.findByConvAsunto", query = "SELECT c FROM Conversacion c WHERE c.convAsunto = :convAsunto"),
-    @NamedQuery(name = "Conversacion.findByUltimo", query = "SELECT c FROM Conversacion c WHERE c.ultimo = :ultimo"),
+    @NamedQuery(name = "Conversacion.findByConvUltimo", query = "SELECT c FROM Conversacion c WHERE c.convUltimo = :convUltimo"),
     @NamedQuery(name = "Conversacion.findByConvNumero", query = "SELECT c FROM Conversacion c WHERE c.convNumero = :convNumero")})
 public class Conversacion implements Serializable {
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "conv_ultimo")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date convUltimo;
-    @JoinColumn(name = "conv_usr2_id", referencedColumnName = "usr_id")
-    @ManyToOne(optional = false)
-    private Usuarios convUsr2Id;
-    @JoinColumn(name = "conv_usr1_id", referencedColumnName = "usr_id")
-    @ManyToOne(optional = false)
-    private Usuarios convUsr1Id;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,21 +54,21 @@ public class Conversacion implements Serializable {
     private String convAsunto;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ultimo")
+    @Column(name = "conv_ultimo")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date ultimo;
+    private Date convUltimo;
     @Basic(optional = false)
     @NotNull
     @Column(name = "conv_numero")
     private int convNumero;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "msjConversacion")
     private Collection<Mensaje> mensajeCollection;
-    @JoinColumn(name = "conv_usr1", referencedColumnName = "usr_cc")
+    @JoinColumn(name = "conv_usr2_id", referencedColumnName = "usr_id")
     @ManyToOne(optional = false)
-    private Usuarios convUsr1;
-    @JoinColumn(name = "conv_usr2", referencedColumnName = "usr_cc")
+    private Usuarios convUsr2Id;
+    @JoinColumn(name = "conv_usr1_id", referencedColumnName = "usr_id")
     @ManyToOne(optional = false)
-    private Usuarios convUsr2;
+    private Usuarios convUsr1Id;
 
     public Conversacion() {
     }
@@ -88,10 +77,10 @@ public class Conversacion implements Serializable {
         this.convId = convId;
     }
 
-    public Conversacion(Integer convId, String convAsunto, Date ultimo, int convNumero) {
+    public Conversacion(Integer convId, String convAsunto, Date convUltimo, int convNumero) {
         this.convId = convId;
         this.convAsunto = convAsunto;
-        this.ultimo = ultimo;
+        this.convUltimo = convUltimo;
         this.convNumero = convNumero;
     }
 
@@ -111,12 +100,12 @@ public class Conversacion implements Serializable {
         this.convAsunto = convAsunto;
     }
 
-    public Date getUltimo() {
-        return ultimo;
+    public Date getConvUltimo() {
+        return convUltimo;
     }
 
-    public void setUltimo(Date ultimo) {
-        this.ultimo = ultimo;
+    public void setConvUltimo(Date convUltimo) {
+        this.convUltimo = convUltimo;
     }
 
     public int getConvNumero() {
@@ -136,20 +125,20 @@ public class Conversacion implements Serializable {
         this.mensajeCollection = mensajeCollection;
     }
 
-    public Usuarios getConvUsr1() {
-        return convUsr1;
+    public Usuarios getConvUsr2Id() {
+        return convUsr2Id;
     }
 
-    public void setConvUsr1(Usuarios convUsr1) {
-        this.convUsr1 = convUsr1;
+    public void setConvUsr2Id(Usuarios convUsr2Id) {
+        this.convUsr2Id = convUsr2Id;
     }
 
-    public Usuarios getConvUsr2() {
-        return convUsr2;
+    public Usuarios getConvUsr1Id() {
+        return convUsr1Id;
     }
 
-    public void setConvUsr2(Usuarios convUsr2) {
-        this.convUsr2 = convUsr2;
+    public void setConvUsr1Id(Usuarios convUsr1Id) {
+        this.convUsr1Id = convUsr1Id;
     }
 
     @Override
@@ -175,30 +164,6 @@ public class Conversacion implements Serializable {
     @Override
     public String toString() {
         return "clases.Conversacion[ convId=" + convId + " ]";
-    }
-
-    public Date getConvUltimo() {
-        return convUltimo;
-    }
-
-    public void setConvUltimo(Date convUltimo) {
-        this.convUltimo = convUltimo;
-    }
-
-    public Usuarios getConvUsr2Id() {
-        return convUsr2Id;
-    }
-
-    public void setConvUsr2Id(Usuarios convUsr2Id) {
-        this.convUsr2Id = convUsr2Id;
-    }
-
-    public Usuarios getConvUsr1Id() {
-        return convUsr1Id;
-    }
-
-    public void setConvUsr1Id(Usuarios convUsr1Id) {
-        this.convUsr1Id = convUsr1Id;
     }
     
 }

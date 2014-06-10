@@ -18,9 +18,6 @@
     <h:body>
 
         <p:tabView effect="#{tabBean.effect}" effectDuration="normal" style="height: auto;" >  
-
-
-
             <p:tab title="Mis datos"> 
                 <p:accordionPanel multiple="true" binding="#{usrActual}" value="#{usuariosController.selected}" >  
                     <p:tab title="Cambiar foto">  
@@ -104,28 +101,35 @@
                                     </p:inputText>
                                     <p:message for="usrApellido" id="msgApellido" display="tooltip" />
 
+                                </h:panelGrid>
+                            </p:panel>
+                            <p:panel header="Datos adicionales">
+                                <p:panelGrid columns="2">
                                     <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrSexo}" for="usrGenero" />
                                     <p:selectOneMenu value="#{usuariosController.selected.usrSexo}" >  
                                         <f:selectItem itemLabel="Masculino" itemValue="0" />
                                         <f:selectItem itemLabel="Femenino" itemValue="1" />
-                                    </p:selectOneMenu> 
-                                   
-
-                                </h:panelGrid>
-                            </p:panel>
-
-                            <p:panel header="Datos adicionales">
-                                <p:panelGrid columns="2">
-
-                                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrCiudad}" for="usrCiudad" />
-                                    <p:inputText id="usrCiudad" value="#{usuariosController.selected.usrCiudad}" title="#{bundle.CreateUsuariosTitle_usrCiudad}" />
-
+                                    </p:selectOneMenu>  
+                                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrDepartamento}" for="departamentosdepartamentoid" />
+                                    <h:selectOneMenu id="departamentosdepartamentoid" value="#{usuariosController.selected.usrDepartamento}" title="#{bundle.CreateUsuariosTitle_usrDepartamento}" validator="#{ciudadController.asignarDepartamento}"  >                        
+                                        <f:selectItems  value="#{departamentosController.itemsAvailableSelectOne}"/>                        
+                                        <p:ajax  listener="#{ciudadController.asignarCiudades}"   update="ciudades" />  
+                                    </h:selectOneMenu>
+                                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrCiudad}" for="ciudadciudadid" />
+                                    <h:selectOneMenu id="ciudades" value="#{usuariosController.selected.usrCiudad}" title="#{bundle.CreateUsuariosTitle_usrCiudad}"  validator="#{universidadesController.asignarCiudad}">                         
+                                        <f:selectItem itemLabel="---" itemValue="" />
+                                        <f:selectItems value="#{ciudadController.ciudades}"/>
+                                        <p:ajax  listener="#{universidadesController.asignarUniversidades}"   update="universidadesuniversidadid" /> 
+                                    </h:selectOneMenu>
+                                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrUniversidad}" for="universidadesuniversidadid" />
+                                    <h:selectOneMenu id="universidadesuniversidadid" value="#{usuariosController.selected.usrUniversidad}" title="#{bundle.CreateUsuariosTitle_usrUniversidad}" >
+                                        <f:selectItem itemLabel="---" itemValue="" />
+                                        <f:selectItems value="#{universidadesController.universidad}"/>
+                                    </h:selectOneMenu>
                                 </p:panelGrid>
                             </p:panel>
                             <br />
                             <h:commandButton action="#{usuariosController.update}"  value="Actualizar" />
-
-
                         </h:form>
                     </p:tab>  
                 </p:accordionPanel>   
@@ -135,85 +139,19 @@
                 <p:layout style="height: 800px; padding: 0; margin: 0;">
 
                     <p:layoutUnit position="center" size="190" resizable="true" closable="true" collapsible="true" >
-                        <!--<ui:include src="/componentes/ingresarNoticia.xhtml"  />-->
+                        <ui:include src="/web/noticias/ingresarNoticia.xhtml"  />
                     </p:layoutUnit>
                 </p:layout>
             </p:tab> 
 
-            <p:tab title="Busca persona" id="busca" >  
-                <h:form id="buscar" class="tablaPostula" prependId="false">
-                    <p:messages id="msgs_errores" ></p:messages>  
-                    <p:growl id="growlB" showDetail="true" />
-                    <h:outputLabel value="Ingrese el nombre a buscar: " for="nombre_buscar" />
-                    <h:inputText id="nombre_buscar" value="#{solicitudesController.nombre_buscar}" title="Usuario a buscar" validator="#{solicitudesController.asignarNombreBuscar}" required="true" requiredMessage="El campo es obligatorios">
-                        <p:ajax  event="keyup" listener="#{solicitudesController.asignarUsuariosEncontrados}"   update="growlB,tablaEnc,msgs_errores" />  
-                    </h:inputText>
-                    <p:commandButton  icon="ui-icon-search" action="#{solicitudesController.asignarUsuariosEncontrados}" update="tablaEnc,growlB"  value="Buscar" />
+            <p:tab title="Busca personas" id="busca" >  
+                <p:layout style="height: 800px; padding: 0; margin: 0;">
 
-                    <p:growl id="growl" showDetail="true" /> 
-                    <p:dataTable id="tablaEnc" sortMode="multiple" var="usuariosE" value="#{solicitudesController.listaUsuariosE}" widgetVar="tablaPost" emptyMessage="No hay solicitudes disponibles" paginator="true" rows="10"
-                                 rowKey="#{usuariosE.usrId}" selection="#{solicitudesController.usrSelect}"  >  
-                        
-                        
-                        <f:facet name="header">  
-                            <p:outputPanel>  
-                                <h:outputText value="Buscar en todos los campos:" />  
-                                <p:inputText id="globalFilter" onkeyup="tablaPost.filter()" style="width:150px" />  
-                                <p:messages id="msgs_error" >Error: </p:messages> 
-                            </p:outputPanel>  
-                        </f:facet>  
+                    <p:layoutUnit position="center" size="190" resizable="true" closable="true" collapsible="true" >
+                       <ui:include src="List.xhtml"  />
+                    </p:layoutUnit> 
+                </p:layout>
 
-
-
-                        <p:column style="width:10%" headerText="Mas Info.">                                                           
-                            <p:rowToggler />  
-                        </p:column>  
-                        <p:column style="width:25%" headerText="Imágen de Perfil">  
-                            <p:graphicImage value="/Recursos/Imagenes/perfil/#{usuariosE.usrId}" width="170" height="200"/>  
-                        </p:column>  
-
-                        <p:column id="nombre" style="width:20px"  headerText="Nombres" filterValue="#{usuariosE.usrNombres}"
-                                  filterMatchMode="contains" sortBy="#{usuariosE.usrNombres}" filterBy="#{usuariosE.usrNombres}" > 
-                            <h:outputText value="#{usuariosE.usrNombres}" />  
-                        </p:column> 
-
-                        <p:column id="apellido"  style="width:40px" filterBy="#{usuariosE.usrApellidos}"   
-                                  headerText="Apellidos"   filterMatchMode="contains" sortBy="#{usuariosE.usrApellidos}" >  
-                            <h:outputText value="#{usuariosE.usrApellidos}" />  
-                        </p:column> 
-
-                        <p:column id="carrera" style="width:20px" filterBy="#{usuariosE.usrEmail}"   
-                                  headerText="E-Mail"   filterMatchMode="contains" sortBy="#{usuariosE.usrEmail}">  
-
-                            <h:outputText value="#{usuariosE.usrEmail}" />  
-                        </p:column>  
-
-
-                       
-                        <p:column  style="width:6%" headerText="Enviar Solicitud" id="agregar"  >
-                            <p:commandButton  id="agregar_amigo"    update="tablaEnc,msgs_error" action="#{solicitudesController.enviarSolicitud}" value="Enviar solicitud" >
-                                <f:setPropertyActionListener value="#{usuariosE}" target="#{solicitudesController.usrSelect}" />  
-                            </p:commandButton> 
-
-                        </p:column>
-
-                        <p:rowExpansion>  
-                            <h:panelGrid id="display" columns="2" cellpadding="5" style="width:100%"  
-                                         styleClass="ui-widget-content grid">  
-                                <h:outputText value="Cedula de Ciudadania:" />
-                                <h:outputText id="detalle_descripcion" value="#{usuariosE.usrId}"   />      
-
-                                <h:outputText value="Ciudad:" />  
-                                <h:outputText id="detalle_ciudad" value="#{usuariosE.usrCiudad}"/>  
-                            </h:panelGrid>  
-
-
-                        </p:rowExpansion>  
-
-                    </p:dataTable>  
-
-                    <p:commandButton value="Enviar" action="#{solicitudesController.aceptarSolicitudes}" update="growl"/>
-                </h:form> 
             </p:tab>  
 
             <p:tab title="Solicitudes" rendered="#{loggin.admin}" >  
@@ -228,9 +166,6 @@
                                 <p:inputText id="globalFilter" onkeyup="tablaPost.filter()" style="width:150px" />  
                             </p:outputPanel>  
                         </f:facet>  
-
-
-
                         <p:column style="width:10%" headerText="Mas Info.">                                                           
                             <p:rowToggler />  
                         </p:column>  
@@ -255,7 +190,7 @@
                         </p:column>  
 
 
-                        <p:column selectionMode="multiple" style="width:6%" headerText="Aceptar Solicitud">
+                        <p:column selectionMode="multiple" style="width:6%" headerText="Enviar mensaje">
 
 
                         </p:column>
@@ -263,29 +198,18 @@
                         <p:rowExpansion>  
                             <h:panelGrid id="display" columns="2" cellpadding="5" style="width:100%"  
                                          styleClass="ui-widget-content grid">  
-
                                 <h:outputText value="Cedula de Ciudadania:" />
                                 <h:outputText id="nombres" value="#{usuarios.usrNombres}" />      
                                 <h:outputText value="Ciudad:" />  
                                 <h:outputText id="ciudad" value="#{usuarios.usrEmail}"/>  
-
-
                             </h:panelGrid>  
-
-
                         </p:rowExpansion>  
-
                     </p:dataTable>  
-
                     <p:commandButton value="Enviar" action="#{solicitudesController.aceptarSolicitudes}" update="growl2"/>
-
 
                 </h:form>  
 
             </p:tab>  
-
-
-
 
         </p:tabView>  
     </h:body>

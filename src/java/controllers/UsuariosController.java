@@ -1,14 +1,20 @@
 package controllers;
 
+import clases.Universidades;
 import clases.Usuarios;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
+import facade.UniversidadesFacade;
 import facade.UsuariosFacade;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -57,6 +63,7 @@ public class UsuariosController implements Serializable {
     }
 
     public PaginationHelper getPagination() {
+
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
                 @Override
@@ -66,7 +73,9 @@ public class UsuariosController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
+                    //if (flag == 0) 
                     return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    //else return new ListDataModel(listaUsuariosE);
                 }
             };
         }
@@ -76,6 +85,7 @@ public class UsuariosController implements Serializable {
     public String prepareList() {
         recreateModel();
         return "List";
+
     }
 
     public String prepareView() {
@@ -94,7 +104,7 @@ public class UsuariosController implements Serializable {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuariosCreated"));
-             FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica");
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -166,8 +176,10 @@ public class UsuariosController implements Serializable {
     }
 
     public DataModel getItems() {
+
         if (items == null) {
             items = getPagination().createPageDataModel();
+
         }
         return items;
     }
@@ -243,14 +255,20 @@ public class UsuariosController implements Serializable {
         }
     }
 //Este es mi código
+    // Validar contraseña 
     private String pass1 = "";
     private String actualPass = "";
     private String nuevaPass = "";
     private String nuevaPassConfir = "";
     List<Usuarios> listaUsuarios = new ArrayList<>();
+
     public String getPass1() {
         return pass1;
-}
+    }
+
+    private UniversidadesFacade getUFacade() {
+        return this.Ufacade;
+    }
 
     public void setPass1(String pass1) {
         this.pass1 = pass1;
@@ -304,7 +322,6 @@ public class UsuariosController implements Serializable {
         this.nuevaPassConfir = nuevaPassConfir;
     }
 
-    
     public void validarPassActual(FacesContext arg0, UIComponent arg1, Object arg2)
             throws ValidatorException {
         String actual = current.getUsrPass();
@@ -329,5 +346,251 @@ public class UsuariosController implements Serializable {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseñas no coinciden", "La contraseñas no coinciden "));
         }
     }
-  
+    //Buscar personas
+    private String nombre_buscar;
+    private String filtar_por = "1";// tipo de filtro al buscar usuarios:(1=nombre, 2= email, 3= universidad)
+    @EJB
+    private facade.UniversidadesFacade Ufacade;
+    List<Usuarios> listaUsuariosE = new ArrayList<>();
+    Universidades u_select;
+    private Usuarios usrSelect;
+    List<Universidades> listaUs = new ArrayList<>();
+    private boolean buscarU = false;
+    List<Usuarios> listaUsrs = new ArrayList<>();
+   
+    public String getFiltar_por() {
+        return filtar_por;
+    }
+
+    public void setFiltar_por(String filtar_por) {
+        this.filtar_por = filtar_por;
+    }
+
+    public Universidades getU_select() {
+        return u_select;
+    }
+
+    public void setU_select(Universidades u_select) {
+        this.u_select = u_select;
+    }
+
+    public List<Usuarios> getListaUsuariosE() {
+        return listaUsuariosE;
+    }
+
+    public void setListaUsuariosE(List<Usuarios> listaUsuariosE) {
+        this.listaUsuariosE = listaUsuariosE;
+    }
+
+    public String getNombre_buscar() {
+        return nombre_buscar;
+    }
+
+    public void setNombre_buscar(String nombre_buscar) {
+        this.nombre_buscar = nombre_buscar;
+    }
+
+    public Usuarios getUsrSelect() {
+        return usrSelect;
+    }
+
+    public void setUsrSelect(Usuarios usrSelect) {
+        this.usrSelect = usrSelect;
+        JsfUtil.addSuccessMessage("Entra a cabiar el usuario seleccionado: " + this.usrSelect);
+    }
+
+    public void asignarNombreBuscar(FacesContext facesContext, UIComponent component, Object value) {
+        try {
+            this.nombre_buscar = value.toString();
+
+        } catch (Exception e) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nombre: " + value + "Error: ", "" + e + "   " + e.getLocalizedMessage());
+            FacesContext.getCurrentInstance().addMessage("buscar", msg);
+        }
+    }
+
+    public List<Universidades> getListaUs() {
+        return listaUs;
+    }
+
+    public void setListaUs(List<Universidades> listaUs) {
+        this.listaUs = listaUs;
+    }
+
+    public List<Usuarios> getListaUsrs() {
+        listaUsrs = ejbFacade.findAll();
+        listaUsrs.remove(current);
+        return listaUsrs;
+    }
+
+    public void setListaUsrs(List<Usuarios> listaUsrs) {
+        this.listaUsrs = listaUsrs;
+    }
+
+    public void asignarUsuariosEncontradosPorNombre() {
+        try {
+            listaUsuariosE = ejbFacade.buscarUsuarios_por_nombre(this.nombre_buscar);
+            listaUsuariosE.remove(current);
+            HashSet<Usuarios> hashSet = new HashSet(listaUsuariosE);
+            listaUsuariosE = new ArrayList<>();
+            // Eliminamos Usuarios repetidos
+            for (Iterator it = hashSet.iterator(); it.hasNext();) {
+                listaUsuariosE.add((Usuarios) it.next());
+            }
+            if (listaUsuariosE.isEmpty()) {
+                items = new ListDataModel(getListaUsrs());
+                JsfUtil.addSuccessMessage("No hay usuarios");
+            } else {
+                items = new ListDataModel(listaUsuariosE);
+            }
+
+        } catch (Exception e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: " + this.nombre_buscar + "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage(), "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage()));
+        }
+    }
+
+    public void asignarUsuariosEncontradosPorEmail() {
+        try {
+            listaUsuariosE = ejbFacade.buscarUsuarios_por_email(this.nombre_buscar);
+            listaUsuariosE.remove(current);
+            HashSet<Usuarios> hashSet = new HashSet(listaUsuariosE);
+            listaUsuariosE = new ArrayList<>();
+            // Eliminamos Usuarios repetidos
+            for (Iterator it = hashSet.iterator(); it.hasNext();) {
+                listaUsuariosE.add((Usuarios) it.next());
+            }
+            if (listaUsuariosE.isEmpty()) {
+                items = new ListDataModel(getListaUsrs());
+                JsfUtil.addSuccessMessage("No hay usuarios");
+            } else {
+                items = new ListDataModel(listaUsuariosE);
+            }
+        } catch (Exception e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: " + this.nombre_buscar + "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage(), "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage()));
+        }
+    }
+
+    public void asignarUsuariosEncontradosPorUniversidad() {
+        try {
+            listaUsuariosE = ejbFacade.buscarUsuarios_por_universidad(u_select.getUniversidadId());
+            listaUsuariosE.remove(current);
+            HashSet<Usuarios> hashSet = new HashSet(listaUsuariosE);
+            listaUsuariosE = new ArrayList<>();
+            // Eliminamos Usuarios repetidos
+            for (Iterator it = hashSet.iterator(); it.hasNext();) {
+                listaUsuariosE.add((Usuarios) it.next());
+            }
+            if (listaUsuariosE.isEmpty()) {
+                items = new ListDataModel(getListaUsrs());
+                JsfUtil.addSuccessMessage("No hay usuarios");
+            } else {
+                items = new ListDataModel(listaUsuariosE);
+            }
+        } catch (Exception e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al asignar usuarios por U: " + this.nombre_buscar + "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage(), "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage()));
+        }
+    }
+
+    public boolean isBuscarU() {
+        try {
+            return buscarU;
+        } catch (Exception e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al buscar las Universidades", "" + e + "\nLocalización: " + e.getLocalizedMessage()));
+        }
+        return false;
+    }
+
+    public void asignarFiltro(FacesContext facesContext, UIComponent component, Object value) {
+        try {
+
+            buscarU = false;
+            nombre_buscar = "";
+            listaUsuariosE = new ArrayList<>();
+            items = new ListDataModel(getListaUsrs());//pasamos la lista al datamodel
+            this.filtar_por = "" + value;
+            if (filtar_por.equals("3")) {
+                listaUs = Ufacade.findAll();
+                u_select = listaUs.get(0);
+                buscarU = true;
+
+            }
+        } catch (Exception e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error filtro: " + value + " " + e + "\nLocalize: " + e.getLocalizedMessage(), "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage()));
+        }
+    }
+
+    public void aplicarFiltro() {
+        try {
+            switch (filtar_por) {
+                case "1":
+                    asignarUsuariosEncontradosPorNombre();
+                    JsfUtil.addSuccessMessage("Ya buscó!");
+                    break;
+                case "2":
+                    asignarUsuariosEncontradosPorEmail();
+                    break;
+            }
+
+        } catch (Exception e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error filtro: " + e + "\nLocalize: " + e.getLocalizedMessage(), "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage()));
+        }
+    }
+
+    public void aplicarFiltroUs(FacesContext facesContext, UIComponent component, Object value) {
+        try {
+            asignarUsuariosEncontradosPorUniversidad();
+        } catch (Exception e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error filtro: " + e + "\nLocalize: " + e.getLocalizedMessage(), "  nombre no asignado: " + e + "\nLocalize: " + e.getLocalizedMessage()));
+        }
+    }
+
+    public void enviarMsj() throws IOException {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/conversacion/conversacionTemplateClient.xhtml");
+
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("Error al enviar el mensaje: " + e + " Localize: " + e.getLocalizedMessage());
+        }
+    }
+
+    public void irA(String dire) throws IOException {
+        try {
+
+            switch (dire) {
+                case "index":
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/");
+                    break;
+                case "perfil":
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/usuarios/perfiles.xhtml");
+                    break;
+                case "contacto":
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/componentes/contactenos.xhtml");
+                    break;
+                case "colectivos":
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/colectivos/colectivosTemplateClient.xhtml");
+                    break;
+                case "foros":
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/foros/forosTemplateClient.xhtml");
+                    break;
+                case "enviarMsj":
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/conversacion/conversacionTemplateClient.xhtml");
+                    break;
+            }
+
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("Error al direccionar al enviar el msj: " + e);
+        }
+    }
+    
+  @PostConstruct
+    public void init() {
+      items= new ListDataModel(getListaUsrs());
+  }
 }

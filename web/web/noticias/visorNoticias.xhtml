@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      lang="es"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <link rel="stylesheet" type="text/css" href="../Recursos/Css/general.css" />
+        <link rel="stylesheet" type="text/css" href="" />
+    </h:head>
+
+    <h:body >
+      <h:form id="form">
+            <p:dataScroller value="#{noticiasController.noticias}" rows="12" id="noticias" var="item">  
+                <f:facet name="header">
+                    Noticias
+                </f:facet>
+
+                <p:panel header="#{item.noticiaTitulo}" style="text-align:center">
+                    <h:panelGrid  columns="1" width="400" border="0" style="margin: 0 auto; text-align: center; border: 0 #ffffff;"> 
+                        <p:graphicImage height="170px" width="170px" value="#{pageContext.contextPath}/DatosUsuario/noticias/#{item.noticiaImagen}" />   
+                        <h:outputText value="#{item.noticiaFecha}"  />
+                        <center>
+                            <textarea rows="1" cols="1" style="height: 200px; width: 620px; border: 0px;background: #ffffff" disabled="true"  > "#{item.noticiaDescripcion}" </textarea>
+                        </center>
+                        <p:commandButton  id="leer_mas"  action="#{noticiasController.leer_mas}" value="Leer mas"  ajax="false">
+                            <f:setPropertyActionListener value="#{item}" target="#{noticiasController.noticia_selec}" /> 
+                        </p:commandButton> 
+                        <p:commandLink update=":form:notDetail" oncomplete="notDialog.show()" title="Detalle">
+                            <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                            <f:setPropertyActionListener value="#{item}" target="#{noticiasController.noticia_selec}" />
+                        </p:commandLink>
+
+                    </h:panelGrid> 
+                </p:panel>
+
+            </p:dataScroller>
+
+            <p:dialog header="#{noticiasController.noticia_selec.noticiaTitulo}" widgetVar="notDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" >
+                <p:outputPanel id="notDetail" style="text-align:center;">
+                    <p:panel  style="text-align:center" rendered="#{not empty noticiasController.noticia_selec}" >  
+                                    <p:graphicImage height="350px" value="#{pageContext.contextPath}/DatosUsuario/noticias/#{noticiasController.noticia_selec.noticiaImagen}" />
+                                    <h:outputText value="#{noticiasController.noticia_selec.noticiaFecha}" />
+                                    <h:outputText value="#{noticiasController.noticia_selec.noticiaDescripcion}" />
+                                    <h:outputText value="#{noticiasController.noticia_selec.noticiaFuente}" />
+                                    <p:commandButton  id="regresar"  action="#{loggin.irA('index')}" value="Regresar" />
+                    </p:panel> 
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+        
+    </h:body>
+
+</html>

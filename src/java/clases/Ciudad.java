@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Miguel
+ * @author Naturaleza
  */
 @Entity
 @Table(name = "ciudad")
@@ -56,8 +56,6 @@ public class Ciudad implements Serializable {
     private Departamentos ciudadDepartamento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "universidadCiudad")
     private Collection<Universidades> universidadesCollection;
-    @OneToMany(mappedBy = "usrCiudad")
-    private Collection<Usuarios> usuariosCollection;
 
     public Ciudad() {
     }
@@ -112,15 +110,6 @@ public class Ciudad implements Serializable {
         this.universidadesCollection = universidadesCollection;
     }
 
-    @XmlTransient
-    public Collection<Usuarios> getUsuariosCollection() {
-        return usuariosCollection;
-    }
-
-    public void setUsuariosCollection(Collection<Usuarios> usuariosCollection) {
-        this.usuariosCollection = usuariosCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -143,7 +132,7 @@ public class Ciudad implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.Ciudad[ ciudadId=" + ciudadId + " ]";
+        return ""+ciudadNombre;
     }
     
 }

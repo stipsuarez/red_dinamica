@@ -1,0 +1,56 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html" >
+        <h:head >
+            <f:facet name="first" >
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <link rel="stylesheet" type="text/css" href="Recursos/Css/general.css" />
+                <link rel="stylesheet" type="text/css" href="Recursos/Banner/engine1/style.css" media="screen" />
+                <script type="text/javascript" src="Recursos/Banner/engine1/jquery.js"></script>
+                <title>Red Colombiana de Dinámica de Sistemas</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <div class="cubierta">
+
+                <p:layout style="height: 1300px; padding: 0; margin: 0;">
+
+                    <p:layoutUnit position="north" size="205" resizable="true" closable="true" collapsible="true" >
+                        <ui:include src="/componentes/menuregistro.xhtml" />
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="south" size="140" closable="true" collapsible="true">
+                        <ui:include src="/componentes/piePagina.xhtml" />
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="center" header="">
+
+                        <h:form id="form" >
+
+                            <p:panel  style="text-align:center">  
+                                <h:panelGrid columns="1" style="width:100%; padding: 2px;"  >
+                                    <h:outputText value="#{noticiasController.noticia_selec.noticiaTitulo}" />
+                                    <p:graphicImage height="350px" value="#{pageContext.contextPath}/DatosUsuario/noticias/#{noticiasController.noticia_selec.noticiaImagen}" />
+                                    <h:outputText value="#{noticiasController.noticia_selec.noticiaFecha}" />
+                                    <h:outputText value="#{noticiasController.noticia_selec.noticiaDescripcion}" />
+                                    <h:outputText value="#{noticiasController.noticia_selec.noticiaFuente}" />
+                                    <p:commandButton  id="regresar"  action="#{loggin.irA('index')}" value="Regresar" />
+                                </h:panelGrid> 
+                                
+                            </p:panel> 
+
+                        </h:form>  
+                    </p:layoutUnit>
+                </p:layout>
+
+            </div>
+
+        </h:body>
+    </f:view>
+</html>

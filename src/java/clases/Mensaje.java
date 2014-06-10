@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Miguel
+ * @author Naturaleza
  */
 @Entity
 @Table(name = "mensaje")
@@ -37,12 +37,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Mensaje.findByMsjFecha", query = "SELECT m FROM Mensaje m WHERE m.msjFecha = :msjFecha"),
     @NamedQuery(name = "Mensaje.findByMsjLeido", query = "SELECT m FROM Mensaje m WHERE m.msjLeido = :msjLeido")})
 public class Mensaje implements Serializable {
-    @JoinColumn(name = "conv_usr2_id", referencedColumnName = "usr_id")
-    @ManyToOne(optional = false)
-    private Usuarios convUsr2Id;
-    @JoinColumn(name = "conv_usr1_id", referencedColumnName = "usr_id")
-    @ManyToOne(optional = false)
-    private Usuarios convUsr1Id;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,12 +56,6 @@ public class Mensaje implements Serializable {
     @NotNull
     @Column(name = "msj_leido")
     private boolean msjLeido;
-    @JoinColumn(name = "msj_destinatario", referencedColumnName = "usr_cc")
-    @ManyToOne(optional = false)
-    private Usuarios msjDestinatario;
-    @JoinColumn(name = "msj_remitente", referencedColumnName = "usr_cc")
-    @ManyToOne(optional = false)
-    private Usuarios msjRemitente;
     @JoinColumn(name = "msj_conversacion", referencedColumnName = "conv_id")
     @ManyToOne(optional = false)
     private Conversacion msjConversacion;
@@ -117,22 +105,6 @@ public class Mensaje implements Serializable {
         this.msjLeido = msjLeido;
     }
 
-    public Usuarios getMsjDestinatario() {
-        return msjDestinatario;
-    }
-
-    public void setMsjDestinatario(Usuarios msjDestinatario) {
-        this.msjDestinatario = msjDestinatario;
-    }
-
-    public Usuarios getMsjRemitente() {
-        return msjRemitente;
-    }
-
-    public void setMsjRemitente(Usuarios msjRemitente) {
-        this.msjRemitente = msjRemitente;
-    }
-
     public Conversacion getMsjConversacion() {
         return msjConversacion;
     }
@@ -164,22 +136,6 @@ public class Mensaje implements Serializable {
     @Override
     public String toString() {
         return "clases.Mensaje[ msjId=" + msjId + " ]";
-    }
-
-    public Usuarios getConvUsr2Id() {
-        return convUsr2Id;
-    }
-
-    public void setConvUsr2Id(Usuarios convUsr2Id) {
-        this.convUsr2Id = convUsr2Id;
-    }
-
-    public Usuarios getConvUsr1Id() {
-        return convUsr1Id;
-    }
-
-    public void setConvUsr1Id(Usuarios convUsr1Id) {
-        this.convUsr1Id = convUsr1Id;
     }
     
 }

@@ -26,10 +26,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Miguel
- */
 @Entity
 @Table(name = "usuarios")
 @XmlRootElement
@@ -45,6 +41,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuarios.findByUsrEstado", query = "SELECT u FROM Usuarios u WHERE u.usrEstado = :usrEstado"),
     @NamedQuery(name = "Usuarios.findByUsrFoto", query = "SELECT u FROM Usuarios u WHERE u.usrFoto = :usrFoto")})
 public class Usuarios implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "convUsr2Id")
+    private Collection<Conversacion> conversacionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "convUsr1Id")
+    private Collection<Conversacion> conversacionCollection1;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -254,7 +254,25 @@ public class Usuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.Usuarios[ usrId=" + usrId + " ]";
+        return ""+usrNombres+" "+usrApellidos ;
     }
-    
+    //Mi código acá
+
+    @XmlTransient
+    public Collection<Conversacion> getConversacionCollection() {
+        return conversacionCollection;
+    }
+
+    public void setConversacionCollection(Collection<Conversacion> conversacionCollection) {
+        this.conversacionCollection = conversacionCollection;
+    }
+
+    @XmlTransient
+    public Collection<Conversacion> getConversacionCollection1() {
+        return conversacionCollection1;
+    }
+
+    public void setConversacionCollection1(Collection<Conversacion> conversacionCollection1) {
+        this.conversacionCollection1 = conversacionCollection1;
+    }
 }

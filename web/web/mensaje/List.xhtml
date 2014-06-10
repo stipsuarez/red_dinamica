@@ -10,90 +10,66 @@
             <h:outputText value="#{bundle.ListMensajeTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-        <h:form styleClass="jsfcrud_list_form">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:outputText escape="false" value="#{bundle.ListMensajeEmpty}" rendered="#{mensajeController.items.rowCount == 0}"/>
-            <h:panelGroup rendered="#{mensajeController.items.rowCount > 0}">
-                <h:outputText value="#{mensajeController.pagination.pageFirstItem + 1}..#{mensajeController.pagination.pageLastItem + 1}/#{mensajeController.pagination.itemsCount}"/>&nbsp;
-                <h:commandLink action="#{mensajeController.previous}" value="#{bundle.Previous} #{mensajeController.pagination.pageSize}" rendered="#{mensajeController.pagination.hasPreviousPage}"/>&nbsp;
-                <h:commandLink action="#{mensajeController.next}" value="#{bundle.Next} #{mensajeController.pagination.pageSize}" rendered="#{mensajeController.pagination.hasNextPage}"/>&nbsp;
-                <h:dataTable value="#{mensajeController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMensajeTitle_msjId}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.msjId}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMensajeTitle_msjTexto}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.msjTexto}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMensajeTitle_msjFecha}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.msjFecha}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMensajeTitle_msjLeido}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.msjLeido}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMensajeTitle_msjDestinatario}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.msjDestinatario}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMensajeTitle_msjRemitente}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.msjRemitente}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMensajeTitle_msjConversacion}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.msjConversacion}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMensajeTitle_convUsr2Id}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.convUsr2Id}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMensajeTitle_convUsr1Id}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.convUsr1Id}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="&nbsp;"/>
-                        </f:facet>
-                        <h:commandLink action="#{mensajeController.prepareView}" value="#{bundle.ListMensajeViewLink}"/>
-                        <h:outputText value=" "/>
-                        <h:commandLink action="#{mensajeController.prepareEdit}" value="#{bundle.ListMensajeEditLink}"/>
-                        <h:outputText value=" "/>
-                        <h:commandLink action="#{mensajeController.destroy}" value="#{bundle.ListMensajeDestroyLink}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:panelGroup>
-            <br />
-            <h:commandLink action="#{mensajeController.prepareCreate}" value="#{bundle.ListMensajeCreateLink}"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.ListMensajeIndexLink}"/>
-        </h:form>
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListMensajeEmpty}" rendered="#{mensajeController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{mensajeController.items.rowCount > 0}">
+                    <h:outputText value="#{mensajeController.pagination.pageFirstItem + 1}..#{mensajeController.pagination.pageLastItem + 1}/#{mensajeController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{mensajeController.previous}" value="#{bundle.Previous} #{mensajeController.pagination.pageSize}" rendered="#{mensajeController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{mensajeController.next}" value="#{bundle.Next} #{mensajeController.pagination.pageSize}" rendered="#{mensajeController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{mensajeController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMensajeTitle_msjId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.msjId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMensajeTitle_msjTexto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.msjTexto}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMensajeTitle_msjFecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.msjFecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMensajeTitle_msjLeido}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.msjLeido}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMensajeTitle_msjConversacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.msjConversacion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{mensajeController.prepareView}" value="#{bundle.ListMensajeViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{mensajeController.prepareEdit}" value="#{bundle.ListMensajeEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{mensajeController.destroy}" value="#{bundle.ListMensajeDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{mensajeController.prepareCreate}" value="#{bundle.ListMensajeCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListMensajeIndexLink}"/>
+            </h:form>
         </ui:define>
     </ui:composition>
 

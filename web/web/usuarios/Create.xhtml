@@ -33,10 +33,6 @@
                     <h:inputText id="usrEstado" value="#{usuariosController.selected.usrEstado}" title="#{bundle.CreateUsuariosTitle_usrEstado}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usrEstado}"/>
                     <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrFoto}" for="usrFoto" />
                     <h:inputText id="usrFoto" value="#{usuariosController.selected.usrFoto}" title="#{bundle.CreateUsuariosTitle_usrFoto}" />
-                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrCiudad}" for="usrCiudad" />
-                    <h:selectOneMenu id="usrCiudad" value="#{usuariosController.selected.usrCiudad}" title="#{bundle.CreateUsuariosTitle_usrCiudad}" >
-                        <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrUniversidad}" for="usrUniversidad" />
                     <h:selectOneMenu id="usrUniversidad" value="#{usuariosController.selected.usrUniversidad}" title="#{bundle.CreateUsuariosTitle_usrUniversidad}" >
                         <f:selectItems value="#{universidadesController.itemsAvailableSelectOne}"/>
@@ -44,6 +40,10 @@
                     <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrDepartamento}" for="usrDepartamento" />
                     <h:selectOneMenu id="usrDepartamento" value="#{usuariosController.selected.usrDepartamento}" title="#{bundle.CreateUsuariosTitle_usrDepartamento}" >
                         <f:selectItems value="#{departamentosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_usrCiudad}" for="usrCiudad" />
+                    <h:selectOneMenu id="usrCiudad" value="#{usuariosController.selected.usrCiudad}" title="#{bundle.CreateUsuariosTitle_usrCiudad}" >
+                        <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
