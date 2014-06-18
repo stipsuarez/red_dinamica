@@ -5,6 +5,7 @@
 package clases;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,9 +16,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,6 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Universidades.findByUniversidadId", query = "SELECT u FROM Universidades u WHERE u.universidadId = :universidadId"),
     @NamedQuery(name = "Universidades.findByUniversidadNombre", query = "SELECT u FROM Universidades u WHERE u.universidadNombre = :universidadNombre")})
 public class Universidades implements Serializable {
+    @OneToMany(mappedBy = "usrUniversidad")
+    private Collection<Usuarios> usuariosCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,6 +103,15 @@ public class Universidades implements Serializable {
     @Override
     public String toString() {
         return ""+universidadNombre;
+    }
+
+    @XmlTransient
+    public Collection<Usuarios> getUsuariosCollection() {
+        return usuariosCollection;
+    }
+
+    public void setUsuariosCollection(Collection<Usuarios> usuariosCollection) {
+        this.usuariosCollection = usuariosCollection;
     }
     
 }

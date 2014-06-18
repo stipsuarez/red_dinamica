@@ -16,7 +16,7 @@
                 </h:panelGroup>
                 <h:outputText escape="false" value="#{bundle.ListMensajeEmpty}" rendered="#{mensajeController.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{mensajeController.items.rowCount > 0}">
-                    <h:dataTable value="#{mensajeController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:dataTable value="#{conversacionController.conv_select.mensajeCollection}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMensajeTitle_msjTexto}"/>

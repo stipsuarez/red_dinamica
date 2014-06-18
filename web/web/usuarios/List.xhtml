@@ -15,6 +15,7 @@
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
+                <p:messages id="msjs" autoUpdate="true"  />
                 <h:outputText escape="false" value="#{bundle.ListUsuariosEmpty}" rendered="#{usuariosController.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{usuariosController.items.rowCount > 0}">
                     <p:growl id="msgs_errores" ></p:growl> 
@@ -34,7 +35,7 @@
 
                         <h:selectOneMenu id="U_buscar"  rendered="#{usuariosController.buscarU}" value="#{usuariosController.u_select}" title="Universidades" validator="#{usuariosController.aplicarFiltroUs}">
                             <f:selectItems value="#{usuariosController.listaUs}"/>
-                            <p:ajax update="tablaEnc,,msgs_errores" />  
+                            <p:ajax update="tablaEnc,msgs_errores" />  
                         </h:selectOneMenu>
                     </h:panelGroup>
                     
@@ -44,8 +45,8 @@
                         <p:column style="width:5%" headerText="Mas Info.">
                             <p:rowToggler />
                         </p:column>
-                        <p:column style="width:20%" headerText="Imágen de Perfil">
-                            <p:graphicImage value="/Recursos/Imagenes/perfil/#{item.usrFoto}" width="170" height="200"/>
+                        <p:column style="width:15%" headerText="Imágen de Perfil">
+                            <p:graphicImage value="/Recursos/Imagenes/perfil/#{item.usrFoto}" width="50px"/>
                         </p:column>
                         <p:column id="nombre" style="width:20%"  headerText="Nombres" filterValue="#{item.usrNombres}"
                                   filterMatchMode="contains" sortBy="#{item.usrNombres}" filterBy="#{item.usrNombres}">
@@ -60,18 +61,11 @@
                         <p:column id="email" style="width:20%" filterBy="#{item.usrEmail}"
                                   headerText="E-Mail"   filterMatchMode="contains" sortBy="#{item.usrEmail}">
 
-                            <h:outputText value="#{item.usrEmail}"/>
+                            <h:outputText value="#{item.usrEmail}" style="width:15%" />
                         </p:column>
-
-
                         <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <p:commandButton action="#{usuariosController.enviarMsj}" actionListener="#{conversacionController.setUsrDestino(item)}" value="Enviar Mensaje">
-
+                             <p:commandButton  actionListener="#{conversacionController.setUsrDestino(item)}" value="Enviar Mensaje">
                             </p:commandButton>
-
                         </p:column>
                         <p:rowExpansion>
                             <h:panelGrid id="display" columns="2" cellpadding="5" style="width:100%"
@@ -87,11 +81,7 @@
                         </p:rowExpansion>
                     </p:dataTable>
                 </h:panelGroup>
-                <br />
-                <h:commandLink action="#{usuariosController.prepareCreate}" value="#{bundle.ListUsuariosCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListUsuariosIndexLink}"/>
+                
             </h:form>
         </ui:define>
     </ui:composition>

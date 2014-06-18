@@ -40,6 +40,7 @@ public class UsuariosController implements Serializable {
     private int selectedItemIndex;
 
     public UsuariosController() {
+         //items= new ListDataModel(getListaUsrs());
     }
 
     public Usuarios getSelected() {
@@ -529,7 +530,6 @@ public class UsuariosController implements Serializable {
             switch (filtar_por) {
                 case "1":
                     asignarUsuariosEncontradosPorNombre();
-                    JsfUtil.addSuccessMessage("Ya buscó!");
                     break;
                 case "2":
                     asignarUsuariosEncontradosPorEmail();
@@ -551,14 +551,6 @@ public class UsuariosController implements Serializable {
         }
     }
 
-    public void enviarMsj() throws IOException {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/conversacion/conversacionTemplateClient.xhtml");
-
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage("Error al enviar el mensaje: " + e + " Localize: " + e.getLocalizedMessage());
-        }
-    }
 
     public void irA(String dire) throws IOException {
         try {

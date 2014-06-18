@@ -1,50 +1,37 @@
+body {
+    margin: 0px;
+}
 
 #top {
-    position: relative;
     background-color: #036fab;
     color: white;
-    padding: 5px;
+    padding: 10px;
     margin: 0px 0px 10px 0px;
-    height: 50px;
 }
 
 #bottom {
-    position: relative;
     background-color: #c2dfef;
-    padding: 5px;
-    margin: 10px 0px 0px 0px;
+    padding: 10px;
 }
 
 #left {
-    float: left;
     background-color: #ece3a5;
-    padding: 5px;
+    padding: 10px;
     width: 150px;
+    vertical-align: top;
 }
 
 #right {
-    float: right;
     background-color: #ece3a5;
-    padding: 5px;
+    padding: 10px;
     width: 150px;
+    vertical-align: top;
 }
 
-.center_content {
-    position: relative;
+#content {
     background-color: #dddddd;
-    padding: 5px;
-}
-
-.left_content {
-    background-color: #dddddd;
-    padding: 5px;
-    margin-left: 170px;
-}
-
-.right_content {
-    background-color: #dddddd;
-    padding: 5px;
-    margin: 0px 170px 0px 170px;
+    padding: 10px;
+        vertical-align: top;
 }
 
 #top a:link, #top a:visited {
@@ -58,5 +45,3 @@
   font-weight : bold;
   text-decoration : underline;
 }
-
-

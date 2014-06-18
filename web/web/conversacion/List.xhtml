@@ -6,78 +6,88 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListConversacionTitle}"></h:outputText>
+    <ui:composition template="./../../templates/conversacionTemplate.xhtml">
+        <ui:define name="top" id="top">
+
+            <p:layoutUnit position="north" size="190" resizable="true" closable="true" collapsible="true" rendered="#{!loggin.activa}">
+                <ui:include src="/componentes/menugeneral.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="north" size="190" resizable="true" closable="true" collapsible="true" rendered="#{loggin.activa}">
+                <ui:include src="/componentes/menuregistro.xhtml" />
+            </p:layoutUnit>
+
         </ui:define>
-        <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListConversacionEmpty}" rendered="#{conversacionController.items.rowCount == 0}"/>
+        <ui:define name="left" id="lista_conv">
+
+            <h:form id="form" >
+
                 <h:panelGroup rendered="#{conversacionController.items.rowCount > 0}">
-                    <h:outputText value="#{conversacionController.pagination.pageFirstItem + 1}..#{conversacionController.pagination.pageLastItem + 1}/#{conversacionController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{conversacionController.previous}" value="#{bundle.Previous} #{conversacionController.pagination.pageSize}" rendered="#{conversacionController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{conversacionController.next}" value="#{bundle.Next} #{conversacionController.pagination.pageSize}" rendered="#{conversacionController.pagination.hasNextPage}"/>&nbsp;
-                    <p:dataTable value="#{conversacionController.items}" var="item" style="border:solid 1px" >
+
+                    <p:dataTable id="tabla_conv"   value="#{conversacionController.items}" emptyMessage="No hay mensajes" var="item"  style="border:solid 1px" selectionMode="single"  selection="#{conversacionController.conv_select}" rowKey="#{item.convId}"
+                                 editable="true">
+
+                        <p:ajax event="rowSelect" listener="#{conversacionController.onRowSelect}" update="tabla_conv,:form_msjs" />
+                        <p:ajax event="rowUnselect" listener="#{conversacionController.onRowUnselect}" update="tabla_conv,:form_msjs" />
+                        <p:columnGroup type="header" />
                         <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListConversacionTitle_convId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.convId}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListConversacionTitle_convAsunto}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.convAsunto}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListConversacionTitle_convUltimo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.convUltimo}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListConversacionTitle_convNumero}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.convNumero}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListConversacionTitle_convUsr2Id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.convUsr2Id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListConversacionTitle_convUsr1Id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.convUsr1Id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{conversacionController.prepareView}" value="#{bundle.ListConversacionViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{conversacionController.prepareEdit}" value="#{bundle.ListConversacionEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{conversacionController.destroy}" value="#{bundle.ListConversacionDestroyLink}"/>
-                        </p:column>
+                            <h:panelGrid columns="2" style="width:100%" id="msgs1">
+                                <p:graphicImage value="/Recursos/Imagenes/perfil/#{item.convUsr2Id.usrFoto}" width="50px"/>
+                                <h:outputText value="#{item.convUsr2Id.usrNombres} #{item.convUsr2Id.usrApellidos}" style="width: 70%;font-size: 15px;font-weight: bold"/>
+                                <h:outputText value="#{item.convUltimo}">
+                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                </h:outputText>
+                                <h:outputText value="#{item.convAsunto}"/>
+                            </h:panelGrid>
+                        </p:column>                
                     </p:dataTable>
+
                 </h:panelGroup>
-                <br />
-                <h:commandLink action="#{conversacionController.prepareCreate}" value="#{bundle.ListConversacionCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListConversacionIndexLink}"/>
+
             </h:form>
+            <ui:include src="/web/usuarios/perfil.xhtml" class="iniciarsesion"/> 
+        </ui:define>
+        <ui:define name="content" id="content">
+            <h:panelGroup >
+                <h:panelGroup id="msjConversacion1">
+                    <h:form id="form_msjs">
+                        <h:outputLabel value="Conversación entre: " for="envia"/>
+                        <h:outputLabel value="#{usuariosController.selected.usrNombres} #{usuariosController.selected.usrApellidos}"  id="envia"/>
+                        <h:outputLabel value="  Y  " for="destino"/>
+                        <h:outputLabel value="#{conversacionController.usrDestino.usrNombres} #{conversacionController.usrDestino.usrApellidos}" id="destino" />
+
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{mensajeController.items.rowCount > 0}">
+                            <p:dataTable   var="item"  sortOrder="ASCENDING" sortBy="#{item.msjFecha}" >
+                                <p:column  >
+                                    <h:panelGrid columns="2" >
+                                        <p:graphicImage value="/Recursos/Imagenes/perfil/#{item.msjDestinatario.usrFoto}" width="30" height="40"/>
+                                        <h:outputText value="#{item.msjTexto}"/>
+                                        <h:outputText value="#{item.msjFecha}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                        </h:outputText>
+                                        <h:outputText value="#{item.msjLeido}"/>
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGroup>
+                    </h:form>
+                </h:panelGroup>
+                <h:panelGroup  >
+                    <h:form id="mensajes_conv">
+                        <h:panelGrid columns="2">
+                            <h:outputLabel rendered="#{!conversacionController.existe_conv}" value="#{bundle.CreateConversacionLabel_convAsunto}" for="convAsunto" />
+                            <h:inputText rendered="#{!conversacionController.existe_conv}" id="convAsunto" value="#{conversacionController.selected.convAsunto}" title="#{bundle.CreateConversacionTitle_convAsunto}" required="true" requiredMessage="#{bundle.CreateConversacionRequiredMessage_convAsunto}"/>
+                        </h:panelGrid>
+                        <p:editor required="true" requiredMessage="Debes introducir un texto."   value="#{conversacionController.textoMsj}" width="354" style="margin: 10px" />
+                        <br />
+                        <p:commandButton action="#{conversacionController.enviarMsj}" value="Enviar" update=":form_msjs,:form,:mensajes_conv"/>
+                        <br />
+                    </h:form>
+                </h:panelGroup>
+            </h:panelGroup>
         </ui:define>
     </ui:composition>
-
 </html>

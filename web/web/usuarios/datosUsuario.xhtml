@@ -30,7 +30,7 @@
                                     <p:graphicImage value="#{pageContext.contextPath}/Recursos/Imagenes/perfil/default.png"
                                                     rendered="#{! photoCamBean.tieneFoto}" cache="false" style="height: 203px;"/>
                                     <p:graphicImage rendered="#{photoCamBean.tieneFoto}"
-                                                    value="#{pageContext.contextPath}/Recursos/Imagenes/perfil/#{usuariosController.selected.usrId}"
+                                                    value="#{pageContext.contextPath}/Recursos/Imagenes/perfil/#{usuariosController.selected.usrFoto}"
                                                     cache="false" style="height: 203px;"/>
                                 </p:commandLink>
                                 <p:dialog header="Toma una foto" widgetVar="fotoDialog" >
@@ -148,7 +148,7 @@
                 <p:layout style="height: 800px; padding: 0; margin: 0;">
 
                     <p:layoutUnit position="center" size="190" resizable="true" closable="true" collapsible="true" >
-                       <ui:include src="List.xhtml"  />
+                        <ui:include src="List.xhtml"  />
                     </p:layoutUnit> 
                 </p:layout>
 

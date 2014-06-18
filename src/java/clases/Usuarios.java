@@ -41,6 +41,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuarios.findByUsrEstado", query = "SELECT u FROM Usuarios u WHERE u.usrEstado = :usrEstado"),
     @NamedQuery(name = "Usuarios.findByUsrFoto", query = "SELECT u FROM Usuarios u WHERE u.usrFoto = :usrFoto")})
 public class Usuarios implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "msjDestinatario")
+    private Collection<Mensaje> mensajeCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "msjRemitente")
+    private Collection<Mensaje> mensajeCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "convUsr2Id")
     private Collection<Conversacion> conversacionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "convUsr1Id")
@@ -274,5 +278,23 @@ public class Usuarios implements Serializable {
 
     public void setConversacionCollection1(Collection<Conversacion> conversacionCollection1) {
         this.conversacionCollection1 = conversacionCollection1;
+    }
+
+    @XmlTransient
+    public Collection<Mensaje> getMensajeCollection() {
+        return mensajeCollection;
+    }
+
+    public void setMensajeCollection(Collection<Mensaje> mensajeCollection) {
+        this.mensajeCollection = mensajeCollection;
+    }
+
+    @XmlTransient
+    public Collection<Mensaje> getMensajeCollection1() {
+        return mensajeCollection1;
+    }
+
+    public void setMensajeCollection1(Collection<Mensaje> mensajeCollection1) {
+        this.mensajeCollection1 = mensajeCollection1;
     }
 }

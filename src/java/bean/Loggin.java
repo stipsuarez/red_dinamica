@@ -143,7 +143,7 @@ public class Loggin implements InterfaceBean {
             case "contacto": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/componentes/contactenos.xhtml"); break;    
             case "colectivos": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/colectivos/colectivosTemplateClient.xhtml"); break;    
             case "foros": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/foros/forosTemplateClient.xhtml"); break;   
-            case "conversacion": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/conversacion/buscarTemplateClient.xhtml"); break;   
+            case "conversacion": FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/conversacion/List.xhtml"); break;   
         }
     }
     

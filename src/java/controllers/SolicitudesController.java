@@ -357,7 +357,7 @@ public class SolicitudesController implements Serializable {
         if (listaAceptados.size() > 0) {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Confirmación", "Cambios efectuados satisfactoriamente"));
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/pages/perfiles.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/red_dinamica/faces/web/usuarios/perfiles.xhtml");
         }
     }
     //asignar el tipo del filtro

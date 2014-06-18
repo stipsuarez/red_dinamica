@@ -71,6 +71,7 @@ public class Conversacion implements Serializable {
     private Usuarios convUsr1Id;
 
     public Conversacion() {
+        
     }
 
     public Conversacion(Integer convId) {

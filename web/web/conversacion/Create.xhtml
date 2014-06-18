@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -21,12 +22,11 @@
                     <h:outputLabel value="#{conversacionController.usrDestino.usrNombres}" id="destino" />
                     <h:outputLabel value="#{bundle.CreateConversacionLabel_convAsunto}" for="convAsunto" />
                     <h:inputText id="convAsunto" value="#{conversacionController.selected.convAsunto}" title="#{bundle.CreateConversacionTitle_convAsunto}" required="true" requiredMessage="#{bundle.CreateConversacionRequiredMessage_convAsunto}"/>
-                    <h:outputLabel value="#{bundle.CreateConversacionLabel_convNumero}" for="convNumero" />
-                    <h:inputText id="convNumero" value="#{conversacionController.selected.convNumero}" title="#{bundle.CreateConversacionTitle_convNumero}" required="true" requiredMessage="#{bundle.CreateConversacionRequiredMessage_convNumero}"/>
-
+                    
                 </h:panelGrid>
+                <p:editor required="true" requiredMessage="Debes introducir un texto."   value="#{conversacionController.textoMsj}" width="354" style="margin: 10px" />
                 <br />
-                <h:commandLink action="#{conversacionController.create}" value="#{bundle.CreateConversacionSaveLink}" />
+                <h:commandLink action="#{conversacionController.enviarMsj}" value="#{bundle.CreateConversacionSaveLink}" />
                 <br />
                 <br />
                 <h:commandLink action="#{conversacionController.prepareList}" value="#{bundle.CreateConversacionShowAllLink}" immediate="true"/>

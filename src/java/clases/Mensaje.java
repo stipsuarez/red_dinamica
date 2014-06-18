@@ -37,6 +37,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Mensaje.findByMsjFecha", query = "SELECT m FROM Mensaje m WHERE m.msjFecha = :msjFecha"),
     @NamedQuery(name = "Mensaje.findByMsjLeido", query = "SELECT m FROM Mensaje m WHERE m.msjLeido = :msjLeido")})
 public class Mensaje implements Serializable {
+    @JoinColumn(name = "msj_destinatario", referencedColumnName = "usr_id")
+    @ManyToOne(optional = false)
+    private Usuarios msjDestinatario;
+    @JoinColumn(name = "msj_remitente", referencedColumnName = "usr_id")
+    @ManyToOne(optional = false)
+    private Usuarios msjRemitente;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -136,6 +142,22 @@ public class Mensaje implements Serializable {
     @Override
     public String toString() {
         return "clases.Mensaje[ msjId=" + msjId + " ]";
+    }
+
+    public Usuarios getMsjDestinatario() {
+        return msjDestinatario;
+    }
+
+    public void setMsjDestinatario(Usuarios msjDestinatario) {
+        this.msjDestinatario = msjDestinatario;
+    }
+
+    public Usuarios getMsjRemitente() {
+        return msjRemitente;
+    }
+
+    public void setMsjRemitente(Usuarios msjRemitente) {
+        this.msjRemitente = msjRemitente;
     }
     
 }
